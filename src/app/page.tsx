@@ -2,7 +2,7 @@ import Home from '@/components/Home/Home'
 
 export default function HomePage() {
   return (
-    <div className="overflow-hidden ">
+    <div className="">
       <Home/>
     </div>
   );
