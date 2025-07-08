@@ -36,7 +36,7 @@ const Nav = ({openNav}:Props) => {
           <h1 className='text-xl md:text-2xl text-white uppercase font-bold'>Trip</h1>
         </div>
         {/* navlinks */}
-        <div className="hidden md:flex items-center space-x-10">
+        <div className="hidden lg:flex items-center space-x-10">
           {navlinks.map((item)=>{
             return (
               <Link href={item.url} key={item.id}>               
@@ -59,7 +59,7 @@ const Nav = ({openNav}:Props) => {
             Book Now
           </button>
           {/* burger menu */}
-          <HiBars3BottomRight onClick={openNav} className="w-8 h-8 cursor-pointer text-white md:hidden"/>
+          <HiBars3BottomRight onClick={openNav} className="w-8 h-8 cursor-pointer text-white lg:hidden"/>
         </div>
 
 

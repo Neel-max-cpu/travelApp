@@ -2,7 +2,7 @@
   "name": "travel",
   "version": "0.1.0",
   "private": true,
-  "scripts": {    
+  "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -12,7 +12,8 @@
     "next": "15.3.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-icons": "^5.5.0"
+    "react-icons": "^5.5.0",
+    "react-multi-carousel": "^2.8.6"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
