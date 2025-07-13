@@ -9,14 +9,14 @@ const WhyChoose = () => {
         <SectionHeading heading="Why Choose Us" subheading="hehe"/>
         <div className="grid w-[80%] mx-auto grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 items-center mt-20">
             {/* why choose card */}
-            <div className="">
-                <WhyChooseCard image="/images/c1.svg" title="Best Price Gurantee"/>
+            <div className="" data-aos="fade-up" data-aos-anchor-placement="top-center">
+                <WhyChooseCard image="/images/c1.svg" title="Best Price Gurantee" subtitle="ha in your dreams"/>
             </div>
-            <div className="">
-                <WhyChooseCard image="/images/c2.svg" title="Easy & Quick Booking"/>
+            <div className="" data-aos="fade-up" data-aos-anchor-placement="top-center" data-aos-delay="150">
+                <WhyChooseCard image="/images/c2.svg" title="Easy & Quick Booking" subtitle="also in your dream, hidden charges are mandatory!"  />
             </div>
-            <div className="">
-                <WhyChooseCard image="/images/c3.svg" title="Customer Care 24x7"/>
+            <div className="" data-aos="fade-up" data-aos-anchor-placement="top-center" data-aos-delay="300">
+                <WhyChooseCard image="/images/c3.svg" title="Customer Care 24x7" subtitle="you bet! (in your dream lmao!)"/>
             </div>
         </div>
     </div>

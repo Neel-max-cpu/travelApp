@@ -47,7 +47,7 @@ const Hero = () => {
         {/* date to book */}
         <div className="absolute z-[100] w-full h-full top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
             <div className="flex items-center justify-center flex-col w-full h-full">
-                <div className="">
+                <div className="" data-aos="fade-up">
                     <h1 className="text-[25px] mb-4 md:mb-0 text-center md:text-[35px] lg:text-[45px] tracking-[0.7rem] text-white font-bold uppercase">lets enjoy the nature</h1>
                     <p className="uppercase md:text-base text-center text-lg text-white font-normal [word-spacing:5px]">get the best prices on 20,000+ properties worldwide</p>
                 </div>
