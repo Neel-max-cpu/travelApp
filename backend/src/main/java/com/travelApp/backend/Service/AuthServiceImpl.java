@@ -1,6 +1,7 @@
 package com.travelApp.backend.Service;
 
 import com.travelApp.backend.Dto.UsersReq;
+import com.travelApp.backend.Entity.ForgetPasswordLogger;
 import com.travelApp.backend.Entity.PasswordMapping;
 import com.travelApp.backend.Entity.RegisterUserOtp;
 import com.travelApp.backend.Entity.Users;
@@ -8,6 +9,7 @@ import com.travelApp.backend.Expections.BadRequestsException;
 import com.travelApp.backend.Expections.ForbiddenException;
 import com.travelApp.backend.Expections.NotFoundException;
 import com.travelApp.backend.Helper.CreateOtp;
+import com.travelApp.backend.Repo.ForgetPasswordLoggerRepo;
 import com.travelApp.backend.Repo.PasswordMappingRepo;
 import com.travelApp.backend.Repo.RegisterUserOtpRepo;
 import com.travelApp.backend.Repo.UsersRepo;
@@ -31,16 +33,19 @@ public class AuthServiceImpl implements AuthService {
     private final PasswordEncoder passwordEncoder;
     private final PasswordMappingRepo passwordMappingRepo;
     private final JwtService jwtService;
+    private final ForgetPasswordLoggerRepo forgetPasswordLoggerRepo;
 
     public AuthServiceImpl(UsersRepo usersRepo, RegisterUserOtpRepo registerUserOtpRepo,
                            MailService mailService, PasswordEncoder passwordEncoder,
-                           PasswordMappingRepo passwordMappingRepo, JwtService jwtService) {
+                           PasswordMappingRepo passwordMappingRepo, JwtService jwtService,
+                           ForgetPasswordLoggerRepo forgetPasswordLoggerRepo) {
         this.usersRepo = usersRepo;
         this.registerUserOtpRepo = registerUserOtpRepo;
         this.mailService = mailService;
         this.passwordEncoder = passwordEncoder;
         this.passwordMappingRepo = passwordMappingRepo;
         this.jwtService = jwtService;
+        this.forgetPasswordLoggerRepo = forgetPasswordLoggerRepo;
     }
 
 
@@ -48,11 +53,18 @@ public class AuthServiceImpl implements AuthService {
     //logger implementation
     private static final Logger logger = LoggerFactory.getLogger(AuthServiceImpl.class);
 
-    boolean sendEmail(String email, String otp){
+    boolean sendEmail(String email, String otp, Integer val){
         //logger
         logger.info("email sent from the auth service");
+        String service;
+        if(val==1){
+            service = "register";
+        }
+        else{
+            service = "resetting Password";
+        }
 
-        String body = "Hello ,\n\nYour OTP for registration is: " + otp +
+        String body = "Hello ,\n\nYour OTP for "+service+" is: " + otp +
                 "\n\nThis OTP is valid for 10 minutes." +
                 "\n\nIf you did not request this, please ignore." +
                 "\n\n- TravelApp Team";
@@ -65,7 +77,7 @@ public class AuthServiceImpl implements AuthService {
         //create 6 digit otp
         String otp = CreateOtp.generateOtp();
 
-        boolean mailSent = sendEmail(email, otp);
+        boolean mailSent = sendEmail(email, otp, 1);
         if(!mailSent){return false;}
 
         //save to db
@@ -175,6 +187,123 @@ public class AuthServiceImpl implements AuthService {
             //logger
             logger.error("logIn failed in service");
             throw new BadRequestsException("Invalid or expired password!");
+        }
+    }
+
+    @Override
+    public boolean sendOtpForgotPassword(UsersReq req){
+        String email = req.getEmail();
+
+        Optional<Users> optional = usersRepo.findByEmail(email);
+        if(optional.isEmpty()){
+            throw new NotFoundException("User not found with that email!");
+        }
+
+        Users mappingUser = optional.get();
+
+        //create 6 digit otp
+        String otp = CreateOtp.generateOtp();
+        boolean mailSent = sendEmail(email, otp, 2);
+        if(!mailSent){return false;}
+
+
+        //save to db
+        ForgetPasswordLogger log = new ForgetPasswordLogger();
+        log.setUserId(mappingUser.getId());
+        log.setUserName(mappingUser.getName());
+        log.setEmail(email);
+        log.setOtp(otp);
+        log.setIsActive('Y');
+        log.setCreatedOn(LocalDateTime.now());
+
+        forgetPasswordLoggerRepo.save(log);
+        return true;
+    }
+
+    @Override
+    public ResponseEntity<?>forgetPass(UsersReq req){
+        logger.info("forgetPass user in the authService");
+        try{
+            String password =  req.getPassword();
+            String email =  req.getEmail();
+            String otp = req.getOtp();
+            String confirmPassword = req.getConfirmPassword();
+
+            if(!password.equals(confirmPassword)){
+                throw new BadRequestsException("Passwords do not match");
+            }
+
+            ForgetPasswordLogger log = forgetPasswordLoggerRepo.findTopByEmailAndOtpAndIsActive(email, otp, 'Y')
+                    .orElseThrow(()->new BadRequestsException("Invalid or expired otp!"));
+
+            // time diff <= 10min
+            Duration diff = Duration.between(log.getCreatedOn(), LocalDateTime.now());
+            if (diff.toMinutes() > 10) {
+                throw new BadRequestsException("OTP has expired.");
+            }
+            //otp verified
+            log.setIsActive('N');
+            forgetPasswordLoggerRepo.save(log);
+
+            Optional<Users> optional = usersRepo.findByEmail(email);
+            Users mappingUser = optional.get();
+
+            // hash it and save it users
+            mappingUser.setPassword(passwordEncoder.encode(password));
+            usersRepo.save(mappingUser);
+
+            // map password to history
+            PasswordMapping passwordMapping = passwordMappingRepo.findByUserId(mappingUser.getId());
+            passwordMapping.setPassword(password);
+            passwordMapping.setLastModified(LocalDateTime.now());
+
+            passwordMappingRepo.save(passwordMapping);
+
+            //logger
+            logger.info("forget password changed successfully in service");
+            Map<String,Object> response = new HashMap<>();
+            response.put("message", "Password changed successfully!");
+            return ResponseEntity.ok(response);
+
+        } catch (Exception e) {
+            throw new BadRequestsException("Error forgetPass authService");
+        }
+    }
+
+    @Override
+    public ResponseEntity<?>resetPass(UsersReq req, String token){
+        logger.info("resetPass user in the authService");
+        try{
+            Integer userId = jwtService.extractUserId(token);
+            String password =  req.getPassword();
+            String confirmPassword = req.getConfirmPassword();
+
+            if(!password.equals(confirmPassword)){
+                throw new BadRequestsException("Passwords do not match");
+            }
+
+            Optional<Users> optional = usersRepo.findById(userId);
+            Users mappingUser = optional.get();
+
+            // hash it and save it users
+            mappingUser.setPassword(passwordEncoder.encode(password));
+            usersRepo.save(mappingUser);
+
+            // map password to history
+            PasswordMapping passwordMapping = passwordMappingRepo.findByUserId(userId);
+            passwordMapping.setPassword(password);
+            passwordMapping.setLastModified(LocalDateTime.now());
+
+            passwordMappingRepo.save(passwordMapping);
+
+            //logger
+            logger.info("resetPass password changed successfully in service");
+            Map<String,Object> response = new HashMap<>();
+            response.put("message", "Password changed successfully!");
+            return ResponseEntity.ok(response);
+
+        } catch (Exception e) {
+            throw new BadRequestsException("Error resetPass authService");
         }
     }
 }

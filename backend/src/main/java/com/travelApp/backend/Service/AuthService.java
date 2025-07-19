@@ -8,4 +8,8 @@ public interface AuthService {
     Users registerUser(UsersReq req);
     boolean sendOtp(UsersReq req);
     ResponseEntity<?> signIn(UsersReq req);
+    boolean sendOtpForgotPassword(UsersReq req);
+    ResponseEntity<?> forgetPass(UsersReq req);
+    ResponseEntity<?> resetPass(UsersReq req, String token);
+
 }

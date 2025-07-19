@@ -1,6 +1,7 @@
 package com.travelApp.backend.Service;
 
 import com.travelApp.backend.Entity.Users;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
@@ -30,5 +31,15 @@ public class JwtServiceImpl implements JwtService {
                 .setExpiration(new Date(System.currentTimeMillis() + jwtExpirationInMs))
                 .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
+    }
+
+    @Override
+    public Integer extractUserId(String token) {
+        Claims claims = Jwts.parser()
+                .setSigningKey(Keys.hmacShaKeyFor(jwtSecret.getBytes()))
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
+        return Integer.parseInt(claims.getSubject());
     }
 }

@@ -107,4 +107,57 @@ public class Auth {
         }
     }
 
+
+    @PostMapping("/sendOtpForgotPassword")
+    public ResponseEntity<?>sendOtpForgotPassword(@RequestBody UsersReq req){
+        //logger
+        logger.info("OTP sending started forgot password");
+        try{
+
+            Boolean flag = authService.sendOtpForgotPassword(req);
+            if(flag){
+                Map<String, String> response = new HashMap<>();
+                response.put("status", "otp sent successfully valid for 10mins");
+
+                //logger
+                logger.info("OTP sent successfully valid for 10mins for forgot password");
+
+                return ResponseEntity.ok(response);
+            }
+            Map<String, String> response = new HashMap<>();
+            response.put("status", "OTP sending failed");
+
+            //logger
+            logger.error("OTP sending failed forgot password");
+
+            return ResponseEntity.badRequest().body(response);
+        } catch (Exception e) {
+            //logger
+            logger.error("OTP failed from backend");
+            throw new BadRequestsException("Error while sending the otp");
+        }
+    }
+
+    @PostMapping("/forgetPass")
+    public ResponseEntity<?> forgetPass(@RequestBody UsersReq req){
+        logger.info("ForgetPass started");
+        try{
+            return ResponseEntity.ok(authService.forgetPass(req));
+        } catch (Exception e) {
+            throw new BadRequestsException("Error forgetPass");
+        }
+    }
+
+
+    @PostMapping("/resetPass")
+    public ResponseEntity<?> resetPass(@RequestHeader("Authorization") String authHeader, @RequestBody UsersReq req){
+        logger.info("ResetPassword started");
+        try{
+            String token = authHeader.replace("Bearer ", "");
+            return ResponseEntity.ok(authService.resetPass(req, token));
+        } catch (Exception e) {
+            throw new BadRequestsException("Error forgetPass");
+        }
+    }
+
 }
