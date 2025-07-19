@@ -68,7 +68,7 @@ public class AuthServiceImpl implements AuthService {
                 "\n\nThis OTP is valid for 10 minutes." +
                 "\n\nIf you did not request this, please ignore." +
                 "\n\n- TravelApp Team";
-        return mailService.sendRegisterMail(email, body);
+        return mailService.sendRegisterMail(email, body, val);
     }
 
     @Override
