@@ -1,4 +1,4 @@
-package com.travelApp.backend.Entity;
+package com.travelApp.backend.Entity.UsersClass;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;

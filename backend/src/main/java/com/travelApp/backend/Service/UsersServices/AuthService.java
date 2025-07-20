@@ -1,7 +1,7 @@
-package com.travelApp.backend.Service;
+package com.travelApp.backend.Service.UsersServices;
 
 import com.travelApp.backend.Dto.UsersReq;
-import com.travelApp.backend.Entity.Users;
+import com.travelApp.backend.Entity.UsersClass.Users;
 import org.springframework.http.ResponseEntity;
 
 public interface AuthService {

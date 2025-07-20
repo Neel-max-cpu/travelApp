@@ -1,4 +1,4 @@
-package com.travelApp.backend.Service;
+package com.travelApp.backend.Service.UsersServices;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

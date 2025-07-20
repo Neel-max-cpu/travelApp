@@ -1,10 +1,9 @@
 package com.travelApp.backend.Controllers;
 
 import com.travelApp.backend.Dto.UsersReq;
-import com.travelApp.backend.Entity.Users;
+import com.travelApp.backend.Entity.UsersClass.Users;
 import com.travelApp.backend.Expections.BadRequestsException;
-import com.travelApp.backend.Service.AuthService;
-import com.travelApp.backend.Service.AuthServiceImpl;
+import com.travelApp.backend.Service.UsersServices.AuthService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;

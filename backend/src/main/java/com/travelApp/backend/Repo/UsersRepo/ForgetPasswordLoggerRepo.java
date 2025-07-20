@@ -1,6 +1,6 @@
-package com.travelApp.backend.Repo;
+package com.travelApp.backend.Repo.UsersRepo;
 
-import com.travelApp.backend.Entity.ForgetPasswordLogger;
+import com.travelApp.backend.Entity.UsersClass.ForgetPasswordLogger;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

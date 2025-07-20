@@ -1,6 +1,6 @@
-package com.travelApp.backend.Repo;
+package com.travelApp.backend.Repo.UsersRepo;
 
-import com.travelApp.backend.Entity.RegisterUserOtp;
+import com.travelApp.backend.Entity.UsersClass.RegisterUserOtp;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
