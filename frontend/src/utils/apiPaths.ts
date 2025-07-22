@@ -8,7 +8,7 @@ export const API_PATHS = {
         LOGIN:"/api/auth/login",
         OTPFORGETPASS:"/api/auth/sendOtpForgotPassword",        
         FORGOT_PASS:"/api/auth/forgetPass",    
-        RESETPASS:"/api/auth/resetPass"    
-    },
-    
+        RESETPASS:"/api/auth/resetPass",
+        DISABLEOTP:"/api/auth/disableOtp",
+    },    
 };

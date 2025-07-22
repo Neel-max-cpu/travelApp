@@ -7,4 +7,5 @@ import java.util.Optional;
 
 public interface ForgetPasswordLoggerRepo extends JpaRepository<ForgetPasswordLogger, Integer> {
     Optional<ForgetPasswordLogger> findTopByEmailAndOtpAndIsActive(String email, String otp, Character isActive);
+    ForgetPasswordLogger findByEmailAndIsActive(String email, Character isActive);
 }

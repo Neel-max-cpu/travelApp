@@ -159,4 +159,14 @@ public class Auth {
         }
     }
 
+    @PostMapping("/disableOtp")
+    public ResponseEntity<?> disableOtp(@RequestBody UsersReq req){
+        logger.info("DisableOtp started");
+        try{
+            return ResponseEntity.ok(authService.disableOtp(req));
+        } catch (Exception e) {
+            throw new BadRequestsException("Error disableOtp");
+        }
+    }
+
 }

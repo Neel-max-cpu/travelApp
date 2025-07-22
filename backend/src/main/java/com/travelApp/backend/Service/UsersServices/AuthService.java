@@ -11,5 +11,6 @@ public interface AuthService {
     boolean sendOtpForgotPassword(UsersReq req);
     ResponseEntity<?> forgetPass(UsersReq req);
     ResponseEntity<?> resetPass(UsersReq req, String token);
+    ResponseEntity<?> disableOtp(UsersReq req);
 
 }

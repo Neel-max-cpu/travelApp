@@ -9,4 +9,5 @@ public class UsersReq {
     private String otp;
     private String password;
     private String confirmPassword;
+    private String value;
 }

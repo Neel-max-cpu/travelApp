@@ -24,6 +24,7 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -70,6 +71,28 @@ public class AuthServiceImpl implements AuthService {
                 "\n\nIf you did not request this, please ignore." +
                 "\n\n- TravelApp Team";
         return mailService.sendRegisterMail(email, body, val);
+    }
+
+    boolean inactiveTheOtp(String email, String val){
+        if(Objects.equals(val, "1")){
+            //register otp
+            RegisterUserOtp registerUserOtp = registerUserOtpRepo.findByEmailAndIsActive(email,'Y');
+            if(registerUserOtp!=null){
+                registerUserOtp.setIsActive('N');
+                registerUserOtpRepo.save(registerUserOtp);
+                return true;
+            }
+        }
+        else {
+            // forgot pass otp
+            ForgetPasswordLogger forgetPasswordLogger = forgetPasswordLoggerRepo.findByEmailAndIsActive(email, 'Y');
+            if(forgetPasswordLogger!=null){
+                forgetPasswordLogger.setIsActive('N');
+                forgetPasswordLoggerRepo.save(forgetPasswordLogger);
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
@@ -307,4 +330,26 @@ public class AuthServiceImpl implements AuthService {
             throw new BadRequestsException("Error resetPass authService");
         }
     }
+
+    @Override
+    public ResponseEntity<?> disableOtp(UsersReq req){
+        logger.info("disableOtp in the authService");
+        try{
+            String val = req.getValue();
+            String email = req.getEmail();
+            Map<String, String> response = new HashMap<>();
+            if(inactiveTheOtp(email, val)){
+                response.put("message", "otp disabled!");
+            }
+            else{
+                response.put("message", "Invalid/otp not found!");
+            }
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            logger.error("Error disabling OTP", e);
+            throw new BadRequestsException("Error disableOtp authService");
+        }
+    }
+
+
 }

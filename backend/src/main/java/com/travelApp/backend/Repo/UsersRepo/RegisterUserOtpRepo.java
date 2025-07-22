@@ -9,4 +9,5 @@ import java.util.Optional;
 @Repository
 public interface RegisterUserOtpRepo extends JpaRepository<RegisterUserOtp, Integer> {
     Optional<RegisterUserOtp> findTopByEmailAndOtpAndIsActive(String email, String otp, Character isActive);
+    RegisterUserOtp findByEmailAndIsActive(String email, Character isActive);
 }

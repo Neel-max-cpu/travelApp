@@ -26,11 +26,80 @@ const Nav = ({ openNav }: Props) => {
 
 
 
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [name, setName] = useState('');
   const [otp, setOtp] = useState('');
+  const [otpCoolDown, setOtpCoolDown] = useState(0);
+  const [isOtpSent, setIsOtpSent] = useState(false);
+  
+
+  useEffect(() => {
+    // When dialog is opened, reset all form state
+    if (!isDialogOpen && isOtpSent && email) {
+      const type = formType === "register" ? "1" : formType === "forgetpass" ? "2" : null;
+      if (!type) return;
+      let value:string;
+      if(formType == "register") value="1";
+      else if(formType=="forgetpass") value="2";
+      let response = axiosInstance.post(API_PATHS.AUTH.DISABLEOTP,{
+        email,
+        value: type
+      }).catch(err => console.error("❌ OTP disable error:", err));
+
+      localStorage.removeItem("otpEmail");
+      localStorage.removeItem("otpType");
+    } 
+    
+    setFormType("login");
+    resetForm();  
+  }, [isDialogOpen]);
+
+
+  //page reload
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      const otpEmail = localStorage.getItem("otpEmail");
+      const otpType = localStorage.getItem("otpType");
+      const value = otpType === "register" ? "1" : otpType === "forgetpass" ? "2" : null;
+  
+      if (otpEmail && value) {
+        let response = axiosInstance.post(API_PATHS.AUTH.DISABLEOTP,{
+          email:otpEmail,
+          value
+        }).catch(err => console.error("❌ OTP disable error:", err));
+        localStorage.removeItem("otpEmail");
+        localStorage.removeItem("otpType");
+      }
+    };
+  
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
+  
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+    if (otpCoolDown > 0) {
+      interval = setInterval(() => {
+        setOtpCoolDown(prev => prev - 1);
+      }, 1000);
+    }
+    return () => clearInterval(interval);
+  }, [otpCoolDown]);
+
+  const resetForm = () => {
+    setError("");
+    setEmail("");
+    setPassword("");
+    setConfirmPassword("");
+    setOtp("");
+    setName("");
+  }
 
   //submit
   const handleSubmit = async (e: any) => {
@@ -48,6 +117,7 @@ const Nav = ({ openNav }: Props) => {
       let response;
 
       if (formType == "login") {
+        setError("");
         if (!password) {
           setError("Please enter the password!");
           setLoading(false);
@@ -78,6 +148,7 @@ const Nav = ({ openNav }: Props) => {
 
       }
       else if (formType === 'register') {
+        setError("");
         if (!password) {
           setError("Please enter the password!");
           setLoading(false);
@@ -117,9 +188,11 @@ const Nav = ({ openNav }: Props) => {
         });
 
         toast.success("Registered successfully!");
+        setFormType("login");
 
       }
       else if (formType === 'forgetpass') {
+        setError("");
         if (!validatePass(password)) {
           setError("Password must be atleast 6 Characters long!");
           setLoading(false);
@@ -146,9 +219,11 @@ const Nav = ({ openNav }: Props) => {
         });
 
         toast.success("Password Changed successfully!");
+        setFormType("login");
       }
 
     } catch (error: any) {
+      toast.error("Something went wrong please try again sometime laster!")
       const msg = error?.response?.data?.message || "Something went wrong!";
       setError(msg);
     } finally {
@@ -158,7 +233,7 @@ const Nav = ({ openNav }: Props) => {
   }
 
 
-  const handleSendOtp = async (e:any) => {
+  const handleSendOtp = async (e: any) => {
     if (otpLoading) return;
     setOtpLoading(true);
     e.preventDefault();
@@ -178,7 +253,15 @@ const Nav = ({ openNav }: Props) => {
         { email }
       );
       console.log('✅ OTP sent:', res.data.message);
-    } catch (error:any) {
+      toast.success("Otp sent to your email!")
+      setOtpCoolDown(120);
+      setIsOtpSent(true);
+      if (formType === "register" || formType === "forgetpass") {
+        localStorage.setItem("otpEmail", email);
+        localStorage.setItem("otpType", formType); 
+      }
+    } catch (error: any) {
+      toast.error("Error in sending otp!")
       console.error('❌ OTP Error:', error.response?.data?.message || error.message);
     } finally {
       setOtpLoading(false);
@@ -200,8 +283,12 @@ const Nav = ({ openNav }: Props) => {
         return (
           <>
             <Input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-            <Button onClick={handleSendOtp} disabled={otpLoading}>
-              otpLoading? "Sending OTP..." : "Send OTP"
+            <Button onClick={handleSendOtp} disabled={otpLoading || otpCoolDown > 0}>
+              {otpLoading
+                ? "Sending OTP..."
+                : otpCoolDown > 0
+                  ? `Resend in ${otpCoolDown}s`
+                  : "Send OTP"}
             </Button>
             <Input type="password" placeholder="OTP" value={otp} onChange={(e) => setOtp(e.target.value)} />
             <Input type="text" placeholder="Full Name" value={name} onChange={(e) => setName(e.target.value)} />
@@ -213,9 +300,13 @@ const Nav = ({ openNav }: Props) => {
         return (
           <>
             <Input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-            <Button onClick={handleSendOtp} disabled={otpLoading}>
-              otpLoading? "Sending OTP..." : "Send OTP"
-            </Button>
+            <Button onClick={handleSendOtp} disabled={otpLoading || otpCoolDown > 0}>
+              {otpLoading
+                ? "Sending OTP..."
+                : otpCoolDown > 0
+                  ? `Resend in ${otpCoolDown}s`
+                  : "Send OTP"}
+            </Button>            
             <Input type="password" placeholder="OTP" value={otp} onChange={(e) => setOtp(e.target.value)} />
             <Input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
             <Input type="password" placeholder="Confirm Password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
@@ -229,14 +320,14 @@ const Nav = ({ openNav }: Props) => {
       return (
         <div className="text-sm text-center mt-2 space-y-1">
           <span
-            onClick={() => setFormType("register")}
+            onClick={() => { setFormType("register"); resetForm(); }}
             className="text-blue-600 hover:underline cursor-pointer"
           >
             Don't have an account? Sign up
           </span>
           <br />
           <span
-            onClick={() => setFormType("forgetpass")}
+            onClick={() => { setFormType("forgetpass"); resetForm(); }}
             className="text-blue-600 hover:underline cursor-pointer"
           >
             Forgot password?
@@ -246,7 +337,10 @@ const Nav = ({ openNav }: Props) => {
     } else if (formType === "register") {
       return (
         <span
-          onClick={() => setFormType("login")}
+          onClick={() => {
+            setFormType("login");
+            resetForm();
+          }}
           className="text-sm text-center text-blue-600 hover:underline cursor-pointer mt-2"
         >
           Already have an account? Log in
@@ -255,7 +349,7 @@ const Nav = ({ openNav }: Props) => {
     } else if (formType === "forgetpass") {
       return (
         <span
-          onClick={() => setFormType("login")}
+          onClick={() => { setFormType("login"); resetForm(); }}
           className="text-sm text-center text-blue-600 hover:underline cursor-pointer mt-2"
         >
           Back to Login
@@ -344,7 +438,7 @@ const Nav = ({ openNav }: Props) => {
               {renderFooterLinks()}
               <DialogFooter>
                 <DialogClose asChild>
-                  <Button variant="outline"onClick={() => setIsDialogOpen(false)}>Cancel</Button>
+                  <Button variant="outline" onClick={() => setIsDialogOpen(false)}>Cancel</Button>
                 </DialogClose>
                 <Button type="submit" onClick={handleSubmit} disabled={loading}>
                   {{

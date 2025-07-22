@@ -4,6 +4,7 @@ import {Poppins} from 'next/font/google';
 import ResponsiveNav from '@/components/Home/Navbar/ResponsiveNav'
 import Footer from "@/components/Home/Footer/Footer";
 import ScrollToTop from "@/components/Helper/ScrollToTop";
+import { Toaster } from "react-hot-toast";
 
 const font = Poppins({
   weight:['100', '200', '300', '400', '500', '600', '700', '800', '900'],
@@ -29,6 +30,14 @@ export default function RootLayout({
         {children}
         <Footer/>
         <ScrollToTop/>
+        <Toaster
+          toastOptions={{
+            className:"",
+            style:{
+              fontSize:'13px'
+            },
+          }}
+        />
       </body>
     </html>
   );
