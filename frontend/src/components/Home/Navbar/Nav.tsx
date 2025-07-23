@@ -12,6 +12,7 @@ import { validateCpass, validateEmail, validateName, validateOtp, validatePass }
 import axiosInstance from '@/utils/axiosInstance';
 import { API_PATHS } from '@/utils/apiPaths';
 import toast from "react-hot-toast";
+import { IoIosLogOut } from 'react-icons/io';
 
 type Props = {
   openNav: () => void
@@ -23,6 +24,7 @@ const Nav = ({ openNav }: Props) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
 
 
@@ -34,27 +36,34 @@ const Nav = ({ openNav }: Props) => {
   const [otp, setOtp] = useState('');
   const [otpCoolDown, setOtpCoolDown] = useState(0);
   const [isOtpSent, setIsOtpSent] = useState(false);
-  
+
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      setIsLoggedIn(true);
+    }
+  }, []);
 
   useEffect(() => {
     // When dialog is opened, reset all form state
     if (!isDialogOpen && isOtpSent && email) {
       const type = formType === "register" ? "1" : formType === "forgetpass" ? "2" : null;
       if (!type) return;
-      let value:string;
-      if(formType == "register") value="1";
-      else if(formType=="forgetpass") value="2";
-      let response = axiosInstance.post(API_PATHS.AUTH.DISABLEOTP,{
+      let value: string;
+      if (formType == "register") value = "1";
+      else if (formType == "forgetpass") value = "2";
+      let response = axiosInstance.post(API_PATHS.AUTH.DISABLEOTP, {
         email,
         value: type
       }).catch(err => console.error("❌ OTP disable error:", err));
 
       localStorage.removeItem("otpEmail");
       localStorage.removeItem("otpType");
-    } 
-    
+    }
+
     setFormType("login");
-    resetForm();  
+    resetForm();
   }, [isDialogOpen]);
 
 
@@ -64,23 +73,23 @@ const Nav = ({ openNav }: Props) => {
       const otpEmail = localStorage.getItem("otpEmail");
       const otpType = localStorage.getItem("otpType");
       const value = otpType === "register" ? "1" : otpType === "forgetpass" ? "2" : null;
-  
+
       if (otpEmail && value) {
-        let response = axiosInstance.post(API_PATHS.AUTH.DISABLEOTP,{
-          email:otpEmail,
+        let response = axiosInstance.post(API_PATHS.AUTH.DISABLEOTP, {
+          email: otpEmail,
           value
         }).catch(err => console.error("❌ OTP disable error:", err));
         localStorage.removeItem("otpEmail");
         localStorage.removeItem("otpType");
       }
     };
-  
+
     window.addEventListener("beforeunload", handleBeforeUnload);
     return () => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
     };
   }, []);
-  
+
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
@@ -136,7 +145,7 @@ const Nav = ({ openNav }: Props) => {
           email,
           password
         });
-        const { token, userId, name: userName } = response.data;
+        const { token, userId, name } = response.data.body;
         if (token) {
           localStorage.setItem("token", token);
           localStorage.setItem("userId", userId);
@@ -144,6 +153,7 @@ const Nav = ({ openNav }: Props) => {
           localStorage.setItem("name", name);
           toast.success("Log in success!");
           setIsDialogOpen(false);
+          setIsLoggedIn(true);
         }
 
       }
@@ -258,7 +268,7 @@ const Nav = ({ openNav }: Props) => {
       setIsOtpSent(true);
       if (formType === "register" || formType === "forgetpass") {
         localStorage.setItem("otpEmail", email);
-        localStorage.setItem("otpType", formType); 
+        localStorage.setItem("otpType", formType);
       }
     } catch (error: any) {
       toast.error("Error in sending otp!")
@@ -306,7 +316,7 @@ const Nav = ({ openNav }: Props) => {
                 : otpCoolDown > 0
                   ? `Resend in ${otpCoolDown}s`
                   : "Send OTP"}
-            </Button>            
+            </Button>
             <Input type="password" placeholder="OTP" value={otp} onChange={(e) => setOtp(e.target.value)} />
             <Input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
             <Input type="password" placeholder="Confirm Password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
@@ -358,6 +368,12 @@ const Nav = ({ openNav }: Props) => {
     }
   };
 
+  const handleLogOut = () => {
+    localStorage.clear();
+    setIsLoggedIn(false);
+    toast.success("Logged out!");
+  }
+
 
   useEffect(() => {
     const handler = () => {
@@ -385,36 +401,38 @@ const Nav = ({ openNav }: Props) => {
         </div>
         {/* navlinks */}
         <div className="hidden lg:flex items-center space-x-10">
-          {navlinks.map((item) => {
-            return (
-              <Link href={item.url} key={item.id}>
-                <p className="relative text-white text-base font-medium w-fit block 
-                  after:block after:content-[''] 
-                  after:absolute after:h-[3px] after:bg-yellow-300 after:w-full                   
-                  after:scale-x-0 hover:after:scale-x-100 
-                  after:origin-right hover:after:origin-left 
-                  after:transition-transform after:duration-300">
-                  {item.lable}
-                </p>
-              </Link>
-            )
-          })}
+          {navlinks
+            .filter(item => isLoggedIn || item.id !== 7)
+            .map((item) => {
+              return (
+                <Link href={item.url} key={item.id}>
+                  <p className="navButtonStyleMap">
+                    {item.lable}
+                  </p>
+                </Link>
+              )
+            })}
         </div>
 
         {/* button */}
         <div className="flex items-center space-x-4">
           {/* dialog box */}
           <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-            <DialogTrigger asChild>
-              <p onClick={() => setIsDialogOpen(true)} className="relative text-white text-base font-medium w-fit block 
-                  after:block after:content-[''] 
-                  after:absolute after:h-[3px] after:bg-yellow-300 after:w-full                   
-                  after:scale-x-0 hover:after:scale-x-100 
-                  after:origin-right hover:after:origin-left 
-                  after:transition-transform after:duration-300 hover:cursor-pointer">
-                Login/SignUp
-              </p>
-            </DialogTrigger>
+            {isLoggedIn ? (
+              <div onClick={() => handleLogOut()} className="navButtonStyle">
+                <div className="flex space-x-2 items-center">
+                  <span>LogOut</span>
+                  <IoIosLogOut className='h-5 w-5 font-bold' />
+                </div>
+              </div>
+            ) : (
+
+              <DialogTrigger asChild>
+                <p onClick={() => setIsDialogOpen(true)} className="navButtonStyle">
+                  Login/SignUp
+                </p>
+              </DialogTrigger>
+            )}
             <DialogOverlay className="fixed inset-0 z-[999] bg-black/40 backdrop-blur-sm" />
             <DialogContent className="sm:max-w-md z-[1100]">
               <DialogHeader>

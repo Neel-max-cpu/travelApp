@@ -29,4 +29,10 @@ export const navlinks = [
         url:'#',
         lable:'Contact',
     },
+    {
+        id:7, 
+        url:'#',
+        lable:'My Bookings',
+    },
+    
 ]
