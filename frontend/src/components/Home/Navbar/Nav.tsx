@@ -13,6 +13,7 @@ import axiosInstance from '@/utils/axiosInstance';
 import { API_PATHS } from '@/utils/apiPaths';
 import toast from "react-hot-toast";
 import { IoIosLogOut } from 'react-icons/io';
+import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 
 type Props = {
   openNav: () => void
@@ -294,11 +295,16 @@ const Nav = ({ openNav }: Props) => {
           <>
             <Input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
             <Button onClick={handleSendOtp} disabled={otpLoading || otpCoolDown > 0}>
-              {otpLoading
-                ? "Sending OTP..."
-                : otpCoolDown > 0
-                  ? `Resend in ${otpCoolDown}s`
-                  : "Send OTP"}
+              {otpLoading ? (
+                <>
+                  <AiOutlineLoading3Quarters className="animate-spin inline-block mr-2" />
+                  Sending OTP...
+                </>
+              ) : otpCoolDown > 0 ? (
+                `Resend in ${otpCoolDown}s`
+              ) : (
+                "Send OTP"
+              )}
             </Button>
             <Input type="password" placeholder="OTP" value={otp} onChange={(e) => setOtp(e.target.value)} />
             <Input type="text" placeholder="Full Name" value={name} onChange={(e) => setName(e.target.value)} />
@@ -311,11 +317,16 @@ const Nav = ({ openNav }: Props) => {
           <>
             <Input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
             <Button onClick={handleSendOtp} disabled={otpLoading || otpCoolDown > 0}>
-              {otpLoading
-                ? "Sending OTP..."
-                : otpCoolDown > 0
-                  ? `Resend in ${otpCoolDown}s`
-                  : "Send OTP"}
+              {otpLoading ? (
+                <>
+                  <AiOutlineLoading3Quarters className="animate-spin inline-block mr-2" />
+                  Sending OTP...
+                </>
+              ) : otpCoolDown > 0 ? (
+                `Resend in ${otpCoolDown}s`
+              ) : (
+                "Send OTP"
+              )}
             </Button>
             <Input type="password" placeholder="OTP" value={otp} onChange={(e) => setOtp(e.target.value)} />
             <Input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
@@ -460,9 +471,24 @@ const Nav = ({ openNav }: Props) => {
                 </DialogClose>
                 <Button type="submit" onClick={handleSubmit} disabled={loading}>
                   {{
-                    login: loading ? "Logging in..." : "Login",
-                    register: loading ? "Signing up..." : "Sign Up",
-                    forgetpass: loading ? "Changing..." : "Change Password"
+                    login: loading ? (
+                      <>
+                        <AiOutlineLoading3Quarters className="animate-spin inline-block mr-2" />
+                        "Logging in..." 
+                      </>
+                      ): ("Login"),
+                    register: loading ? (
+                      <>
+                        <AiOutlineLoading3Quarters className="animate-spin inline-block mr-2" />
+                        "Signing up..."
+                      </>
+                      ) : "Sign Up",
+                    forgetpass: loading ? (
+                      <>
+                        <AiOutlineLoading3Quarters className="animate-spin inline-block mr-2" />
+                        "Changing..."
+                      </>
+                      ) : "Change Password"
                   }[formType]}
                 </Button>
               </DialogFooter>

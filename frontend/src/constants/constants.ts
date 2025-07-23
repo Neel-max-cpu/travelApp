@@ -32,7 +32,7 @@ export const navlinks = [
     {
         id:7, 
         url:'#',
-        lable:'My Bookings',
+        lable:'Bookings',
     },
     
 ]
