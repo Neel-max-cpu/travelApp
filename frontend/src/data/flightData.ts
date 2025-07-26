@@ -1,3 +1,11 @@
+export const classData = [
+  {id:1, value:"ECONOMY", name:"Economy"},
+  {id:2, value:"PREMIUM_ECONOMY", name:"Premium Economy"},
+  {id:3, value:"BUSINESS", name:"Buisness"},
+  {id:4, value:"FIRST", name:"First"},
+]
+
+
 export const body = [
   // post request
   {
