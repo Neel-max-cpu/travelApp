@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { FaCalendar, FaLocationArrow, FaMap } from 'react-icons/fa'
 import { FaUserGroup } from 'react-icons/fa6'
 import { IoLocationSharp } from "react-icons/io5";
@@ -9,48 +9,86 @@ import { Label } from '../ui/label';
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
-import { Check, ChevronDownIcon, ChevronsUpDown, LocateFixed  } from 'lucide-react';
+import { Axis3D, Check, ChevronDownIcon, ChevronsUpDown, LocateFixed } from 'lucide-react';
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '../ui/command';
 import { cn } from '@/lib/utils';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '../ui/select';
 import { classData } from '@/data/flightData';
 import { Calendar } from '../ui/calendar';
+import { API_PATHS, fetchSearchAccessToken } from '@/utils/apiPaths';
+import moment from 'moment';
+import useAmadeusToken from '@/hooks/useAmadeusToken';
+import axiosInstance from '@/utils/axiosInstance';
 
 const SearchBoxFlight = () => {
 
-  const [defaultTraveller, setDefaultTraveller] = useState(1);
-  const [defaultClass, setDefaultClass] = useState('Economy');
+  //temporary
+  const [tempTraveller, setTempTraveller] = useState("1");
+  const [tempClass, setTempClass] = useState(classData[0]);
+  
+  
+  
   const [open, setOpen] = React.useState(false)
   const [value, setValue] = React.useState("")
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  
+  
+  
+  //form 
+  const [fromAirport, setFromAirport] = useState<{ label: string; value: string } | null>(null);
+  const [toAirport, setToAirport] = useState<{ label: string; value: string } | null>(null);  
+  const [defaultTraveller, setDefaultTraveller] = useState("1");  
+  const [defaultClass, setDefaultClass] = useState(classData[0]);
+  const [formdate, setFormDate] = React.useState<Date | undefined>(undefined);
+  console.log("date", formdate);
+  
 
-
+  const handleTravellerAndClass = () => {
+    setDefaultTraveller(tempTraveller);
+    setDefaultClass(tempClass);
+    setIsDialogOpen(false);
+  }
 
   return (
     <div className="bg-white rounded-lg p-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 items-center justify-center gap-8 !mt-3 sm:mt-12 w-[95%] sm:w-[80%]">
       {/* search input- departure */}
-      <div className="flex items-center space-x-6 w-[100%]">      
-        <IoLocationSharp className='w-6 h-6 text-blue-600' />
-        <div className="">
-          <p className="text-lg font-medium mb-[0.2rem]">From</p>          
-          <Combobox placeholderName="Departure"/>
+      <div className="flex items-center space-x-6 w-[100%]">
+        <div className="w-full">
+          <div className="flex space-x-2">
+            <IoLocationSharp className='w-6 h-6 text-blue-600' />
+            <p className="text-lg font-medium mb-[0.2rem]">From</p>
+          </div>
+          <Combobox
+            placeholderName="Departure"
+            value={fromAirport}
+            onChange={setFromAirport}
+          />
         </div>
       </div>
 
       {/* search input- arrival */}
       <div className="flex items-center space-x-6 w-[100%]">
-        <FaLocationArrow className='w-6 h-6 text-blue-600' />
-        <div className="">
-          <p className="text-lg font-medium mb-[0.2rem]">To</p>
-          <Combobox placeholderName="Arrival"/>
+        <div className="w-full">
+          <div className="flex space-x-2">
+            <FaLocationArrow className='w-6 h-6 text-blue-600' />
+            <p className="text-lg font-medium mb-[0.2rem]">To</p>
+          </div>
+          <Combobox
+            placeholderName="Arrival"
+            value={toAirport}
+            onChange={setToAirport}
+          />
         </div>
       </div>
 
       {/* search input- dparture date */}
       <div className="flex items-center space-x-6 w-[100%]">
-        <FaCalendar className='w-6 h-6 text-blue-600' />
-        <div className="">        
-          <p className="text-lg font-medium mb-[0.2rem]">Departure date</p>
-          <CalendarOption/>
+        <div className="w-full">
+          <div className="flex space-x-2">
+            <FaCalendar className='w-6 h-6 text-blue-600' />
+            <p className="text-lg font-medium mb-[0.2rem]">Departure date</p>
+          </div>
+          <CalendarOption onChange={setFormDate} />
         </div>
       </div>
 
@@ -58,16 +96,16 @@ const SearchBoxFlight = () => {
       <div className="flex items-center space-x-6 w-[100%]">
         <FaUserGroup className='w-6 h-6 text-blue-600' />
         {/* dialog box */}
-        <Dialog>
+        <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <form>
-            <DialogTrigger asChild>
+            <DialogTrigger asChild onClick={() => setIsDialogOpen(true)}>
               <div className="cursor-pointer">
                 <p className="text-lg font-medium mb-[0.2rem]">Travellers & Class</p>
                 <div className="flex items-end space-x-2">
                   <p className="text-base font-extrabold">{defaultTraveller}</p>
                   <p className="text-base font-base">Traveller</p>
                 </div>
-                <p className="text-base font-normal">{defaultClass} Class</p>
+                <p className="text-base font-normal">{defaultClass.name} Class</p>
               </div>
             </DialogTrigger>
 
@@ -83,46 +121,48 @@ const SearchBoxFlight = () => {
                 <div className="grid gap-3">
                   <Label htmlFor="name-1">Travellers</Label>
                   {/* travellers */}
-                  <SelectTraveller/>
+                  <SelectTraveller value={tempTraveller} onChange={setTempTraveller} />
                 </div>
                 <div className="grid gap-3">
                   <Label htmlFor="username-1">Class</Label>
-                  <SelectClass/>
+                  {/* select class */}
+                  <SelectClass value={tempClass} onChange={setTempClass} />
                 </div>
               </div>
               <DialogFooter>
                 <DialogClose asChild>
-                  <Button variant="outline">Cancel</Button>
+                  <Button variant="outline" onClick={() => setIsDialogOpen(false)}>Cancel</Button>
                 </DialogClose>
-                <Button type="submit">Select</Button>
+                <Button onClick={handleTravellerAndClass} type="submit">Select</Button>
               </DialogFooter>
             </DialogContent>
           </form>
         </Dialog>
-
-
       </div>
+
     </div>
   )
 }
 
 export default SearchBoxFlight
 
+type PropsDate={
+  onChange: (val: Date)=>void;
+}
 
-
-export function CalendarOption() {
+export function CalendarOption({onChange}:PropsDate) {
   const [open, setOpen] = React.useState(false)
   const [date, setDate] = React.useState<Date | undefined>(undefined)
   return (
-    <div className="flex flex-col gap-3">      
+    <div className="flex flex-col gap-3">
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button
             variant="outline"
             id="date"
-            className="w-48 justify-between font-normal"
+            className="w-[100%] justify-between font-normal"
           >
-            {date ? date.toLocaleDateString() : "Select date"}
+            {date ? moment(date).format("DD-MM-YYYY") : "Select date"}
             <ChevronDownIcon />
           </Button>
         </PopoverTrigger>
@@ -132,8 +172,11 @@ export function CalendarOption() {
             selected={date}
             captionLayout="dropdown"
             onSelect={(date) => {
-              setDate(date)
-              setOpen(false)
+              if(date){
+                setDate(date);
+                onChange(date);  
+                setOpen(false);
+              }
             }}
           />
         </PopoverContent>
@@ -142,10 +185,15 @@ export function CalendarOption() {
   )
 }
 
+type PropsTraveller = {
+  onChange: (val: string) => void;
+  value: string;
+}
 
-export function SelectTraveller() {
+
+export function SelectTraveller({ value, onChange }: PropsTraveller) {
   return (
-    <Select>
+    <Select value={value} onValueChange={onChange}>
       <SelectTrigger className="w-[100%]">
         <SelectValue placeholder="Select number of Travellers" />
       </SelectTrigger>
@@ -163,16 +211,32 @@ export function SelectTraveller() {
   )
 }
 
-export function SelectClass() {
+
+type ClassType = {
+  id: number;
+  value: string;
+  name: string;
+};
+
+type PropsClass = {
+  onChange: (val: ClassType) => void;
+  value: ClassType;
+}
+
+export function SelectClass({ value, onChange }: PropsClass) {
   return (
-    <Select>
+    <Select value={value.value} 
+    onValueChange={(val) => {
+      const selected = classData.find((item) => item.value === val);
+      if (selected) onChange(selected);
+    }}>
       <SelectTrigger className="w-[100%]">
         <SelectValue placeholder="Select seat class Type" />
       </SelectTrigger>
       <SelectContent className='z-[1100]'>
         <SelectGroup>
           <SelectLabel>Class</SelectLabel>
-          {classData.map((item)=>(
+          {classData.map((item) => (
             <SelectItem key={item.id} value={item.value}>{item.name}</SelectItem>
           ))}
         </SelectGroup>
@@ -184,36 +248,77 @@ export function SelectClass() {
 
 
 
-type Props={
-  placeholderName:string,
+type Props = {
+  placeholderName: string,
+  onChange: (val: { label: string; value: string } | null) => void;
+  value: { label: string; value: string } | null;
 }
 
-export function Combobox({placeholderName}:Props) {
-  const [open, setOpen] = React.useState(false)
-  const [value, setValue] = React.useState("")
+export function Combobox({ placeholderName, value, onChange }: Props) {
+  //verificaiton token
+  const amadeusToken = useAmadeusToken();
 
-  const frameworks = [
-    {
-      value: "next.js",
-      label: "Next.js",
-    },
-    {
-      value: "sveltekit",
-      label: "SvelteKit",
-    },
-    {
-      value: "nuxt.js",
-      label: "Nuxt.js",
-    },
-    {
-      value: "remix",
-      label: "Remix",
-    },
-    {
-      value: "astro",
-      label: "Astro",
-    },
-  ]
+  const [open, setOpen] = React.useState(false)
+  const [options, setOptions] = useState<{ label: string; value: string }[]>([])
+  const [search, setSearch] = useState("")
+
+  const latestSearchRef = useRef("");
+  useEffect(() => {
+
+    if (!search || search.length < 2) return;
+
+    const controller = new AbortController();
+    latestSearchRef.current = search;
+    const fetchLocations = setTimeout(async () => {
+      try {
+        const response = await axiosInstance.get(
+          API_PATHS.FLIGHT.CITYWITHNAME,
+          {
+            headers: {
+              Authorization: `Bearer ${amadeusToken}`,
+            },
+            params: {
+              subType: "AIRPORT",
+              keyword: search,
+              "page[limit]": 5,
+            },
+          }
+        );
+
+        const toTitleCase = (str: string) => {
+          return str.toLowerCase().replace(/\b\w/g, char => char.toUpperCase())
+        }
+
+        const mapped = response.data?.data?.map((loc: any) => {
+          const city = toTitleCase(loc.address?.cityName || loc.name)
+          const airport = loc.subType === "AIRPORT" ? `, ${toTitleCase(loc.name)}` : ""
+          const code = loc.iataCode ? ` (${loc.iataCode})` : ""
+
+          return {
+            label: `${city}${airport}${code}`,
+            value: loc.iataCode,
+          }
+        })
+
+        //update only if the search is different
+        if (latestSearchRef.current === search) {
+          setOptions(mapped);
+        }
+      } catch (error) {
+        console.log("error in searching the destionat!");
+      }
+    }, 1000);
+
+    //wait a little bit after the keyboard typing finishes
+    return () => {
+      controller.abort(); // Cancel old request
+      clearTimeout(fetchLocations); // Clear debounce timer
+    };
+
+  }, [search, amadeusToken]);
+
+
+
 
 
   return (
@@ -223,34 +328,32 @@ export function Combobox({placeholderName}:Props) {
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-[200px] justify-between"
+          className="w-[100%] justify-between truncate"
         >
-          {value
-            ? frameworks.find((framework) => framework.value === value)?.label
-            : placeholderName }
-          <LocateFixed   className="opacity-50" />
+          {value?.label || placeholderName}
+          <LocateFixed className="opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[200px] p-0 z-1000">
+      <PopoverContent className="w-[100%] p-0 z-1000">
         <Command className="">
-          <CommandInput placeholder="Search Desired Place" className="h-9" />
+          <CommandInput placeholder="Search Desired Place" className="h-9" value={search} onValueChange={(val) => setSearch(val)} />
           <CommandList>
             <CommandEmpty>No Destination found.</CommandEmpty>
             <CommandGroup>
-              {frameworks.map((framework) => (
+              {options.map((opt) => (
                 <CommandItem
-                  key={framework.value}
-                  value={framework.value}
-                  onSelect={(currentValue) => {
-                    setValue(currentValue === value ? "" : currentValue)
+                  key={opt.value}
+                  value={`${opt.label} (${opt.value})`}
+                  onSelect={() => {
+                    onChange(opt || null);
                     setOpen(false)
                   }}
                 >
-                  {framework.label}
+                  {opt.label}
                   <Check
                     className={cn(
                       "ml-auto",
-                      value === framework.value ? "opacity-100" : "opacity-0"
+                      value?.value === opt.value ? "opacity-100" : "opacity-0"
                     )}
                   />
                 </CommandItem>
