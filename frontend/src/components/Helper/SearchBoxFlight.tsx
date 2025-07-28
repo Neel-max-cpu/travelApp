@@ -20,28 +20,50 @@ import moment from 'moment';
 import useAmadeusToken from '@/hooks/useAmadeusToken';
 import axiosInstance from '@/utils/axiosInstance';
 
-const SearchBoxFlight = () => {
+type FlightSearchProps={
+  fromAirport: { label: string; value: string } | null;
+  setFromAirport: React.Dispatch<React.SetStateAction<{ label: string; value: string } | null>>;
+  toAirport: { label: string; value: string } | null;
+  setToAirport: React.Dispatch<React.SetStateAction<{ label: string; value: string } | null>>;
+  defaultTraveller: string;
+  setDefaultTraveller: React.Dispatch<React.SetStateAction<string>>;
+  defaultClass: {
+    id: number;
+    value: string;
+    name: string;
+  };
+  setDefaultClass: React.Dispatch<React.SetStateAction<{
+    id: number;
+    value: string;
+    name: string;
+  }>>;
+  formdate: Date | undefined;
+  setFormDate: React.Dispatch<React.SetStateAction<Date | undefined>>
+}
+
+
+const SearchBoxFlight = ( 
+    {
+
+      fromAirport,
+      setFromAirport,
+      toAirport,
+      setToAirport,
+      defaultTraveller,
+      setDefaultTraveller,
+      defaultClass,
+      setDefaultClass,
+      formdate,
+      setFormDate
+    } :FlightSearchProps
+  ) => {
 
   //temporary
   const [tempTraveller, setTempTraveller] = useState("1");
   const [tempClass, setTempClass] = useState(classData[0]);
-  
-  
-  
-  const [open, setOpen] = React.useState(false)
-  const [value, setValue] = React.useState("")
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
-  
-  
-  
-  //form 
-  const [fromAirport, setFromAirport] = useState<{ label: string; value: string } | null>(null);
-  const [toAirport, setToAirport] = useState<{ label: string; value: string } | null>(null);  
-  const [defaultTraveller, setDefaultTraveller] = useState("1");  
-  const [defaultClass, setDefaultClass] = useState(classData[0]);
-  const [formdate, setFormDate] = React.useState<Date | undefined>(undefined);
-  console.log("date", formdate);
-  
+      
+  const [open, setOpen] = React.useState(false)  
+  const [isDialogOpen, setIsDialogOpen] = useState(false);  
 
   const handleTravellerAndClass = () => {
     setDefaultTraveller(tempTraveller);
