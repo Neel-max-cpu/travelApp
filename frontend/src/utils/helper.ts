@@ -25,3 +25,13 @@ export const validateName = (name: string) => {
 export const validateOtp = (otp:string)=>{
     return typeof otp === "string" && otp.trim().length == 6;
 }
+
+export const formateMoney = (data:string)=>{
+  const num:number = parseInt(data);
+  const [integerPart, fractionalPart] =num.toString().split('.');
+  const lastThree = integerPart.slice(-3);
+  const otherDigits = integerPart.slice(0, -3);
+  const formatted = otherDigits.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + (otherDigits ? "," : "") + lastThree;
+
+  return fractionalPart ? `${formatted}.${fractionalPart}` : formatted;
+}
