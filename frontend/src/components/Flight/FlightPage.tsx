@@ -1,21 +1,33 @@
 'use client';
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../ui/card';
 import { Button } from '../ui/button';
 import { Label } from '../ui/label';
 import { Input } from '../ui/input';
-import { flightResponse5data } from '@/data/flightData';
+import { flightResponse20data, flightResponse5data } from '@/data/flightData';
 import moment from 'moment';
 import { formateMoney } from '@/utils/helper';
 import { IATACodes } from '@/utils/iataCodes';
+import axiosInstance from '@/utils/axiosInstance';
+import { API_PATHS } from '@/utils/apiPaths';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 const FlightPage = () => {
+  const [searchData, setSearchData] = useState<any>(null);
+  useEffect(() => {
+    const data = localStorage.getItem("flight_search_data");
+    if (data) {
+      setSearchData(JSON.parse(data));
+    }
+  }, []);
+
+
   return (
     <div className='bg-[#1B1212] min-h-screen pt-30'>
       <div className="flex flex-col items-center justify-center gap-5 p-4 md:p-20">
-        {flightResponse5data.flatMap((item) =>
+        {flightResponse20data.flatMap((item) =>
           item.data.map((flight) => (
-            <FlightCard key={flight.id} data={flight} dictionaries={item.dictionaries} />
+            <FlightCard key={flight.id} data={flight} dictionaries={item.dictionaries} searchData={searchData} />
           ))
         )}
       </div>
@@ -32,9 +44,13 @@ type Segment = {
   carrierCode: string;          // aircraft company
   number: string;
   aircraft: { code: string };     // plane name
-  operating?: { carrierCode: string };
+  operating?: { carrierCode?: string };
   duration: string;
   numberOfStops: number;
+
+  //extra for avoiding warning
+  id?: string; 
+  blacklistedInEU?: boolean;
 };
 
 type Itinerary = {
@@ -44,6 +60,18 @@ type Itinerary = {
 };
 
 type FlightData = {
+  //extra for safe keeping/avoiding warning
+  type?: string;
+  source?: string;    
+  instantTicketingRequired?: boolean;
+  nonHomogeneous?: boolean;
+  oneWay?: boolean;
+  isUpsellOffer?: boolean;
+  lastTicketingDate?: string;
+  lastTicketingDateTime?: string;
+  travelerPricings?: any[];  
+
+  //using the data 
   id: string;
   itineraries: Itinerary[];
   price: {
@@ -69,104 +97,138 @@ type Dictionaries = {
 type FlightCardProps = {
   data: FlightData;
   dictionaries: Dictionaries;
+  searchData: {
+    fromAirport: { label: string; value: string };
+    toAirport: { label: string; value: string };
+    formdate: string;
+    defaultClass: { id: number; value: string; name: string };
+    defaultTraveller: string;
+  };
+
 };
 
-export function FlightCard({ data, dictionaries }: FlightCardProps) {
-  
+export function FlightCard({ data, dictionaries, searchData }: FlightCardProps) {
+
   //raw data ----
   const length = data.itineraries?.[0]?.segments?.length;
 
   const aircraftCode = data.itineraries?.[0]?.segments?.[0]?.aircraft?.code;
   const carrierCode = data.itineraries?.[0]?.segments?.[0]?.carrierCode;
-    
+
   const departureTimeCode = data.itineraries?.[0]?.segments?.[0].departure.at;
-  const departureCityCode  = data.itineraries?.[0]?.segments?.[0].departure.iataCode;
+  const departureCityCode = data.itineraries?.[0]?.segments?.[0].departure.iataCode;
   const departureCountryCode = dictionaries.locations[departureCityCode]?.countryCode;
-  
-  
-  const arrivalTimeCode = data.itineraries?.[0]?.segments?.[length-1].arrival.at;
-  const arrivalCityCode = data.itineraries?.[0]?.segments?.[length-1].arrival.iataCode;
+
+
+  const arrivalTimeCode = data.itineraries?.[0]?.segments?.[length - 1].arrival.at;
+  const arrivalCityCode = data.itineraries?.[0]?.segments?.[length - 1].arrival.iataCode;
   const arrivalCountryCode = dictionaries.locations[arrivalCityCode]?.countryCode;
-  
+
   const durationCode = data.itineraries?.[0]?.duration;
   const duration = moment.duration(durationCode);
   const totalHours = Math.floor(duration.asHours());
-  const totalMinutes = duration.minutes();  
-  
+  const totalMinutes = duration.minutes();
+
   const moneyCode = data.price.currency;
   const moneyTotal = data.price.total;
   const fommattedTotal = formateMoney(moneyTotal);
 
-  const matchDepartureCity = IATACodes.find(
-    (entry) => entry.code === departureCityCode && entry.country === departureCountryCode
-  );
 
-  const matchArrivalCity = IATACodes.find(
-    (entry) => entry.code === arrivalCityCode && entry.country === arrivalCountryCode
-  );
-  
   //usable data ---
   const numberOfStops = length ? length - 1 : 0;
-  
+
   const aircraftName = aircraftCode ? dictionaries.aircraft[aircraftCode] : 'Unknown';
   const aircraftCompany = carrierCode ? dictionaries.carriers[carrierCode] : 'Unknown';
-  
-  const formattedDuration = (totalMinutes===0)? `${totalHours}h` : `${totalHours}h ${totalMinutes}m`;
 
-  const departureCity = matchDepartureCity ? matchDepartureCity.city : "Unknown";
+  const formattedDuration = (totalMinutes === 0) ? `${totalHours}h` : `${totalHours}h ${totalMinutes}m`;
+
+  const departureCity = searchData?.fromAirport?.label || departureCityCode;
   const departureTime = moment(departureTimeCode).format("HH:mm");
-  const departureDay = moment(departureTimeCode).format("dddd, MMMM Do YYYY");  
-  const departureTerminal = data.itineraries?.[0]?.segments?.[0].departure.terminal;
-  
-  const arrivalCity = matchArrivalCity? matchArrivalCity.city : "Unknown";
+  const departureDay = moment(departureTimeCode).format("dddd, MMMM Do YYYY");
+  const departureTerminal = data.itineraries?.[0]?.segments?.[0].departure.terminal || "N/A";
+
+  const arrivalCity = searchData?.toAirport?.label || arrivalCityCode;
   const arrivalTime = moment(arrivalTimeCode).format("HH:mm");
-  const arrivalDay = moment(arrivalTimeCode).format("dddd, MMM Do YYYY");  
-  const arrivalTerminal = data.itineraries?.[0]?.segments?.[0].arrival.terminal;
-  
+  const arrivalDay = moment(arrivalTimeCode).format("dddd, MMM Do YYYY");
+  const arrivalTerminal = data.itineraries?.[0]?.segments?.[0].arrival.terminal || "N/A";
+
   const price = `${moneyCode} ${fommattedTotal}`;
-  
+
   //image
   const src = `/Airline_Logos/Square/${carrierCode}.png`;
-  
-  console.log("departureCityCode:", departureCityCode);      
-  console.log("departureCountryCode:", departureCountryCode);  
-  console.log("IATACodes Sample:", IATACodes.slice(0, 5));     
+
+  // console.log("departureCityCode:", departureCityCode);      
+  // console.log("departureCountryCode:", departureCountryCode);  
+  // console.log("IATACodes Sample:", IATACodes.slice(0, 5));     
 
   return (
     <Card className="w-full">
       <CardContent>
-        <div className="grid grid-cols-5 space-x-6 items-center justify-center">
+        <div className="grid grid-cols-1 space-y-3 justify-start items-start lg:grid-cols-5 space-x-6 ">
           {/* part1 - plane */}
           <div className="flex space-x-2">
-            <img src={src} alt="" className="w-10 h-10"/>
+            <img src={src} alt="" className="w-10 h-10" />
             <div className="">
               <h1 className="text-black font-semibold">{aircraftCompany}</h1>
-              <h1 className="text-xs text-gray-500">{aircraftName}</h1>              
+              <h1 className="text-xs text-gray-500">{aircraftName}</h1>
             </div>
           </div>
           {/* part2- departure time and place */}
           <div className="">
             <h1 className="font-bold text-lg">{departureTime}</h1>
-            <h1 className="text-sm font-medium">{departureCity}</h1>            
+            <div className="flex space-x-3">
+              <h1 className="text-sm font-medium">{departureCity}</h1>
+              <p className="text-sm text-gray-400">Terminal: {departureTerminal}</p>
+            </div>
             <h1 className="text-sm font-light">{departureDay}</h1>
           </div>
           {/* part3 - duration and stops */}
-          <div className="flex flex-col items-center justify-center">
+          <div className="flex flex-col items-center justify-center mt-5 space-y-3">
             <h1 className="text-sm">{formattedDuration}</h1>
-            {numberOfStops? (
-                <h1 className="text-blue-500 font-medium text-sm">{numberOfStops} {numberOfStops>1? "Stops":"Stop"}</h1>
-              ) :('')
+            <div className="relative bg-gradient-to-r from-yellow-400 via-white to-red-500 w-full h-1 rounded-lg">
+              {/* <div className="w-2 h-2 rounded-full absolute top-1/2 left-[50%] -translate-x-1/2 -translate-y-1/2 border border-red-500 bg-white"></div> */}
+
+              {numberOfStops > 0 && (
+                Array.from({ length: numberOfStops }, (_, index) => {
+                  const spacing = 100 / (numberOfStops + 1);
+                  const position = spacing * (index + 1);
+
+                  return (
+                    <div
+                      key={index}
+                      className="w-2 h-2 rounded-full absolute top-1/2 border border-red-500 bg-white"
+                      style={{
+                        left: `${position}%`,
+                        transform: "translate(-50%, -50%)",
+                      }}
+                    />
+                  );
+                })
+              )}
+            </div>
+            {numberOfStops ? (
+              <h1 className="text-blue-500 font-medium text-sm">{numberOfStops} {numberOfStops > 1 ? "Stops" : "Stop"}</h1>
+            ) : (
+              <h1 className="text-blue-500 font-medium text-sm">Non Stop</h1>
+            )
             }
           </div>
           {/* part4 - arrival time and place */}
           <div className="">
             <h1 className="font-bold text-lg">{arrivalTime}</h1>
-            <h1 className="text-sm font-medium">{arrivalCity}</h1>
+            <div className="flex space-x-3">
+              <h1 className="text-sm font-medium">{arrivalCity}</h1>
+              <p className="text-sm text-gray-400">Terminal: {arrivalTerminal}</p>
+            </div>
             <h1 className="text-sm font-light">{arrivalDay}</h1>
           </div>
           {/* part5 - price and booknow */}
-          <div className="">
-            <h1 className="font-bold text-lg">{price}</h1>            
+          <div className="flex flex-col space-y-2">
+            <h1 className="font-bold text-lg text-center">{price}</h1>
+            <Button className="group relative overflow-hidden bg-green-600 hover:bg-gradient-to-r hover:from-green-600 hover:via-red-600 hover:to-yellow-400 hover:ring-2 hover:ring-blue-300 hover:ring-offset-2 hover:cursor-pointer transition-all ease-in-out duration-300 ">
+              <span className="absolute opacity-20 right-0 w-6 h-32 -mt-12 bg-white transition-all duration-1000 transform translate-x-12 rotate-12 group-hover:-translate-x-30 ease"></span>
+              <span>Book Now</span>
+            </Button>
           </div>
         </div>
       </CardContent>

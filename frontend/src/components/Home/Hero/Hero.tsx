@@ -84,6 +84,13 @@ const Hero = () => {
                 }
                 // console.log(payLoad);
                 // Redirect to results page
+                localStorage.setItem("flight_search_data", JSON.stringify({
+                    fromAirport,
+                    toAirport,
+                    formdate,
+                    defaultClass,
+                    defaultTraveller
+                }));
                 router.push("/flight-results");
 
                 // const response = await axiosInstance.post(API_PATHS.FLIGHT.FLIGHTSEARCH, payLoad);
