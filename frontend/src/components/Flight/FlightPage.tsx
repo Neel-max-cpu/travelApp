@@ -11,26 +11,70 @@ import { IATACodes } from '@/utils/iataCodes';
 import axiosInstance from '@/utils/axiosInstance';
 import { API_PATHS } from '@/utils/apiPaths';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import { ImSpinner2 } from "react-icons/im";
 
 const FlightPage = () => {
   const [searchData, setSearchData] = useState<any>(null);
+  const [visibleFlights, setVisibleFlights] = useState<any[]>([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const itemsPerPage = 5;
   useEffect(() => {
-    const data = localStorage.getItem("flight_search_data");
-    if (data) {
-      setSearchData(JSON.parse(data));
-    }
+    const data = localStorage.getItem('flight_search_data');
+    if (data) setSearchData(JSON.parse(data));
+
+    // Preprocess and store all flights
+    const allFlights = flightResponse20data.flatMap((item) =>
+      item.data.map((flight) => ({
+        flight,
+        dictionaries: item.dictionaries,
+      }))
+    );
+
+    setVisibleFlights(allFlights.slice(0, itemsPerPage));
+    setCurrentIndex(itemsPerPage);
   }, []);
+
+  const fetchMoreData = () => {
+    const allFlights = flightResponse20data.flatMap((item) =>
+      item.data.map((flight) => ({
+        flight,
+        dictionaries: item.dictionaries,
+      }))
+    );
+
+    setTimeout(() => {
+      const nextFlights = allFlights.slice(currentIndex, currentIndex + 2);
+      setVisibleFlights((prev) => [...prev, ...nextFlights]);
+      setCurrentIndex((prev) => prev + nextFlights.length);
+    }, 700);
+  };
+
+  const hasMore = currentIndex < flightResponse20data.flatMap((item) => item.data).length;
 
 
   return (
     <div className='bg-[#1B1212] min-h-screen pt-30'>
-      <div className="flex flex-col items-center justify-center gap-5 p-4 md:p-20">
-        {flightResponse20data.flatMap((item) =>
-          item.data.map((flight) => (
-            <FlightCard key={flight.id} data={flight} dictionaries={item.dictionaries} searchData={searchData} />
-          ))
-        )}
-      </div>
+      <InfiniteScroll
+        dataLength={visibleFlights.length}
+        next={fetchMoreData}
+        hasMore={hasMore}
+        loader={
+          <div className="w-full flex justify-center items-center py-4 my-5">
+            <ImSpinner2 className="text-white text-2xl animate-spin" />
+          </div>
+        }
+      >
+        <div className="flex flex-col items-center justify-center gap-5 p-4 md:p-20">
+          {visibleFlights.map((item, idx) => (
+            <FlightCard
+              key={`${item.flight.id}-${idx}`}
+              data={item.flight}
+              dictionaries={item.dictionaries}
+              searchData={searchData}
+            />
+          ))}
+        </div>
+      </InfiniteScroll>
 
     </div>
   )
@@ -49,7 +93,7 @@ type Segment = {
   numberOfStops: number;
 
   //extra for avoiding warning
-  id?: string; 
+  id?: string;
   blacklistedInEU?: boolean;
 };
 
@@ -62,14 +106,14 @@ type Itinerary = {
 type FlightData = {
   //extra for safe keeping/avoiding warning
   type?: string;
-  source?: string;    
+  source?: string;
   instantTicketingRequired?: boolean;
   nonHomogeneous?: boolean;
   oneWay?: boolean;
   isUpsellOffer?: boolean;
   lastTicketingDate?: string;
   lastTicketingDateTime?: string;
-  travelerPricings?: any[];  
+  travelerPricings?: any[];
 
   //using the data 
   id: string;
