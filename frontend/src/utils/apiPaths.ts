@@ -15,11 +15,16 @@ export const API_PATHS = {
     DISABLEOTP: "/api/auth/disableOtp",        
     AUTHORIZATION: "https://test.api.amadeus.com/v1/security/oauth2/token",
   },
+  COMMON:{
+    CITYWITHNAME: "https://test.api.amadeus.com/v1/reference-data/locations",
+  },
   FLIGHT: {
     FLIGHTSEARCH: "https://test.api.amadeus.com/v2/shopping/flight-offers",
-    CITYWITHNAME: "https://test.api.amadeus.com/v1/reference-data/locations",
     IATACODETOCITY: (iataCode: string) => `https://aerokey-api.vercel.app/v1/airports/code/${iataCode}`
   },
+  HOTELS:{
+
+  }
 };
 
 export const fetchSearchAccessToken = async () => {

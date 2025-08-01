@@ -168,6 +168,7 @@ const SearchBoxFlight = (
 
 export default SearchBoxFlight
 
+
 type PropsDate={
   onChange: (val: Date)=>void;
 }
@@ -184,7 +185,9 @@ export function CalendarOption({onChange}:PropsDate) {
             id="date"
             className="w-[100%] justify-between font-normal"
           >
-            {date ? moment(date).format("DD-MM-YYYY") : "Select date"}
+            <span className={date?"":"text-gray-500"}>
+              {date ? moment(date).format("DD-MM-YYYY") : "Select date"}
+            </span>
             <ChevronDownIcon />
           </Button>
         </PopoverTrigger>
@@ -294,7 +297,7 @@ export function Combobox({ placeholderName, value, onChange }: Props) {
     const fetchLocations = setTimeout(async () => {
       try {
         const response = await axiosInstance.get(
-          API_PATHS.FLIGHT.CITYWITHNAME,
+          API_PATHS.COMMON.CITYWITHNAME,
           {
             headers: {
               Authorization: `Bearer ${amadeusToken}`,
@@ -352,7 +355,9 @@ export function Combobox({ placeholderName, value, onChange }: Props) {
           aria-expanded={open}
           className="w-[100%] justify-between truncate"
         >
-          {value?.label || placeholderName}
+          <span className={value?"":"text-gray-500"}>
+            {value?.label || placeholderName}
+          </span>
           <LocateFixed className="opacity-50" />
         </Button>
       </PopoverTrigger>

@@ -1,5 +1,4 @@
 'use client';
-import SearchBox from '@/components/Helper/SearchBox';
 import SearchBoxFlight from '@/components/Helper/SearchBoxFlight';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
@@ -11,6 +10,7 @@ import moment from 'moment';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useRef, useState } from 'react'
+import SearchBoxHotel from '@/components/Helper/SearchBoxHotel';
 
 const videoSources = [
     "/videos/hero2.mp4",
@@ -34,6 +34,15 @@ const Hero = () => {
     const [defaultTraveller, setDefaultTraveller] = useState("1");
     const [defaultClass, setDefaultClass] = useState(classData[0]);
     const [formdate, setFormDate] = useState<Date | undefined>();
+
+
+    //hotel data
+    const [hotelLocation, setHotelLocation] = useState<{label:string, value:string} | null>(null);
+    const [checkInDate, setCheckInDate] = useState<Date | undefined>();
+    const [checkOutDate, setCheckOutDate] = useState<Date | undefined>();
+    
+    
+    
 
 
     const handleSearch = async (e: any) => {
@@ -152,7 +161,14 @@ const Hero = () => {
                     </div>
                     {/* search box */}
                     {currentSelected === 'hotel' ?
-                        <SearchBox />
+                        <SearchBoxHotel
+                            hotelLocation={hotelLocation} 
+                            setHotelLocation={setHotelLocation}
+                            checkInDate={checkInDate}
+                            setCheckInDate={setCheckInDate}
+                            checkOutDate={checkOutDate}
+                            setCheckOutDate={setCheckOutDate}
+                        />
                         :
                         <SearchBoxFlight
                             fromAirport={fromAirport}
@@ -170,7 +186,7 @@ const Hero = () => {
                     <Button type="button" onClick={handleSearch}
                         className="rounded px-14 md:px-28 -mt-4 py-2.5 overflow-hidden group bg-rose-600 relative hover:bg-gradient-to-r hover:from-red-500 hover:to-red-400 text-white hover:ring-2 hover:ring-offset-2
                 hover:ring-red-400 transition-all ease-out duration-300">
-                        <span className="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12 group-hover:-translate-x-40 ease"></span>
+                        <span className="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-12 bg-white opacity-20 rotate-12 group-hover:-translate-x-30 ease"></span>
                         <span className="relative font-bold">Search</span>
                     </Button>
                 </div>

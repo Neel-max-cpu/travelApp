@@ -14,12 +14,14 @@ import { API_PATHS } from '@/utils/apiPaths';
 import toast from "react-hot-toast";
 import { IoIosLogOut } from 'react-icons/io';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
+import { useRouter } from 'next/navigation';
 
 type Props = {
   openNav: () => void
 }
 
 const Nav = ({ openNav }: Props) => {
+  const router = useRouter();
   const [navBg, setNavBg] = useState(false);
   const [otpLoading, setOtpLoading] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -379,6 +381,10 @@ const Nav = ({ openNav }: Props) => {
     }
   };
 
+  const handleHome = ()=>{
+    router.push("/");
+  }
+
   const handleLogOut = () => {
     localStorage.clear();
     setIsLoggedIn(false);
@@ -408,7 +414,7 @@ const Nav = ({ openNav }: Props) => {
             {/* <TbAirBalloon className='w-6 h-6 text-white'/> */}
             <LiaCloudSolid className='w-6 h-6 font-bold text-white' />
           </div>
-          <h1 className='text-xl md:text-2xl text-white uppercase font-bold'>Sora</h1>
+          <h1 className='text-xl md:text-2xl text-white uppercase font-bold cursor-pointer' onClick={handleHome}>Sora</h1>
         </div>
         {/* navlinks */}
         <div className="hidden lg:flex items-center space-x-10">
