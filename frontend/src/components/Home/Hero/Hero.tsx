@@ -40,6 +40,11 @@ const Hero = () => {
     const [hotelLocation, setHotelLocation] = useState<{label:string, value:string} | null>(null);
     const [checkInDate, setCheckInDate] = useState<Date | undefined>();
     const [checkOutDate, setCheckOutDate] = useState<Date | undefined>();
+    const [cityCenterDistance, setCityCenterDistance] = useState("5");
+    const [aminities, setAminities] = useState<string[]>([]);
+    const [hotelStars, setHotelStars] = useState("");
+    
+    
     
     
     
@@ -51,6 +56,11 @@ const Hero = () => {
 
         if (currentSelected === 'hotel') {
             //todo
+            try {
+                
+            } catch (error) {
+                
+            }
         }
         else {
             try {
@@ -168,6 +178,12 @@ const Hero = () => {
                             setCheckInDate={setCheckInDate}
                             checkOutDate={checkOutDate}
                             setCheckOutDate={setCheckOutDate}
+                            cityCenterDistance={cityCenterDistance}
+                            setCityCenterDistance={setCityCenterDistance}
+                            aminities={aminities}
+                            setAminities={setAminities}
+                            hotelStars={hotelStars}
+                            setHotelStars={setHotelStars}
                         />
                         :
                         <SearchBoxFlight

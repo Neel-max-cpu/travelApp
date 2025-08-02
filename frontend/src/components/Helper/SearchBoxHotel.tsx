@@ -15,14 +15,26 @@ import { API_PATHS } from '@/utils/apiPaths';
 import { cn } from '@/lib/utils';
 import { Calendar } from '../ui/calendar';
 import moment from 'moment';
+import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogOverlay, DialogTitle, DialogTrigger } from '../ui/dialog';
+import { Input } from '../ui/input';
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '../ui/select';
+import { amenitiesData, distanceFromCityCenter, hotelStartData } from '@/data/hotelData';
+import { MultiSelect } from '../ui/multiSelect';
 
-type HotelProps={
-  hotelLocation:{label:string; value:string} | null;
-  setHotelLocation:React.Dispatch<React.SetStateAction<{ label: string; value: string } | null>>;
-  checkInDate:Date|undefined;
-  setCheckInDate: React.Dispatch<React.SetStateAction<Date | undefined>>
-  checkOutDate:Date|undefined;
-  setCheckOutDate: React.Dispatch<React.SetStateAction<Date | undefined>>
+type HotelProps = {
+  hotelLocation: { label: string; value: string } | null;
+  setHotelLocation: React.Dispatch<React.SetStateAction<{ label: string; value: string } | null>>;
+  checkInDate: Date | undefined;
+  setCheckInDate: React.Dispatch<React.SetStateAction<Date | undefined>>;
+  checkOutDate: Date | undefined;
+  setCheckOutDate: React.Dispatch<React.SetStateAction<Date | undefined>>;
+  cityCenterDistance: string;
+  setCityCenterDistance: React.Dispatch<React.SetStateAction<string>>;
+  aminities:string[];
+  setAminities: React.Dispatch<React.SetStateAction<string[]>>;
+  hotelStars: string;
+  setHotelStars: React.Dispatch<React.SetStateAction<string>>;
+
 }
 
 const SearchBoxHotel = ({
@@ -32,13 +44,32 @@ const SearchBoxHotel = ({
   setCheckInDate,
   checkOutDate,
   setCheckOutDate,
-}:HotelProps) => {
+  cityCenterDistance,
+  setCityCenterDistance,
+  aminities,
+  setAminities,
+  hotelStars,
+  setHotelStars,
+}: HotelProps) => {
+
+
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  const resetForm = () => {
+    setHotelLocation(null);
+    setCheckInDate(undefined);
+    setCheckOutDate(undefined);
+    setCityCenterDistance("5");
+    setAminities([]);
+    setHotelStars("");
+  };
+
   return (
-    <div className="bg-white rounded-lg p-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 items-center justify-center gap-8 !mt-3 sm:mt-12 w-[95%] sm:w-[80%]">          
+    <div className="bg-white rounded-lg p-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 items-center justify-center gap-8 !mt-3 sm:mt-12 w-[95%] sm:w-[80%]">
       {/* search input-1 */}
       <div className="flex items-center space-x-6 w-[100%]">
         <div className="w-full">
-        <div className="flex space-x-2">
+          <div className="flex space-x-2">
             <FaMap className='w-6 h-6 text-blue-600' />
             <p className="text-lg font-medium mb-[0.2rem]">Location</p>
           </div>
@@ -51,7 +82,7 @@ const SearchBoxHotel = ({
       </div>
 
       {/* search input-2 */}
-      <div className="flex items-center space-x-6 w-[100%]">        
+      <div className="flex items-center space-x-6 w-[100%]">
         <div className="w-full">
           <div className="flex space-x-2">
             <FaCalendar className='w-6 h-6 text-blue-600' />
@@ -77,11 +108,77 @@ const SearchBoxHotel = ({
         <div className="w-full">
           <div className="flex space-x-2">
             <FaUserGroup className='w-6 h-6 text-blue-600' />
-            <p className="text-lg font-medium mb-[0.2rem]">Guest</p>
+            <p className="text-lg font-medium mb-[0.2rem]">Other Amenities</p>
           </div>
-          <p className="text-base font-normal">1 Guest 1 Room</p>
+          {/* dialog box */}
+          <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+            <form>
+              <DialogTrigger asChild onClick={() => setIsDialogOpen(true)}>
+                <p className="text-base text-gray-500 font-normal cursor-pointer">Guest, Room...</p>
+              </DialogTrigger>
+              <DialogOverlay className="fixed inset-0 z-[999] bg-black/40 backdrop-blur-sm" />
+              <DialogContent className="sm:max-w-[425px] z-[1100]">
+                <DialogHeader>
+                  <DialogTitle>Other Amenities</DialogTitle>
+                  <DialogDescription>
+                    Choose your room type, number of guest and other facilities.
+                  </DialogDescription>
+                </DialogHeader>
+                <div className="grid gap-4">
+                  <div className="grid gap-3">
+                    <Label htmlFor="name-1">Distance From City Center</Label>
+                    {/* distance */}
+                    <SelectOptionDialog
+                      placeHolder="Distance"
+                      value={cityCenterDistance}
+                      onChange={setCityCenterDistance}
+                      data={distanceFromCityCenter}
+                    />
+                  </div>
+                  <div className="grid gap-3">
+                    <Label htmlFor="username-1">Add Ons</Label>
+                    <p className="text-gray-500 text-xs">Choose the aminities you are intrested in.</p>
+                    {/* aminities */}
+                    <MultiSelect
+                    className="z-[1100]"
+                     options={amenitiesData}
+                     onValueChange={setAminities}      
+                     value={aminities}               
+                     placeholder="Select Aminities"
+                     variant="inverted"
+                     animation={2}
+                     maxCount={3}
+                    />
+                  </div>
+                  <div className="grid gap-3">
+                    <Label htmlFor="name-1">Hotel Star</Label>
+                    {/* hotel stars */}
+                    <SelectOptionDialog
+                      placeHolder="Hotel Type"
+                      value={hotelStars}
+                      onChange={setHotelStars}
+                      data={hotelStartData}
+                    />
+                  </div>
+                </div>
+                <DialogFooter>
+                  <DialogClose asChild>
+                    <Button variant="outline" 
+                      onClick={() =>{
+                        setIsDialogOpen(false);
+                        resetForm();                  
+                      } 
+                    }>
+                      Cancel
+                    </Button>
+                  </DialogClose>
+                  <Button type="submit" onClick={() => setIsDialogOpen(false)}>Select</Button>
+                </DialogFooter>
+              </DialogContent>
+            </form>
+          </Dialog>
         </div>
-      </div>      
+      </div>
     </div>
   )
 }
@@ -90,13 +187,50 @@ export default SearchBoxHotel;
 
 
 
-
-type PropsDate={
-  placeHolder:string;
-  onChange: (val: Date)=>void;
+type PropsSelectOption = {
+  placeHolder: string;
+  value: string;
+  onChange: (val: string) => void;
+  data: {
+    id: number;
+    value: string;
+    name: string;
+  }[];
 }
 
-export function CalendarOption({placeHolder,onChange}:PropsDate) {
+
+export function SelectOptionDialog({ placeHolder, value, onChange, data }: PropsSelectOption) {
+  return (
+    <Select
+      value={value}
+      onValueChange={(val) => {
+        const selected = data.find((item) => item.value === val);
+        if (selected) onChange(selected.value);
+      }}
+    >
+      <SelectTrigger className="w-[100%]">
+        <SelectValue placeholder={placeHolder} />
+      </SelectTrigger>
+      <SelectContent className='z-[1100]'>
+        <SelectGroup>
+          <SelectLabel>{placeHolder}</SelectLabel>
+          {data.map((item) => (
+            <SelectItem key={item.id} value={item.value}>{item.name}</SelectItem>
+          ))}
+        </SelectGroup>
+      </SelectContent>
+    </Select>
+  )
+}
+
+
+
+type PropsDate = {
+  placeHolder: string;
+  onChange: (val: Date) => void;
+}
+
+export function CalendarOption({ placeHolder, onChange }: PropsDate) {
   const [open, setOpen] = React.useState(false)
   const [date, setDate] = React.useState<Date | undefined>(undefined)
   return (
@@ -108,7 +242,7 @@ export function CalendarOption({placeHolder,onChange}:PropsDate) {
             id="date"
             className="w-[100%] justify-between font-normal"
           >
-            <span className={date? "" : "text-gray-500"}>
+            <span className={date ? "" : "text-gray-500"}>
               {date ? moment(date).format("DD-MM-YYYY") : placeHolder}
             </span>
             <ChevronDownIcon />
@@ -120,9 +254,9 @@ export function CalendarOption({placeHolder,onChange}:PropsDate) {
             selected={date}
             captionLayout="dropdown"
             onSelect={(date) => {
-              if(date){
+              if (date) {
                 setDate(date);
-                onChange(date);  
+                onChange(date);
                 setOpen(false);
               }
             }}
@@ -212,7 +346,7 @@ export function Combobox({ placeholderName, value, onChange }: Props) {
           aria-expanded={open}
           className="w-[100%] justify-between truncate"
         >
-          <span className={value?"":"text-gray-500"}>
+          <span className={value ? "" : "text-gray-500"}>
             {value?.label || placeholderName}
           </span>
           <LocateFixed className="opacity-50" />
