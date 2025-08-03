@@ -5215,3 +5215,155 @@ export const hotelOffer = [
     ],
   },
 ];
+
+export const hotelOfferDetail = [
+  {
+    data: {
+      type: "hotel-offers",
+      hotel: {
+        type: "hotel",
+        hotelId: "ALNYC647",
+        chainCode: "AL",
+        name: "ALOFT MANHATTAN DOWNTOWN FINANCIAL DIST",
+        cityCode: "NYC",
+        address: {
+          countryCode: "US",
+          stateCode: "NY",
+        },
+        amenities: ["CRIBS_AVAILABLE"],
+      },
+      available: true,
+      offers: [
+        {
+          id: "2HSHOTJA8X",
+          checkInDate: "2025-08-10",
+          checkOutDate: "2025-08-11",
+          rateCode: "RAC",
+          description: {
+            text: "Sleeps 2, Fast & free WiFi throughout the hotel, 1 King, 210sqft/19sqm-230sqft/21sqm, Wireless internet, complimentary, Coffee/tea maker",
+            lang: "EN",
+          },
+          room: {
+            type: "ZZL",
+            typeEstimated: {
+              beds: 1,
+              bedType: "DOUBLE",
+            },
+            description: {
+              text: "Q1 Sale, includes prepay in full, non-refundable",
+              lang: "EN",
+            },
+          },
+          guests: {
+            adults: 2,
+          },
+          price: {
+            currency: "USD",
+            base: "239.00",
+            total: "277.76",
+            taxes: [
+              {
+                code: "CITY_TAX",
+                pricingFrequency: "PER_STAY",
+                pricingMode: "PER_PRODUCT",
+                amount: "10.76",
+                currency: "USD",
+                included: false,
+              },
+              {
+                code: "TOURISM_TAX",
+                pricingFrequency: "PER_STAY",
+                pricingMode: "PER_PRODUCT",
+                amount: "1.50",
+                currency: "USD",
+                included: false,
+              },
+              {
+                code: "OCCUPANCY_TAX",
+                pricingFrequency: "PER_STAY",
+                pricingMode: "PER_PRODUCT",
+                amount: "2.00",
+                currency: "USD",
+                included: false,
+              },
+              {
+                code: "OCCUPANCY_TAX",
+                pricingFrequency: "PER_STAY",
+                pricingMode: "PER_PRODUCT",
+                amount: "14.04",
+                currency: "USD",
+                included: false,
+              },
+              {
+                code: "STATE_TAX",
+                pricingFrequency: "PER_STAY",
+                pricingMode: "PER_PRODUCT",
+                amount: "9.56",
+                currency: "USD",
+                included: false,
+              },
+              {
+                code: "MISCELLANEOUS",
+                pricingFrequency: "PER_STAY",
+                pricingMode: "PER_PRODUCT",
+                amount: "0.90",
+                currency: "USD",
+                included: false,
+              },
+            ],
+            variations: {
+              changes: [
+                {
+                  startDate: "2025-08-10",
+                  endDate: "2025-08-11",
+                  base: "239.00",
+                },
+              ],
+            },
+          },
+          policies: {
+            cancellations: [
+              {
+                description: {
+                  text: "NON-REFUNDABLE RATE",
+                },
+                policyType: "CANCELLATION",
+              },
+            ],
+            paymentType: "deposit",
+            refundable: {
+              cancellationRefund: "NON_REFUNDABLE",
+            },
+            additionalDetails: [
+              {
+                description: [
+                  {
+                    text: "Misc:",
+                  },
+                  {
+                    text: "Customers should review government travel guidance to confirm eligibility and requirements for travel. See travelguidance.ma rriott.com. Upon early departure, an Early Departure Charge of 1 night roo m and applicable tax applies. ",
+                  },
+                ],
+              },
+            ],
+            lengthOfStay: {
+              maximumLengthOfStay: 0,
+              minimumLengthOfStay: 0,
+            },
+          },
+          roomInformation: {
+            description: "Q1 Sale, includes prepay in full, non-refundable",
+            type: "ZZL",
+            typeEstimated: {
+              bedType: "DOUBLE",
+              beds: 1,
+            },
+          },
+        },
+      ],
+    },
+    meta: {
+      lang: "EN",
+    },
+  },
+];

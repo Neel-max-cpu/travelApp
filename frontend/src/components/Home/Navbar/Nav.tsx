@@ -480,19 +480,19 @@ const Nav = ({ openNav }: Props) => {
                     login: loading ? (
                       <>
                         <AiOutlineLoading3Quarters className="animate-spin inline-block mr-2" />
-                        "Logging in..." 
+                        Logging in... 
                       </>
                       ): ("Login"),
                     register: loading ? (
                       <>
                         <AiOutlineLoading3Quarters className="animate-spin inline-block mr-2" />
-                        "Signing up..."
+                        Signing up...
                       </>
                       ) : "Sign Up",
                     forgetpass: loading ? (
                       <>
                         <AiOutlineLoading3Quarters className="animate-spin inline-block mr-2" />
-                        "Changing..."
+                        Changing...
                       </>
                       ) : "Change Password"
                   }[formType]}
