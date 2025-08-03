@@ -5,6 +5,7 @@ import { ImSpinner2 } from "react-icons/im";
 import { hotelFromCity, hotelImage } from '@/data/hotelData';
 import { Card, CardContent } from '../ui/card';
 import { Button } from '../ui/button';
+import { useRouter } from 'next/navigation';
 
 const HotelPage = () => {
 
@@ -99,44 +100,61 @@ type HotelDataProps = {
 };
 
 export function HotelMapCard({ data }: HotelDataProps) {
+    const router = useRouter();
 
     // call the image api with each name and get 3 full image    
     const results = hotelImage[0]?.results || [];
     const image1 = results[0]?.urls?.full || "/HotelDefaulImages/1.jpg";
     const image2 = results[1]?.urls?.full || "/HotelDefaulImages/2.jpg";
     const image3 = results[2]?.urls?.full || "/HotelDefaulImages/3.jpg";    
-    
-    return (
-        <Card className="w-full">
-            <CardContent>
 
-                <div className="grid grid-cols-1 space-y-3 justify-start items-start lg:grid-cols-4 space-x-6 ">
+    const showHotelOffer=()=>{
+        localStorage.setItem('hotelImages', JSON.stringify({ image1, image2, image3 }));
+        //api for hotel offers
+        router.push('/hotel-results/hotel-offers')
+    }
+
+    return (
+        <Card className="w-[80%]">
+            <CardContent>
+                <div className="grid grid-cols-1 space-y-3 justify-start items-start lg:grid-cols-3 space-x-2 ">
                     {/* part 1 images */}
-                    <div className="w-full space-y-3">
-                        <img src={image1} className="w-52 rounded-lg" alt="" />
-                        <div className="flex space-x-3">
-                            <img src={image2} className="w-20 rounded-lg" alt="" />
-                            <img src={image3} className="w-20 rounded-lg" alt="" />
+                    <div className="w-full space-y-3 overflow-hidden">
+                        <div className="bg-gray-300 w-[160px] h-[90px] rounded-lg">
+                            <img src={image1} className="w-full h-full object-cover rounded-lg" alt="" />
+                        </div>
+                        <div className="flex space-x-2">
+                            <div className="bg-gray-300 rounded-lg w-[80px] h-[45px]">
+                                <img src={image2} className="w-full h-full object-cover rounded-lg" alt="" />                                
+                            </div>
+                            <div className="bg-gray-300 rounded-lg w-[80px] h-[45px]">
+                                <img src={image3} className="w-full h-full object-cover rounded-lg" alt="" />
+                            </div>                            
                         </div>
                     </div>
                     {/* part 2 name and intro */}
-                    <div className="w-full">
-                        {data.name}
-                    </div>
-                    {/* part 3 is rating and all */}
-                    {/* part4 - price and booknow */}
-                    <div className="flex flex-col space-y-2">
-                        <h1 className="font-bold text-lg text-center">hehe</h1>
-                        <Button className="group relative overflow-hidden bg-green-600 hover:bg-gradient-to-r hover:from-green-600 hover:via-red-600 hover:to-yellow-400 hover:ring-2 hover:ring-blue-300 hover:ring-offset-2 hover:cursor-pointer transition-all ease-in-out duration-300 ">
+                    <div className="w-full space-y-2">
+                        <h1 className="text-black font-bold underline">
+                            {data.name}                            
+                        </h1>                  
+                        <div className="grid grid-cols-3 space-x-3 text-xs">
+                            <h1 className="font-medium text-blue-600">{data.address.lines}</h1>                            
+                            <h1 className="font-medium">{data.distance.value} {data.distance.unit} distance from city center</h1>
+                            <h1 className="font-medium">Pin: {data.address.postalCode}</h1>
+                        </div>
+                    </div>                    
+                    {/* part3 - booknow */}
+                    <div className="w-full flex flex-col space-y-2">
+                        {/* <h1 className="font-bold text-lg text-center">hehe</h1> */}
+                        <Button 
+                            onClick={showHotelOffer}
+                            className="group relative overflow-hidden bg-green-600 hover:bg-gradient-to-r hover:from-green-600 hover:via-red-600 hover:to-yellow-400 hover:ring-2 hover:ring-blue-300 hover:ring-offset-2 hover:cursor-pointer transition-all ease-in-out duration-300 ">
                             <span className="absolute opacity-20 right-0 w-6 h-32 -mt-12 bg-white transition-all duration-1000 transform translate-x-12 rotate-12 group-hover:-translate-x-30 ease"></span>
-                            <span>Book Now</span>
+                            <span>Show Details</span>
                         </Button>
-                    </div>
+                    </div>                    
                 </div>
-            </CardContent>
-            {/* <CardFooter className="flex justify-end">
-        <Button type="button" className="">Book Now</Button>
-      </CardFooter> */}
+            </CardContent>            
         </Card>
     )
 }

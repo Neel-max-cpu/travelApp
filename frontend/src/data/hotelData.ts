@@ -51,438 +51,484 @@ export const hotelStartData = [
   { id: 6, value: "5", name: "5 Stars" },
 ];
 
-export const hotelImage =[
-    {
-        "total": 2400,
-        "total_pages": 480,
-        "results": [
-            {
-                "id": "yNLv3s7BL08",
-                "slug": "low-angle-photography-of-high-rise-buildings-yNLv3s7BL08",
-                "alternative_slugs": {
-                    "en": "low-angle-photography-of-high-rise-buildings-yNLv3s7BL08",
-                    "es": "fotografia-de-angulo-bajo-de-edificios-de-gran-altura-yNLv3s7BL08",
-                    "ja": "高層ビルのローアングル撮影-yNLv3s7BL08",
-                    "fr": "photographie-en-contre-plongee-dimmeubles-de-grande-hauteur-yNLv3s7BL08",
-                    "it": "fotografia-ad-angolo-basso-di-grattacieli-yNLv3s7BL08",
-                    "ko": "고층-건물의-로우-앵글-사진-yNLv3s7BL08",
-                    "de": "flachwinkelfotografie-von-hochhausern-yNLv3s7BL08",
-                    "pt": "fotografia-de-baixo-angulo-de-arranha-ceus-yNLv3s7BL08",
-                    "id": "fotografi-sudut-rendah-bangunan-bertingkat-tinggi-yNLv3s7BL08"
-                },
-                "created_at": "2018-01-17T14:37:58Z",
-                "updated_at": "2025-08-02T13:13:09Z",
-                "promoted_at": "2018-01-18T13:22:15Z",
-                "width": 3024,
-                "height": 2300,
-                "color": "#a6c0f3",
-                "blur_hash": "LWHM1RyEMbHq.SI9VXo~NIR*WBo$",
-                "description": null,
-                "alt_description": "low angle photography of high rise buildings",
-                "breadcrumbs": [],
-                "urls": {
-                    "raw": "https://images.unsplash.com/photo-1516199811897-1d7311bfff6d?ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHwxfHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA&ixlib=rb-4.1.0",
-                    "full": "https://images.unsplash.com/photo-1516199811897-1d7311bfff6d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHwxfHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA&ixlib=rb-4.1.0&q=85",
-                    "regular": "https://images.unsplash.com/photo-1516199811897-1d7311bfff6d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHwxfHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA&ixlib=rb-4.1.0&q=80&w=1080",
-                    "small": "https://images.unsplash.com/photo-1516199811897-1d7311bfff6d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHwxfHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA&ixlib=rb-4.1.0&q=80&w=400",
-                    "thumb": "https://images.unsplash.com/photo-1516199811897-1d7311bfff6d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHwxfHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA&ixlib=rb-4.1.0&q=80&w=200",
-                    "small_s3": "https://s3.us-west-2.amazonaws.com/images.unsplash.com/small/photo-1516199811897-1d7311bfff6d"
-                },
-                "links": {
-                    "self": "https://api.unsplash.com/photos/low-angle-photography-of-high-rise-buildings-yNLv3s7BL08",
-                    "html": "https://unsplash.com/photos/low-angle-photography-of-high-rise-buildings-yNLv3s7BL08",
-                    "download": "https://unsplash.com/photos/yNLv3s7BL08/download?ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHwxfHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA",
-                    "download_location": "https://api.unsplash.com/photos/yNLv3s7BL08/download?ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHwxfHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA"
-                },
-                "likes": 79,
-                "liked_by_user": false,
-                "current_user_collections": [],
-                "sponsorship": null,
-                "topic_submissions": {},
-                "asset_type": "photo",
-                "user": {
-                    "id": "YSvzgIIwlgo",
-                    "updated_at": "2024-10-11T05:23:45Z",
-                    "username": "riii_mansing",
-                    "name": "riii",
-                    "first_name": "riii",
-                    "last_name": null,
-                    "twitter_username": null,
-                    "portfolio_url": null,
-                    "bio": "[part time sophomore, part time traveller]\r\nInstagram: @r.travels_",
-                    "location": "Indonesia",
-                    "links": {
-                        "self": "https://api.unsplash.com/users/riii_mansing",
-                        "html": "https://unsplash.com/@riii_mansing",
-                        "photos": "https://api.unsplash.com/users/riii_mansing/photos",
-                        "likes": "https://api.unsplash.com/users/riii_mansing/likes",
-                        "portfolio": "https://api.unsplash.com/users/riii_mansing/portfolio"
-                    },
-                    "profile_image": {
-                        "small": "https://images.unsplash.com/profile-1516116650769-ea1613018551?ixlib=rb-4.1.0&crop=faces&fit=crop&w=32&h=32",
-                        "medium": "https://images.unsplash.com/profile-1516116650769-ea1613018551?ixlib=rb-4.1.0&crop=faces&fit=crop&w=64&h=64",
-                        "large": "https://images.unsplash.com/profile-1516116650769-ea1613018551?ixlib=rb-4.1.0&crop=faces&fit=crop&w=128&h=128"
-                    },
-                    "instagram_username": "r.travels_",
-                    "total_collections": 2,
-                    "total_likes": 751,
-                    "total_photos": 13,
-                    "total_promoted_photos": 1,
-                    "total_illustrations": 0,
-                    "total_promoted_illustrations": 0,
-                    "accepted_tos": true,
-                    "for_hire": false,
-                    "social": {
-                        "instagram_username": "r.travels_",
-                        "portfolio_url": null,
-                        "twitter_username": null,
-                        "paypal_email": null
-                    }
-                }
-            },
-            {
-                "id": "pTggAB-BJE4",
-                "slug": "low-angle-photography-of-curtain-building-during-daytime-pTggAB-BJE4",
-                "alternative_slugs": {
-                    "en": "low-angle-photography-of-curtain-building-during-daytime-pTggAB-BJE4",
-                    "es": "fotografia-de-angulo-bajo-de-la-construccion-de-cortinas-durante-el-dia-pTggAB-BJE4",
-                    "ja": "昼間のカーテンビルのローアングル撮影-pTggAB-BJE4",
-                    "fr": "photographie-en-contre-plongee-de-la-construction-de-rideaux-pendant-la-journee-pTggAB-BJE4",
-                    "it": "fotografia-ad-angolo-basso-della-costruzione-di-tende-durante-il-giorno-pTggAB-BJE4",
-                    "ko": "낮-동안-커튼-건물의-로우-앵글-사진-pTggAB-BJE4",
-                    "de": "low-angle-fotografie-des-vorhangbaus-wahrend-des-tages-pTggAB-BJE4",
-                    "pt": "fotografia-de-baixo-angulo-do-edificio-da-cortina-durante-o-dia-pTggAB-BJE4",
-                    "id": "fotografi-sudut-rendah-bangunan-tirai-di-siang-hari-pTggAB-BJE4"
-                },
-                "created_at": "2019-04-02T00:12:16Z",
-                "updated_at": "2025-08-02T09:11:25Z",
-                "promoted_at": "2019-04-04T07:46:27Z",
-                "width": 3024,
-                "height": 4032,
-                "color": "#f3f3f3",
-                "blur_hash": "L{K-tYRjt6s:~qs:j[ofxut7azWB",
-                "description": null,
-                "alt_description": "low angle photography of curtain building during daytime",
-                "breadcrumbs": [],
-                "urls": {
-                    "raw": "https://images.unsplash.com/photo-1554163930-b96269dffdd5?ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHwyfHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA&ixlib=rb-4.1.0",
-                    "full": "https://images.unsplash.com/photo-1554163930-b96269dffdd5?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHwyfHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA&ixlib=rb-4.1.0&q=85",
-                    "regular": "https://images.unsplash.com/photo-1554163930-b96269dffdd5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHwyfHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA&ixlib=rb-4.1.0&q=80&w=1080",
-                    "small": "https://images.unsplash.com/photo-1554163930-b96269dffdd5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHwyfHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA&ixlib=rb-4.1.0&q=80&w=400",
-                    "thumb": "https://images.unsplash.com/photo-1554163930-b96269dffdd5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHwyfHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA&ixlib=rb-4.1.0&q=80&w=200",
-                    "small_s3": "https://s3.us-west-2.amazonaws.com/images.unsplash.com/small/photo-1554163930-b96269dffdd5"
-                },
-                "links": {
-                    "self": "https://api.unsplash.com/photos/low-angle-photography-of-curtain-building-during-daytime-pTggAB-BJE4",
-                    "html": "https://unsplash.com/photos/low-angle-photography-of-curtain-building-during-daytime-pTggAB-BJE4",
-                    "download": "https://unsplash.com/photos/pTggAB-BJE4/download?ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHwyfHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA",
-                    "download_location": "https://api.unsplash.com/photos/pTggAB-BJE4/download?ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHwyfHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA"
-                },
-                "likes": 24,
-                "liked_by_user": false,
-                "current_user_collections": [],
-                "sponsorship": null,
-                "topic_submissions": {},
-                "asset_type": "photo",
-                "user": {
-                    "id": "T9ViTdw9tuA",
-                    "updated_at": "2025-04-04T17:52:15Z",
-                    "username": "finsand",
-                    "name": "Evan R",
-                    "first_name": "Evan",
-                    "last_name": "R",
-                    "twitter_username": null,
-                    "portfolio_url": null,
-                    "bio": "https://www.flickr.com/photos/199365188@N05/",
-                    "location": "Virginia, USA",
-                    "links": {
-                        "self": "https://api.unsplash.com/users/finsand",
-                        "html": "https://unsplash.com/@finsand",
-                        "photos": "https://api.unsplash.com/users/finsand/photos",
-                        "likes": "https://api.unsplash.com/users/finsand/likes",
-                        "portfolio": "https://api.unsplash.com/users/finsand/portfolio"
-                    },
-                    "profile_image": {
-                        "small": "https://images.unsplash.com/profile-1553976294981-621e66913dc1?ixlib=rb-4.1.0&crop=faces&fit=crop&w=32&h=32",
-                        "medium": "https://images.unsplash.com/profile-1553976294981-621e66913dc1?ixlib=rb-4.1.0&crop=faces&fit=crop&w=64&h=64",
-                        "large": "https://images.unsplash.com/profile-1553976294981-621e66913dc1?ixlib=rb-4.1.0&crop=faces&fit=crop&w=128&h=128"
-                    },
-                    "instagram_username": "evan.r.u",
-                    "total_collections": 0,
-                    "total_likes": 103,
-                    "total_photos": 37,
-                    "total_promoted_photos": 1,
-                    "total_illustrations": 0,
-                    "total_promoted_illustrations": 0,
-                    "accepted_tos": true,
-                    "for_hire": false,
-                    "social": {
-                        "instagram_username": "evan.r.u",
-                        "portfolio_url": null,
-                        "twitter_username": null,
-                        "paypal_email": null
-                    }
-                }
-            },
-            {
-                "id": "7vZ0Ik6IfhY",
-                "slug": "birds-eye-photography-of-building-7vZ0Ik6IfhY",
-                "alternative_slugs": {
-                    "en": "birds-eye-photography-of-building-7vZ0Ik6IfhY",
-                    "es": "fotografia-a-vista-de-pajaro-del-edificio-7vZ0Ik6IfhY",
-                    "ja": "建物の鳥瞰写真-7vZ0Ik6IfhY",
-                    "fr": "photographie-a-vol-doiseau-du-batiment-7vZ0Ik6IfhY",
-                    "it": "fotografia-a-volo-duccello-delledificio-7vZ0Ik6IfhY",
-                    "ko": "건물의-조감도-사진-7vZ0Ik6IfhY",
-                    "de": "vogelperspektivenfotografie-des-gebaudes-7vZ0Ik6IfhY",
-                    "pt": "fotografia-de-olho-de-passaro-do-edificio-7vZ0Ik6IfhY",
-                    "id": "fotografi-bangunan-dari-mata-burung-7vZ0Ik6IfhY"
-                },
-                "created_at": "2015-04-02T04:42:21Z",
-                "updated_at": "2025-08-02T15:43:10Z",
-                "promoted_at": "2015-04-02T04:42:21Z",
-                "width": 5616,
-                "height": 3744,
-                "color": "#262626",
-                "blur_hash": "LA9G~;4n9E%N%MoyD%%M00?bWDWB",
-                "description": "Urban Architecture",
-                "alt_description": "bird's eye photography of building",
-                "breadcrumbs": [],
-                "urls": {
-                    "raw": "https://images.unsplash.com/photo-1427949680810-01ff14e683ea?ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHwzfHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA&ixlib=rb-4.1.0",
-                    "full": "https://images.unsplash.com/photo-1427949680810-01ff14e683ea?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHwzfHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA&ixlib=rb-4.1.0&q=85",
-                    "regular": "https://images.unsplash.com/photo-1427949680810-01ff14e683ea?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHwzfHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA&ixlib=rb-4.1.0&q=80&w=1080",
-                    "small": "https://images.unsplash.com/photo-1427949680810-01ff14e683ea?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHwzfHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA&ixlib=rb-4.1.0&q=80&w=400",
-                    "thumb": "https://images.unsplash.com/photo-1427949680810-01ff14e683ea?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHwzfHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA&ixlib=rb-4.1.0&q=80&w=200",
-                    "small_s3": "https://s3.us-west-2.amazonaws.com/images.unsplash.com/small/photo-1427949680810-01ff14e683ea"
-                },
-                "links": {
-                    "self": "https://api.unsplash.com/photos/birds-eye-photography-of-building-7vZ0Ik6IfhY",
-                    "html": "https://unsplash.com/photos/birds-eye-photography-of-building-7vZ0Ik6IfhY",
-                    "download": "https://unsplash.com/photos/7vZ0Ik6IfhY/download?ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHwzfHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA",
-                    "download_location": "https://api.unsplash.com/photos/7vZ0Ik6IfhY/download?ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHwzfHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA"
-                },
-                "likes": 92,
-                "liked_by_user": false,
-                "current_user_collections": [],
-                "sponsorship": null,
-                "topic_submissions": {},
-                "asset_type": "photo",
-                "user": {
-                    "id": "Nvnz4Pb_oq0",
-                    "updated_at": "2024-10-25T22:17:45Z",
-                    "username": "jeffhopper",
-                    "name": "Jeff Hopper",
-                    "first_name": "Jeff",
-                    "last_name": "Hopper",
-                    "twitter_username": "jeffhopperr",
-                    "portfolio_url": "https://www.jhopperdesigns.com/",
-                    "bio": "Video Producer / Photographer",
-                    "location": "San Diego, CA",
-                    "links": {
-                        "self": "https://api.unsplash.com/users/jeffhopper",
-                        "html": "https://unsplash.com/@jeffhopper",
-                        "photos": "https://api.unsplash.com/users/jeffhopper/photos",
-                        "likes": "https://api.unsplash.com/users/jeffhopper/likes",
-                        "portfolio": "https://api.unsplash.com/users/jeffhopper/portfolio",
-                        "following": "https://api.unsplash.com/users/jeffhopper/following",
-                        "followers": "https://api.unsplash.com/users/jeffhopper/followers"
-                    },
-                    "profile_image": {
-                        "small": "https://images.unsplash.com/profile-1476681634145-8bb135f1193a?ixlib=rb-4.0.3&crop=faces&fit=crop&w=32&h=32",
-                        "medium": "https://images.unsplash.com/profile-1476681634145-8bb135f1193a?ixlib=rb-4.0.3&crop=faces&fit=crop&w=64&h=64",
-                        "large": "https://images.unsplash.com/profile-1476681634145-8bb135f1193a?ixlib=rb-4.0.3&crop=faces&fit=crop&w=128&h=128"
-                    },
-                    "instagram_username": "jeffhopper",
-                    "total_collections": 1,
-                    "total_likes": 19,
-                    "total_photos": 18,
-                    "total_promoted_photos": 14,
-                    "total_illustrations": 0,
-                    "total_promoted_illustrations": 0,
-                    "accepted_tos": true,
-                    "for_hire": true,
-                    "social": {
-                        "instagram_username": "jeffhopper",
-                        "portfolio_url": "https://www.jhopperdesigns.com/",
-                        "twitter_username": "jeffhopperr",
-                        "paypal_email": null
-                    }
-                }
-            },
-            {
-                "id": "lzkm874fVS4",
-                "slug": "aerial-view-photography-of-buildings-during-daytime-lzkm874fVS4",
-                "alternative_slugs": {
-                    "en": "aerial-view-photography-of-buildings-during-daytime-lzkm874fVS4",
-                    "es": "fotografia-de-vista-aerea-de-edificios-durante-el-dia-lzkm874fVS4",
-                    "ja": "日中の建物の航空写真-lzkm874fVS4",
-                    "fr": "photographie-de-vue-aerienne-de-batiments-pendant-la-journee-lzkm874fVS4",
-                    "it": "fotografia-aerea-di-edifici-durante-il-giorno-lzkm874fVS4",
-                    "ko": "주간-건물의-조감도-사진-lzkm874fVS4",
-                    "de": "luftbildaufnahmen-von-gebauden-bei-tag-lzkm874fVS4",
-                    "pt": "fotografia-aerea-de-edificios-durante-o-dia-lzkm874fVS4",
-                    "id": "fotografi-pemandangan-udara-bangunan-di-siang-hari-lzkm874fVS4"
-                },
-                "created_at": "2016-09-09T07:39:32Z",
-                "updated_at": "2025-08-02T09:05:56Z",
-                "promoted_at": "2016-09-09T07:39:32Z",
-                "width": 4592,
-                "height": 3448,
-                "color": "#262626",
-                "blur_hash": "L5G8yHK+00D%cFIAozWFIox[}[9F",
-                "description": "Empire neighborhood",
-                "alt_description": "aerial view photography of buildings during daytime",
-                "breadcrumbs": [],
-                "urls": {
-                    "raw": "https://images.unsplash.com/photo-1473406737897-08799132faf3?ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHw0fHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA&ixlib=rb-4.1.0",
-                    "full": "https://images.unsplash.com/photo-1473406737897-08799132faf3?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHw0fHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA&ixlib=rb-4.1.0&q=85",
-                    "regular": "https://images.unsplash.com/photo-1473406737897-08799132faf3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHw0fHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA&ixlib=rb-4.1.0&q=80&w=1080",
-                    "small": "https://images.unsplash.com/photo-1473406737897-08799132faf3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHw0fHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA&ixlib=rb-4.1.0&q=80&w=400",
-                    "thumb": "https://images.unsplash.com/photo-1473406737897-08799132faf3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHw0fHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA&ixlib=rb-4.1.0&q=80&w=200",
-                    "small_s3": "https://s3.us-west-2.amazonaws.com/images.unsplash.com/small/photo-1473406737897-08799132faf3"
-                },
-                "links": {
-                    "self": "https://api.unsplash.com/photos/aerial-view-photography-of-buildings-during-daytime-lzkm874fVS4",
-                    "html": "https://unsplash.com/photos/aerial-view-photography-of-buildings-during-daytime-lzkm874fVS4",
-                    "download": "https://unsplash.com/photos/lzkm874fVS4/download?ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHw0fHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA",
-                    "download_location": "https://api.unsplash.com/photos/lzkm874fVS4/download?ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHw0fHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA"
-                },
-                "likes": 89,
-                "liked_by_user": false,
-                "current_user_collections": [],
-                "sponsorship": null,
-                "topic_submissions": {},
-                "asset_type": "photo",
-                "user": {
-                    "id": "rpz7jeVI9mo",
-                    "updated_at": "2025-01-31T11:59:34Z",
-                    "username": "pjhauser",
-                    "name": "Phil Hauser",
-                    "first_name": "Phil",
-                    "last_name": "Hauser",
-                    "twitter_username": "pjhauser1",
-                    "portfolio_url": "http://zweck.co",
-                    "bio": "I am a web developer and love photography. Always have my camera with me :)",
-                    "location": "Chester, UK",
-                    "links": {
-                        "self": "https://api.unsplash.com/users/pjhauser",
-                        "html": "https://unsplash.com/@pjhauser",
-                        "photos": "https://api.unsplash.com/users/pjhauser/photos",
-                        "likes": "https://api.unsplash.com/users/pjhauser/likes",
-                        "portfolio": "https://api.unsplash.com/users/pjhauser/portfolio",
-                        "following": "https://api.unsplash.com/users/pjhauser/following",
-                        "followers": "https://api.unsplash.com/users/pjhauser/followers"
-                    },
-                    "profile_image": {
-                        "small": "https://images.unsplash.com/profile-1470650604843-0b744f34bde5?ixlib=rb-4.0.3&crop=faces&fit=crop&w=32&h=32",
-                        "medium": "https://images.unsplash.com/profile-1470650604843-0b744f34bde5?ixlib=rb-4.0.3&crop=faces&fit=crop&w=64&h=64",
-                        "large": "https://images.unsplash.com/profile-1470650604843-0b744f34bde5?ixlib=rb-4.0.3&crop=faces&fit=crop&w=128&h=128"
-                    },
-                    "instagram_username": "pjhauser1",
-                    "total_collections": 1,
-                    "total_likes": 20,
-                    "total_photos": 121,
-                    "total_promoted_photos": 3,
-                    "total_illustrations": 0,
-                    "total_promoted_illustrations": 0,
-                    "accepted_tos": true,
-                    "for_hire": false,
-                    "social": {
-                        "instagram_username": "pjhauser1",
-                        "portfolio_url": "http://zweck.co",
-                        "twitter_username": "pjhauser1",
-                        "paypal_email": null
-                    }
-                }
-            },
-            {
-                "id": "MofJxEZ_Cqk",
-                "slug": "low-angle-photography-of-high-rise-building-MofJxEZ_Cqk",
-                "alternative_slugs": {
-                    "en": "low-angle-photography-of-high-rise-building-MofJxEZ_Cqk",
-                    "es": "fotografia-de-angulo-bajo-de-edificios-de-gran-altura-MofJxEZ_Cqk",
-                    "ja": "高層ビルのローアングル撮影-MofJxEZ_Cqk",
-                    "fr": "photographie-en-contre-plongee-dun-immeuble-de-grande-hauteur-MofJxEZ_Cqk",
-                    "it": "fotografia-ad-angolo-basso-di-grattacieli-MofJxEZ_Cqk",
-                    "ko": "고층-건물의-낮은-각도-사진-MofJxEZ_Cqk",
-                    "de": "low-angle-fotografie-von-hochhausern-MofJxEZ_Cqk",
-                    "pt": "fotografia-de-baixo-angulo-do-edificio-do-arranha-ceus-MofJxEZ_Cqk",
-                    "id": "fotografi-sudut-rendah-bangunan-bertingkat-tinggi-MofJxEZ_Cqk"
-                },
-                "created_at": "2020-10-13T13:31:05Z",
-                "updated_at": "2025-08-02T15:41:48Z",
-                "promoted_at": "2020-10-16T11:23:23Z",
-                "width": 2832,
-                "height": 4240,
-                "color": "#f3f3f3",
-                "blur_hash": "LpEpf*M{V@V@_NIUa|WBMxIAtRkC",
-                "description": "Rainy day in New York City.",
-                "alt_description": "low angle photography of high rise building",
-                "breadcrumbs": [],
-                "urls": {
-                    "raw": "https://images.unsplash.com/photo-1602595603892-d7508172c45f?ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHw1fHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA&ixlib=rb-4.1.0",
-                    "full": "https://images.unsplash.com/photo-1602595603892-d7508172c45f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHw1fHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA&ixlib=rb-4.1.0&q=85",
-                    "regular": "https://images.unsplash.com/photo-1602595603892-d7508172c45f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHw1fHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA&ixlib=rb-4.1.0&q=80&w=1080",
-                    "small": "https://images.unsplash.com/photo-1602595603892-d7508172c45f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHw1fHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA&ixlib=rb-4.1.0&q=80&w=400",
-                    "thumb": "https://images.unsplash.com/photo-1602595603892-d7508172c45f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHw1fHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA&ixlib=rb-4.1.0&q=80&w=200",
-                    "small_s3": "https://s3.us-west-2.amazonaws.com/images.unsplash.com/small/photo-1602595603892-d7508172c45f"
-                },
-                "links": {
-                    "self": "https://api.unsplash.com/photos/low-angle-photography-of-high-rise-building-MofJxEZ_Cqk",
-                    "html": "https://unsplash.com/photos/low-angle-photography-of-high-rise-building-MofJxEZ_Cqk",
-                    "download": "https://unsplash.com/photos/MofJxEZ_Cqk/download?ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHw1fHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA",
-                    "download_location": "https://api.unsplash.com/photos/MofJxEZ_Cqk/download?ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHw1fHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA"
-                },
-                "likes": 66,
-                "liked_by_user": false,
-                "current_user_collections": [],
-                "sponsorship": null,
-                "topic_submissions": {},
-                "asset_type": "photo",
-                "user": {
-                    "id": "DKtoo-vyt9M",
-                    "updated_at": "2024-10-10T21:55:02Z",
-                    "username": "kurtvon",
-                    "name": "Kurt Von",
-                    "first_name": "Kurt",
-                    "last_name": "Von",
-                    "twitter_username": null,
-                    "portfolio_url": "http://stockcliphub.com",
-                    "bio": "Check out my YouTube tutorials on how to create your own presets and luts!",
-                    "location": "PNW",
-                    "links": {
-                        "self": "https://api.unsplash.com/users/kurtvon",
-                        "html": "https://unsplash.com/@kurtvon",
-                        "photos": "https://api.unsplash.com/users/kurtvon/photos",
-                        "likes": "https://api.unsplash.com/users/kurtvon/likes",
-                        "portfolio": "https://api.unsplash.com/users/kurtvon/portfolio"
-                    },
-                    "profile_image": {
-                        "small": "https://images.unsplash.com/profile-1540676160545-8a69da220549?ixlib=rb-4.1.0&crop=faces&fit=crop&w=32&h=32",
-                        "medium": "https://images.unsplash.com/profile-1540676160545-8a69da220549?ixlib=rb-4.1.0&crop=faces&fit=crop&w=64&h=64",
-                        "large": "https://images.unsplash.com/profile-1540676160545-8a69da220549?ixlib=rb-4.1.0&crop=faces&fit=crop&w=128&h=128"
-                    },
-                    "instagram_username": "kurtvon",
-                    "total_collections": 0,
-                    "total_likes": 0,
-                    "total_photos": 32,
-                    "total_promoted_photos": 11,
-                    "total_illustrations": 0,
-                    "total_promoted_illustrations": 0,
-                    "accepted_tos": true,
-                    "for_hire": true,
-                    "social": {
-                        "instagram_username": "kurtvon",
-                        "portfolio_url": "http://stockcliphub.com",
-                        "twitter_username": null,
-                        "paypal_email": null
-                    }
-                }
-            }
-        ]
-    }
-]
+export const hotelImage = [
+  {
+    total: 2400,
+    total_pages: 480,
+    results: [
+      {
+        id: "yNLv3s7BL08",
+        slug: "low-angle-photography-of-high-rise-buildings-yNLv3s7BL08",
+        alternative_slugs: {
+          en: "low-angle-photography-of-high-rise-buildings-yNLv3s7BL08",
+          es: "fotografia-de-angulo-bajo-de-edificios-de-gran-altura-yNLv3s7BL08",
+          ja: "高層ビルのローアングル撮影-yNLv3s7BL08",
+          fr: "photographie-en-contre-plongee-dimmeubles-de-grande-hauteur-yNLv3s7BL08",
+          it: "fotografia-ad-angolo-basso-di-grattacieli-yNLv3s7BL08",
+          ko: "고층-건물의-로우-앵글-사진-yNLv3s7BL08",
+          de: "flachwinkelfotografie-von-hochhausern-yNLv3s7BL08",
+          pt: "fotografia-de-baixo-angulo-de-arranha-ceus-yNLv3s7BL08",
+          id: "fotografi-sudut-rendah-bangunan-bertingkat-tinggi-yNLv3s7BL08",
+        },
+        created_at: "2018-01-17T14:37:58Z",
+        updated_at: "2025-08-02T13:13:09Z",
+        promoted_at: "2018-01-18T13:22:15Z",
+        width: 3024,
+        height: 2300,
+        color: "#a6c0f3",
+        blur_hash: "LWHM1RyEMbHq.SI9VXo~NIR*WBo$",
+        description: null,
+        alt_description: "low angle photography of high rise buildings",
+        breadcrumbs: [],
+        urls: {
+          raw: "https://images.unsplash.com/photo-1516199811897-1d7311bfff6d?ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHwxfHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA&ixlib=rb-4.1.0",
+          full: "https://images.unsplash.com/photo-1516199811897-1d7311bfff6d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHwxfHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA&ixlib=rb-4.1.0&q=85",
+          regular:
+            "https://images.unsplash.com/photo-1516199811897-1d7311bfff6d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHwxfHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA&ixlib=rb-4.1.0&q=80&w=1080",
+          small:
+            "https://images.unsplash.com/photo-1516199811897-1d7311bfff6d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHwxfHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA&ixlib=rb-4.1.0&q=80&w=400",
+          thumb:
+            "https://images.unsplash.com/photo-1516199811897-1d7311bfff6d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHwxfHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA&ixlib=rb-4.1.0&q=80&w=200",
+          small_s3:
+            "https://s3.us-west-2.amazonaws.com/images.unsplash.com/small/photo-1516199811897-1d7311bfff6d",
+        },
+        links: {
+          self: "https://api.unsplash.com/photos/low-angle-photography-of-high-rise-buildings-yNLv3s7BL08",
+          html: "https://unsplash.com/photos/low-angle-photography-of-high-rise-buildings-yNLv3s7BL08",
+          download:
+            "https://unsplash.com/photos/yNLv3s7BL08/download?ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHwxfHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA",
+          download_location:
+            "https://api.unsplash.com/photos/yNLv3s7BL08/download?ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHwxfHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA",
+        },
+        likes: 79,
+        liked_by_user: false,
+        current_user_collections: [],
+        sponsorship: null,
+        topic_submissions: {},
+        asset_type: "photo",
+        user: {
+          id: "YSvzgIIwlgo",
+          updated_at: "2024-10-11T05:23:45Z",
+          username: "riii_mansing",
+          name: "riii",
+          first_name: "riii",
+          last_name: null,
+          twitter_username: null,
+          portfolio_url: null,
+          bio: "[part time sophomore, part time traveller]\r\nInstagram: @r.travels_",
+          location: "Indonesia",
+          links: {
+            self: "https://api.unsplash.com/users/riii_mansing",
+            html: "https://unsplash.com/@riii_mansing",
+            photos: "https://api.unsplash.com/users/riii_mansing/photos",
+            likes: "https://api.unsplash.com/users/riii_mansing/likes",
+            portfolio: "https://api.unsplash.com/users/riii_mansing/portfolio",
+          },
+          profile_image: {
+            small:
+              "https://images.unsplash.com/profile-1516116650769-ea1613018551?ixlib=rb-4.1.0&crop=faces&fit=crop&w=32&h=32",
+            medium:
+              "https://images.unsplash.com/profile-1516116650769-ea1613018551?ixlib=rb-4.1.0&crop=faces&fit=crop&w=64&h=64",
+            large:
+              "https://images.unsplash.com/profile-1516116650769-ea1613018551?ixlib=rb-4.1.0&crop=faces&fit=crop&w=128&h=128",
+          },
+          instagram_username: "r.travels_",
+          total_collections: 2,
+          total_likes: 751,
+          total_photos: 13,
+          total_promoted_photos: 1,
+          total_illustrations: 0,
+          total_promoted_illustrations: 0,
+          accepted_tos: true,
+          for_hire: false,
+          social: {
+            instagram_username: "r.travels_",
+            portfolio_url: null,
+            twitter_username: null,
+            paypal_email: null,
+          },
+        },
+      },
+      {
+        id: "pTggAB-BJE4",
+        slug: "low-angle-photography-of-curtain-building-during-daytime-pTggAB-BJE4",
+        alternative_slugs: {
+          en: "low-angle-photography-of-curtain-building-during-daytime-pTggAB-BJE4",
+          es: "fotografia-de-angulo-bajo-de-la-construccion-de-cortinas-durante-el-dia-pTggAB-BJE4",
+          ja: "昼間のカーテンビルのローアングル撮影-pTggAB-BJE4",
+          fr: "photographie-en-contre-plongee-de-la-construction-de-rideaux-pendant-la-journee-pTggAB-BJE4",
+          it: "fotografia-ad-angolo-basso-della-costruzione-di-tende-durante-il-giorno-pTggAB-BJE4",
+          ko: "낮-동안-커튼-건물의-로우-앵글-사진-pTggAB-BJE4",
+          de: "low-angle-fotografie-des-vorhangbaus-wahrend-des-tages-pTggAB-BJE4",
+          pt: "fotografia-de-baixo-angulo-do-edificio-da-cortina-durante-o-dia-pTggAB-BJE4",
+          id: "fotografi-sudut-rendah-bangunan-tirai-di-siang-hari-pTggAB-BJE4",
+        },
+        created_at: "2019-04-02T00:12:16Z",
+        updated_at: "2025-08-02T09:11:25Z",
+        promoted_at: "2019-04-04T07:46:27Z",
+        width: 3024,
+        height: 4032,
+        color: "#f3f3f3",
+        blur_hash: "L{K-tYRjt6s:~qs:j[ofxut7azWB",
+        description: null,
+        alt_description:
+          "low angle photography of curtain building during daytime",
+        breadcrumbs: [],
+        urls: {
+          raw: "https://images.unsplash.com/photo-1554163930-b96269dffdd5?ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHwyfHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA&ixlib=rb-4.1.0",
+          full: "https://images.unsplash.com/photo-1554163930-b96269dffdd5?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHwyfHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA&ixlib=rb-4.1.0&q=85",
+          regular:
+            "https://images.unsplash.com/photo-1554163930-b96269dffdd5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHwyfHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA&ixlib=rb-4.1.0&q=80&w=1080",
+          small:
+            "https://images.unsplash.com/photo-1554163930-b96269dffdd5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHwyfHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA&ixlib=rb-4.1.0&q=80&w=400",
+          thumb:
+            "https://images.unsplash.com/photo-1554163930-b96269dffdd5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHwyfHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA&ixlib=rb-4.1.0&q=80&w=200",
+          small_s3:
+            "https://s3.us-west-2.amazonaws.com/images.unsplash.com/small/photo-1554163930-b96269dffdd5",
+        },
+        links: {
+          self: "https://api.unsplash.com/photos/low-angle-photography-of-curtain-building-during-daytime-pTggAB-BJE4",
+          html: "https://unsplash.com/photos/low-angle-photography-of-curtain-building-during-daytime-pTggAB-BJE4",
+          download:
+            "https://unsplash.com/photos/pTggAB-BJE4/download?ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHwyfHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA",
+          download_location:
+            "https://api.unsplash.com/photos/pTggAB-BJE4/download?ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHwyfHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA",
+        },
+        likes: 24,
+        liked_by_user: false,
+        current_user_collections: [],
+        sponsorship: null,
+        topic_submissions: {},
+        asset_type: "photo",
+        user: {
+          id: "T9ViTdw9tuA",
+          updated_at: "2025-04-04T17:52:15Z",
+          username: "finsand",
+          name: "Evan R",
+          first_name: "Evan",
+          last_name: "R",
+          twitter_username: null,
+          portfolio_url: null,
+          bio: "https://www.flickr.com/photos/199365188@N05/",
+          location: "Virginia, USA",
+          links: {
+            self: "https://api.unsplash.com/users/finsand",
+            html: "https://unsplash.com/@finsand",
+            photos: "https://api.unsplash.com/users/finsand/photos",
+            likes: "https://api.unsplash.com/users/finsand/likes",
+            portfolio: "https://api.unsplash.com/users/finsand/portfolio",
+          },
+          profile_image: {
+            small:
+              "https://images.unsplash.com/profile-1553976294981-621e66913dc1?ixlib=rb-4.1.0&crop=faces&fit=crop&w=32&h=32",
+            medium:
+              "https://images.unsplash.com/profile-1553976294981-621e66913dc1?ixlib=rb-4.1.0&crop=faces&fit=crop&w=64&h=64",
+            large:
+              "https://images.unsplash.com/profile-1553976294981-621e66913dc1?ixlib=rb-4.1.0&crop=faces&fit=crop&w=128&h=128",
+          },
+          instagram_username: "evan.r.u",
+          total_collections: 0,
+          total_likes: 103,
+          total_photos: 37,
+          total_promoted_photos: 1,
+          total_illustrations: 0,
+          total_promoted_illustrations: 0,
+          accepted_tos: true,
+          for_hire: false,
+          social: {
+            instagram_username: "evan.r.u",
+            portfolio_url: null,
+            twitter_username: null,
+            paypal_email: null,
+          },
+        },
+      },
+      {
+        id: "7vZ0Ik6IfhY",
+        slug: "birds-eye-photography-of-building-7vZ0Ik6IfhY",
+        alternative_slugs: {
+          en: "birds-eye-photography-of-building-7vZ0Ik6IfhY",
+          es: "fotografia-a-vista-de-pajaro-del-edificio-7vZ0Ik6IfhY",
+          ja: "建物の鳥瞰写真-7vZ0Ik6IfhY",
+          fr: "photographie-a-vol-doiseau-du-batiment-7vZ0Ik6IfhY",
+          it: "fotografia-a-volo-duccello-delledificio-7vZ0Ik6IfhY",
+          ko: "건물의-조감도-사진-7vZ0Ik6IfhY",
+          de: "vogelperspektivenfotografie-des-gebaudes-7vZ0Ik6IfhY",
+          pt: "fotografia-de-olho-de-passaro-do-edificio-7vZ0Ik6IfhY",
+          id: "fotografi-bangunan-dari-mata-burung-7vZ0Ik6IfhY",
+        },
+        created_at: "2015-04-02T04:42:21Z",
+        updated_at: "2025-08-02T15:43:10Z",
+        promoted_at: "2015-04-02T04:42:21Z",
+        width: 5616,
+        height: 3744,
+        color: "#262626",
+        blur_hash: "LA9G~;4n9E%N%MoyD%%M00?bWDWB",
+        description: "Urban Architecture",
+        alt_description: "bird's eye photography of building",
+        breadcrumbs: [],
+        urls: {
+          raw: "https://images.unsplash.com/photo-1427949680810-01ff14e683ea?ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHwzfHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA&ixlib=rb-4.1.0",
+          full: "https://images.unsplash.com/photo-1427949680810-01ff14e683ea?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHwzfHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA&ixlib=rb-4.1.0&q=85",
+          regular:
+            "https://images.unsplash.com/photo-1427949680810-01ff14e683ea?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHwzfHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA&ixlib=rb-4.1.0&q=80&w=1080",
+          small:
+            "https://images.unsplash.com/photo-1427949680810-01ff14e683ea?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHwzfHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA&ixlib=rb-4.1.0&q=80&w=400",
+          thumb:
+            "https://images.unsplash.com/photo-1427949680810-01ff14e683ea?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHwzfHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA&ixlib=rb-4.1.0&q=80&w=200",
+          small_s3:
+            "https://s3.us-west-2.amazonaws.com/images.unsplash.com/small/photo-1427949680810-01ff14e683ea",
+        },
+        links: {
+          self: "https://api.unsplash.com/photos/birds-eye-photography-of-building-7vZ0Ik6IfhY",
+          html: "https://unsplash.com/photos/birds-eye-photography-of-building-7vZ0Ik6IfhY",
+          download:
+            "https://unsplash.com/photos/7vZ0Ik6IfhY/download?ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHwzfHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA",
+          download_location:
+            "https://api.unsplash.com/photos/7vZ0Ik6IfhY/download?ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHwzfHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA",
+        },
+        likes: 92,
+        liked_by_user: false,
+        current_user_collections: [],
+        sponsorship: null,
+        topic_submissions: {},
+        asset_type: "photo",
+        user: {
+          id: "Nvnz4Pb_oq0",
+          updated_at: "2024-10-25T22:17:45Z",
+          username: "jeffhopper",
+          name: "Jeff Hopper",
+          first_name: "Jeff",
+          last_name: "Hopper",
+          twitter_username: "jeffhopperr",
+          portfolio_url: "https://www.jhopperdesigns.com/",
+          bio: "Video Producer / Photographer",
+          location: "San Diego, CA",
+          links: {
+            self: "https://api.unsplash.com/users/jeffhopper",
+            html: "https://unsplash.com/@jeffhopper",
+            photos: "https://api.unsplash.com/users/jeffhopper/photos",
+            likes: "https://api.unsplash.com/users/jeffhopper/likes",
+            portfolio: "https://api.unsplash.com/users/jeffhopper/portfolio",
+            following: "https://api.unsplash.com/users/jeffhopper/following",
+            followers: "https://api.unsplash.com/users/jeffhopper/followers",
+          },
+          profile_image: {
+            small:
+              "https://images.unsplash.com/profile-1476681634145-8bb135f1193a?ixlib=rb-4.0.3&crop=faces&fit=crop&w=32&h=32",
+            medium:
+              "https://images.unsplash.com/profile-1476681634145-8bb135f1193a?ixlib=rb-4.0.3&crop=faces&fit=crop&w=64&h=64",
+            large:
+              "https://images.unsplash.com/profile-1476681634145-8bb135f1193a?ixlib=rb-4.0.3&crop=faces&fit=crop&w=128&h=128",
+          },
+          instagram_username: "jeffhopper",
+          total_collections: 1,
+          total_likes: 19,
+          total_photos: 18,
+          total_promoted_photos: 14,
+          total_illustrations: 0,
+          total_promoted_illustrations: 0,
+          accepted_tos: true,
+          for_hire: true,
+          social: {
+            instagram_username: "jeffhopper",
+            portfolio_url: "https://www.jhopperdesigns.com/",
+            twitter_username: "jeffhopperr",
+            paypal_email: null,
+          },
+        },
+      },
+      {
+        id: "lzkm874fVS4",
+        slug: "aerial-view-photography-of-buildings-during-daytime-lzkm874fVS4",
+        alternative_slugs: {
+          en: "aerial-view-photography-of-buildings-during-daytime-lzkm874fVS4",
+          es: "fotografia-de-vista-aerea-de-edificios-durante-el-dia-lzkm874fVS4",
+          ja: "日中の建物の航空写真-lzkm874fVS4",
+          fr: "photographie-de-vue-aerienne-de-batiments-pendant-la-journee-lzkm874fVS4",
+          it: "fotografia-aerea-di-edifici-durante-il-giorno-lzkm874fVS4",
+          ko: "주간-건물의-조감도-사진-lzkm874fVS4",
+          de: "luftbildaufnahmen-von-gebauden-bei-tag-lzkm874fVS4",
+          pt: "fotografia-aerea-de-edificios-durante-o-dia-lzkm874fVS4",
+          id: "fotografi-pemandangan-udara-bangunan-di-siang-hari-lzkm874fVS4",
+        },
+        created_at: "2016-09-09T07:39:32Z",
+        updated_at: "2025-08-02T09:05:56Z",
+        promoted_at: "2016-09-09T07:39:32Z",
+        width: 4592,
+        height: 3448,
+        color: "#262626",
+        blur_hash: "L5G8yHK+00D%cFIAozWFIox[}[9F",
+        description: "Empire neighborhood",
+        alt_description: "aerial view photography of buildings during daytime",
+        breadcrumbs: [],
+        urls: {
+          raw: "https://images.unsplash.com/photo-1473406737897-08799132faf3?ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHw0fHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA&ixlib=rb-4.1.0",
+          full: "https://images.unsplash.com/photo-1473406737897-08799132faf3?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHw0fHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA&ixlib=rb-4.1.0&q=85",
+          regular:
+            "https://images.unsplash.com/photo-1473406737897-08799132faf3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHw0fHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA&ixlib=rb-4.1.0&q=80&w=1080",
+          small:
+            "https://images.unsplash.com/photo-1473406737897-08799132faf3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHw0fHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA&ixlib=rb-4.1.0&q=80&w=400",
+          thumb:
+            "https://images.unsplash.com/photo-1473406737897-08799132faf3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHw0fHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA&ixlib=rb-4.1.0&q=80&w=200",
+          small_s3:
+            "https://s3.us-west-2.amazonaws.com/images.unsplash.com/small/photo-1473406737897-08799132faf3",
+        },
+        links: {
+          self: "https://api.unsplash.com/photos/aerial-view-photography-of-buildings-during-daytime-lzkm874fVS4",
+          html: "https://unsplash.com/photos/aerial-view-photography-of-buildings-during-daytime-lzkm874fVS4",
+          download:
+            "https://unsplash.com/photos/lzkm874fVS4/download?ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHw0fHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA",
+          download_location:
+            "https://api.unsplash.com/photos/lzkm874fVS4/download?ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHw0fHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA",
+        },
+        likes: 89,
+        liked_by_user: false,
+        current_user_collections: [],
+        sponsorship: null,
+        topic_submissions: {},
+        asset_type: "photo",
+        user: {
+          id: "rpz7jeVI9mo",
+          updated_at: "2025-01-31T11:59:34Z",
+          username: "pjhauser",
+          name: "Phil Hauser",
+          first_name: "Phil",
+          last_name: "Hauser",
+          twitter_username: "pjhauser1",
+          portfolio_url: "http://zweck.co",
+          bio: "I am a web developer and love photography. Always have my camera with me :)",
+          location: "Chester, UK",
+          links: {
+            self: "https://api.unsplash.com/users/pjhauser",
+            html: "https://unsplash.com/@pjhauser",
+            photos: "https://api.unsplash.com/users/pjhauser/photos",
+            likes: "https://api.unsplash.com/users/pjhauser/likes",
+            portfolio: "https://api.unsplash.com/users/pjhauser/portfolio",
+            following: "https://api.unsplash.com/users/pjhauser/following",
+            followers: "https://api.unsplash.com/users/pjhauser/followers",
+          },
+          profile_image: {
+            small:
+              "https://images.unsplash.com/profile-1470650604843-0b744f34bde5?ixlib=rb-4.0.3&crop=faces&fit=crop&w=32&h=32",
+            medium:
+              "https://images.unsplash.com/profile-1470650604843-0b744f34bde5?ixlib=rb-4.0.3&crop=faces&fit=crop&w=64&h=64",
+            large:
+              "https://images.unsplash.com/profile-1470650604843-0b744f34bde5?ixlib=rb-4.0.3&crop=faces&fit=crop&w=128&h=128",
+          },
+          instagram_username: "pjhauser1",
+          total_collections: 1,
+          total_likes: 20,
+          total_photos: 121,
+          total_promoted_photos: 3,
+          total_illustrations: 0,
+          total_promoted_illustrations: 0,
+          accepted_tos: true,
+          for_hire: false,
+          social: {
+            instagram_username: "pjhauser1",
+            portfolio_url: "http://zweck.co",
+            twitter_username: "pjhauser1",
+            paypal_email: null,
+          },
+        },
+      },
+      {
+        id: "MofJxEZ_Cqk",
+        slug: "low-angle-photography-of-high-rise-building-MofJxEZ_Cqk",
+        alternative_slugs: {
+          en: "low-angle-photography-of-high-rise-building-MofJxEZ_Cqk",
+          es: "fotografia-de-angulo-bajo-de-edificios-de-gran-altura-MofJxEZ_Cqk",
+          ja: "高層ビルのローアングル撮影-MofJxEZ_Cqk",
+          fr: "photographie-en-contre-plongee-dun-immeuble-de-grande-hauteur-MofJxEZ_Cqk",
+          it: "fotografia-ad-angolo-basso-di-grattacieli-MofJxEZ_Cqk",
+          ko: "고층-건물의-낮은-각도-사진-MofJxEZ_Cqk",
+          de: "low-angle-fotografie-von-hochhausern-MofJxEZ_Cqk",
+          pt: "fotografia-de-baixo-angulo-do-edificio-do-arranha-ceus-MofJxEZ_Cqk",
+          id: "fotografi-sudut-rendah-bangunan-bertingkat-tinggi-MofJxEZ_Cqk",
+        },
+        created_at: "2020-10-13T13:31:05Z",
+        updated_at: "2025-08-02T15:41:48Z",
+        promoted_at: "2020-10-16T11:23:23Z",
+        width: 2832,
+        height: 4240,
+        color: "#f3f3f3",
+        blur_hash: "LpEpf*M{V@V@_NIUa|WBMxIAtRkC",
+        description: "Rainy day in New York City.",
+        alt_description: "low angle photography of high rise building",
+        breadcrumbs: [],
+        urls: {
+          raw: "https://images.unsplash.com/photo-1602595603892-d7508172c45f?ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHw1fHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA&ixlib=rb-4.1.0",
+          full: "https://images.unsplash.com/photo-1602595603892-d7508172c45f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHw1fHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA&ixlib=rb-4.1.0&q=85",
+          regular:
+            "https://images.unsplash.com/photo-1602595603892-d7508172c45f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHw1fHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA&ixlib=rb-4.1.0&q=80&w=1080",
+          small:
+            "https://images.unsplash.com/photo-1602595603892-d7508172c45f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHw1fHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA&ixlib=rb-4.1.0&q=80&w=400",
+          thumb:
+            "https://images.unsplash.com/photo-1602595603892-d7508172c45f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHw1fHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA&ixlib=rb-4.1.0&q=80&w=200",
+          small_s3:
+            "https://s3.us-west-2.amazonaws.com/images.unsplash.com/small/photo-1602595603892-d7508172c45f",
+        },
+        links: {
+          self: "https://api.unsplash.com/photos/low-angle-photography-of-high-rise-building-MofJxEZ_Cqk",
+          html: "https://unsplash.com/photos/low-angle-photography-of-high-rise-building-MofJxEZ_Cqk",
+          download:
+            "https://unsplash.com/photos/MofJxEZ_Cqk/download?ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHw1fHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA",
+          download_location:
+            "https://api.unsplash.com/photos/MofJxEZ_Cqk/download?ixid=M3w3ODY1MTZ8MHwxfHNlYXJjaHw1fHxBTE9GVCUyME1BTkhBVFRBTiUyMERPV05UT1dOJTIwRklOQU5DSUFMJTIwRElTVHxlbnwwfHx8fDE3NTQxNTA3NzN8MA",
+        },
+        likes: 66,
+        liked_by_user: false,
+        current_user_collections: [],
+        sponsorship: null,
+        topic_submissions: {},
+        asset_type: "photo",
+        user: {
+          id: "DKtoo-vyt9M",
+          updated_at: "2024-10-10T21:55:02Z",
+          username: "kurtvon",
+          name: "Kurt Von",
+          first_name: "Kurt",
+          last_name: "Von",
+          twitter_username: null,
+          portfolio_url: "http://stockcliphub.com",
+          bio: "Check out my YouTube tutorials on how to create your own presets and luts!",
+          location: "PNW",
+          links: {
+            self: "https://api.unsplash.com/users/kurtvon",
+            html: "https://unsplash.com/@kurtvon",
+            photos: "https://api.unsplash.com/users/kurtvon/photos",
+            likes: "https://api.unsplash.com/users/kurtvon/likes",
+            portfolio: "https://api.unsplash.com/users/kurtvon/portfolio",
+          },
+          profile_image: {
+            small:
+              "https://images.unsplash.com/profile-1540676160545-8a69da220549?ixlib=rb-4.1.0&crop=faces&fit=crop&w=32&h=32",
+            medium:
+              "https://images.unsplash.com/profile-1540676160545-8a69da220549?ixlib=rb-4.1.0&crop=faces&fit=crop&w=64&h=64",
+            large:
+              "https://images.unsplash.com/profile-1540676160545-8a69da220549?ixlib=rb-4.1.0&crop=faces&fit=crop&w=128&h=128",
+          },
+          instagram_username: "kurtvon",
+          total_collections: 0,
+          total_likes: 0,
+          total_photos: 32,
+          total_promoted_photos: 11,
+          total_illustrations: 0,
+          total_promoted_illustrations: 0,
+          accepted_tos: true,
+          for_hire: true,
+          social: {
+            instagram_username: "kurtvon",
+            portfolio_url: "http://stockcliphub.com",
+            twitter_username: null,
+            paypal_email: null,
+          },
+        },
+      },
+    ],
+  },
+];
 
 export const hotelFromCity = [
   {
@@ -5082,5 +5128,90 @@ export const hotelFromCity = [
         self: "https://test.api.amadeus.com/v1/reference-data/locations/hotels/by-city?cityCode=NYC&radius=5",
       },
     },
+  },
+];
+
+export const hotelOffer = [
+  {
+    data: [
+      {
+        type: "hotel-offers",
+        hotel: {
+          type: "hotel",
+          hotelId: "ALNYC647",
+          chainCode: "AL",
+          dupeId: "501447323",
+          name: "Aloft Manhattan Downtown Financial District",
+          cityCode: "NYC",
+          latitude: 40.71041,
+          longitude: -74.00666,
+        },
+        available: true,
+        offers: [
+          {
+            id: "2HSHOTJA8X",
+            checkInDate: "2025-08-10",
+            checkOutDate: "2025-08-11",
+            rateCode: "RAC",
+            room: {
+              type: "ZZL",
+              typeEstimated: {
+                beds: 1,
+                bedType: "KING",
+              },
+              description: {
+                text: "Q1 Sale, includes prepay in full, non-refundable\nSleeps 2, Fast & free WiFi throughout the\nhotel, 1 King, 210sqft/19sqm-230sqft/21sqm,",
+                lang: "EN",
+              },
+            },
+            guests: {
+              adults: 2,
+            },
+            price: {
+              currency: "USD",
+              base: "239.00",
+              total: "277.76",
+              variations: {
+                average: {
+                  base: "239.00",
+                },
+                changes: [
+                  {
+                    startDate: "2025-08-10",
+                    endDate: "2025-08-11",
+                    base: "239.00",
+                  },
+                ],
+              },
+            },
+            policies: {
+              cancellations: [
+                {
+                  description: {
+                    text: "NON-REFUNDABLE RATE",
+                  },
+                  policyType: "CANCELLATION",
+                },
+              ],
+              paymentType: "deposit",
+              refundable: {
+                cancellationRefund: "NON_REFUNDABLE",
+              },
+            },
+            self: "https://test.api.amadeus.com/v3/shopping/hotel-offers/2HSHOTJA8X",
+            roomInformation: {
+              description:
+                "Q1 Sale, includes prepay in full, non-refundable\nSleeps 2, Fast & free WiFi throughout the\nhotel, 1 King, 210sqft/19sqm-230sqft/21sqm,",
+              type: "ZZL",
+              typeEstimated: {
+                bedType: "KING",
+                beds: 1,
+              },
+            },
+          },
+        ],
+        self: "https://test.api.amadeus.com/v3/shopping/hotel-offers?hotelIds=ALNYC647&adults=2&checkInDate=2025-08-10&paymentPolicy=NONE&roomQuantity=1",
+      },
+    ],
   },
 ];

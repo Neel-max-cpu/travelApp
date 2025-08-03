@@ -45,9 +45,6 @@ const Hero = () => {
     const [hotelStars, setHotelStars] = useState("");
     
     
-    
-    
-    
 
 
     const handleSearch = async (e: any) => {
@@ -55,6 +52,7 @@ const Hero = () => {
         console.log("Clicked search");
 
         if (currentSelected === 'hotel') {
+            router.push("/hotel-results");
             //todo
             try {
                 
