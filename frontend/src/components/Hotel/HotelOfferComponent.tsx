@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation';
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogOverlay, DialogTitle, DialogTrigger } from '../ui/dialog';
 import { Label } from '../ui/label';
 import { useBookingStore } from '@/store/useBookingStore';
+import { changeToInr, changeToInrNumber } from '@/utils/helper';
 
 const HotelOfferComponent = () => {
     const router = useRouter();
@@ -17,20 +18,22 @@ const HotelOfferComponent = () => {
 
     const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-    const handleOfferData = (offer:any) => {
+    const handleOfferData = (offer: any) => {
         const dataToSend = {
-            type:"hotel",
+            type: "hotel",
             name: hotelData.hotel.name,
             cityCode: hotelData.hotel.cityCode,
             checkInDate: hotelData.offers[0].checkInDate,
             checkOutDate: hotelData.offers[0].checkOutDate,
-            price: parseFloat(hotelData.offers[0].price.total),
+            price: changeToInrNumber(hotelData.offers[0].price.total),
             currency: hotelData.offers[0].price.currency,
-        }as const;
+        } as const;
 
         useBookingStore.getState().setBookingData(dataToSend); // set in store
         router.push("/payment");
     };
+
+    // 1 $ = Rs 87.77
 
     return (
         <div className="bg-[#1B1212] min-h-screen p-30">
@@ -77,7 +80,7 @@ const HotelOfferComponent = () => {
                                         <p className="text-sm text-gray-600">
                                             <span className="font-bold text-black">Guests:</span> {offer.guests.adults} Adult{offer.guests.adults > 1 ? 's' : ''}
                                         </p>
-                                        <p className="text-xl text-gray-800 font-bold underline">Total: ${offer.price.total} {offer.price.currency}</p>
+                                        <p className="text-xl text-gray-800 font-bold underline">Total: {changeToInr(offer.price.total)} INR</p>
                                         <p className="text-xs text-red-500 font-semibold mt-1">*{offer.policies?.cancellations?.[0]?.description?.text}</p>
                                     </div>
                                     {/* button */}
@@ -135,19 +138,25 @@ const HotelOfferComponent = () => {
                                                                         </div>
                                                                         {/* price */}
                                                                         <p className="font-bold text-sm text-blue-500 underline">Tax Breakdown :</p>
-                                                                        <div className="text-sm grid grid-cols-6 gap-2">
+                                                                        <div className="text-sm grid grid-cols-2 gap-2">
+                                                                            <div className="flex flex-col">
+                                                                                <p className="font-semibold text-red-500">Base:</p>
+                                                                                <p className="text-gray-600">
+                                                                                    Rs. {changeToInr(offer.price.base)}
+                                                                                </p>
+                                                                            </div>
                                                                             {offer.price.taxes.map((tax, index) => (
                                                                                 <div key={index} className="flex flex-col">
                                                                                     <p className="font-semibold text-red-500">{tax.code.replace(/_/g, ' ')}</p>
                                                                                     <p className="text-gray-600">
-                                                                                        ${tax.amount} {tax.currency}
+                                                                                        Rs. {changeToInr(tax.amount)}
                                                                                     </p>
                                                                                 </div>
                                                                             ))}
                                                                         </div>
                                                                         <div className="text-xl font-bold flex space-x-2">
                                                                             <p className="">Total: </p>
-                                                                            <p className="text-blue-500">${offer.price.total} {offer.price.currency}</p>
+                                                                            <p className="text-blue-500">Rs.{changeToInr(offer.price.total)}</p>
                                                                         </div>
                                                                         <p className="text-xs font-semibold text-red-600 mt-2">*{offer.policies.cancellations[0]?.description.text}</p>
                                                                     </div>

@@ -35,3 +35,18 @@ export const formateMoney = (data:string)=>{
 
   return fractionalPart ? `${formatted}.${fractionalPart}` : formatted;
 }
+
+export const changeToInr = (data:any)=>{
+  // 1 $ = Rs 87.77
+  let dollars = parseFloat(data);
+  let inr = 87.77 * dollars;
+  let inrString = inr.toString();
+  return formateMoney(inrString)  
+}
+
+export const changeToInrNumber = (data:any)=>{
+  // 1 $ = Rs 87.77
+  let dollars = parseFloat(data);
+  let inr = 87.77 * dollars;
+  return parseFloat(inr.toFixed(2));    
+}
