@@ -112,7 +112,9 @@ const SearchBoxHotel = ({
           </div>
           {/* dialog box */}
           <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-            <form>
+            {/* prevent default so no reload after submit */}
+            {/* <form onSubmit={(e) => e.preventDefault()}> */}
+            <>
               <DialogTrigger asChild onClick={() => setIsDialogOpen(true)}>
                 <p className="text-base text-gray-500 font-normal cursor-pointer">Guest, Room...</p>
               </DialogTrigger>
@@ -175,7 +177,8 @@ const SearchBoxHotel = ({
                   <Button type="submit" onClick={() => setIsDialogOpen(false)}>Select</Button>
                 </DialogFooter>
               </DialogContent>
-            </form>
+            {/* </form> */}
+            </>
           </Dialog>
         </div>
       </div>

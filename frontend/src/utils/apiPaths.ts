@@ -12,19 +12,53 @@ export const API_PATHS = {
     OTPFORGETPASS: "/api/auth/sendOtpForgotPassword",
     FORGOT_PASS: "/api/auth/forgetPass",
     RESETPASS: "/api/auth/resetPass",
-    DISABLEOTP: "/api/auth/disableOtp",        
+    DISABLEOTP: "/api/auth/disableOtp",
     AUTHORIZATION: "https://test.api.amadeus.com/v1/security/oauth2/token",
   },
-  COMMON:{
+  COMMON: {
     CITYWITHNAME: "https://test.api.amadeus.com/v1/reference-data/locations",
   },
   FLIGHT: {
     FLIGHTSEARCH: "https://test.api.amadeus.com/v2/shopping/flight-offers",
-    IATACODETOCITY: (iataCode: string) => `https://aerokey-api.vercel.app/v1/airports/code/${iataCode}`
+    IATACODETOCITY: (iataCode: string) =>
+      `https://aerokey-api.vercel.app/v1/airports/code/${iataCode}`,
   },
-  HOTELS:{
+  HOTELS: {
+    GETHOTELSINCITY: (params: {
+      cityCode?: string;
+      radius?: string;
+      amenities?: string[];
+      ratings?: string[];
+    }) => {
+      const queryParams = new URLSearchParams();
 
-  }
+      if (params.cityCode) queryParams.append("cityCode", params.cityCode);
+      if (params.radius) queryParams.append("radius", params.radius);
+      if (params.amenities?.length)
+        queryParams.append("amenities", params.amenities.join(","));
+      if (params.ratings?.length)
+        queryParams.append("ratings", params.ratings.join(","));
+
+      return `https://test.api.amadeus.com/v1/reference-data/locations/hotels/by-city?${queryParams.toString()}`;
+    },
+    GETHOTELOFFERS:(params: {
+      cityCode?: string;
+      radius?: string;
+      amenities?: string[];
+      ratings?: string[];
+    }) => {
+      const queryParams = new URLSearchParams();
+
+      if (params.cityCode) queryParams.append("cityCode", params.cityCode);
+      if (params.radius) queryParams.append("radius", params.radius);
+      if (params.amenities?.length)
+        queryParams.append("amenities", params.amenities.join(","));
+      if (params.ratings?.length)
+        queryParams.append("ratings", params.ratings.join(","));
+
+      return `https://test.api.amadeus.com/v3/shopping/hotel-offers?${queryParams.toString()}`;
+    },
+  },
 };
 
 export const fetchSearchAccessToken = async () => {

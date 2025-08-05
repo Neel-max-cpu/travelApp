@@ -11,6 +11,8 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useRef, useState } from 'react'
 import SearchBoxHotel from '@/components/Helper/SearchBoxHotel';
+import { useHotelStore } from '@/store/useHotelStore';
+import toast from 'react-hot-toast';
 
 const videoSources = [
     "/videos/hero2.mp4",
@@ -37,30 +39,60 @@ const Hero = () => {
 
 
     //hotel data
-    const [hotelLocation, setHotelLocation] = useState<{label:string, value:string} | null>(null);
+    const [hotelLocation, setHotelLocation] = useState<{ label: string, value: string } | null>(null);
     const [checkInDate, setCheckInDate] = useState<Date | undefined>();
     const [checkOutDate, setCheckOutDate] = useState<Date | undefined>();
     const [cityCenterDistance, setCityCenterDistance] = useState("5");
     const [aminities, setAminities] = useState<string[]>([]);
     const [hotelStars, setHotelStars] = useState("");
-    
-    
+
+    //search 
+    const [loading, setLoading] = useState(false);
 
 
     const handleSearch = async (e: any) => {
+        if (loading) return;
         e.preventDefault();
-        console.log("Clicked search");
-
+        e.stopPropagation();
+        setLoading(true);
         if (currentSelected === 'hotel') {
-            router.push("/hotel-results");
-            //todo
+            let response;
             try {
-                
-            } catch (error) {
-                
+                // save the check in/out date for further api calls
+                const params = {
+                    cityCode: hotelLocation?.value,
+                    radius: cityCenterDistance,
+                    amenities: aminities,
+                    ratings: hotelStars ? [hotelStars] : [],
+                };
+                response = await axiosInstance.get(
+                    API_PATHS.HOTELS.GETHOTELSINCITY(params), {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem("accesstokenAuthorization")}`,
+                    },
+
+                });
+                console.log("response ", response);
+
+                //save it in zustand
+                useHotelStore.getState().setHotelResponse(response.data);
+                if (checkInDate) {
+                    useHotelStore.getState().setCheckInDate(checkInDate);
+                }
+                if (checkOutDate) {
+                    useHotelStore.getState().setCheckOutDate(checkOutDate);
+                }
+                setLoading(false);
+                router.push("/hotel-results");
+
+            } catch (error: any) {
+                setLoading(false);
+                toast.error("Something went wrong please try again sometime later!")
+                console.log("error while searching hotel: ", error.message || error);
             }
         }
         else {
+            //todo
             try {
                 const travellerLenght = parseInt(defaultTraveller, 10);
                 const travellers = Array.from({ length: travellerLenght }, (_, i) => ({
@@ -125,7 +157,6 @@ const Hero = () => {
 
     }
 
-
     return (
         <div className='relative w-full h-[120vh] sm:h-[100vh]'>
             {/* overlay */}
@@ -170,7 +201,7 @@ const Hero = () => {
                     {/* search box */}
                     {currentSelected === 'hotel' ?
                         <SearchBoxHotel
-                            hotelLocation={hotelLocation} 
+                            hotelLocation={hotelLocation}
                             setHotelLocation={setHotelLocation}
                             checkInDate={checkInDate}
                             setCheckInDate={setCheckInDate}
@@ -198,10 +229,11 @@ const Hero = () => {
                         />
                     }
                     <Button type="button" onClick={handleSearch}
+                        disabled={loading}
                         className="rounded px-14 md:px-28 -mt-4 py-2.5 overflow-hidden group bg-rose-600 relative hover:bg-gradient-to-r hover:from-red-500 hover:to-red-400 text-white hover:ring-2 hover:ring-offset-2
                 hover:ring-red-400 transition-all ease-out duration-300">
                         <span className="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-12 bg-white opacity-20 rotate-12 group-hover:-translate-x-30 ease"></span>
-                        <span className="relative font-bold">Search</span>
+                        <span className="relative font-bold">{loading ? "Searching..." : "Search"}</span>
                     </Button>
                 </div>
             </div>
