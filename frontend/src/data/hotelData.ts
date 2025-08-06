@@ -50,6 +50,18 @@ export const hotelStartData = [
   { id: 5, value: "4", name: "4 Stars" },
   { id: 6, value: "5", name: "5 Stars" },
 ];
+export const guestData = [
+  { id: 1, value: 1, name: "1 Adult" },
+  { id: 2, value: 2, name: "2 Adults" },
+  { id: 3, value: 3, name: "3 Adults" },
+  { id: 4, value: 4, name: "4 Adults" },
+  { id: 5, value: 5, name: "5 Adults" },
+  { id: 6, value: 6, name: "6 Adults" },
+  { id: 7, value: 7, name: "7 Adults" },
+  { id: 8, value: 8, name: "8 Adults" },
+  { id: 9, value: 9, name: "9 Adults" },
+]
+
 
 export const hotelImage = [
   {

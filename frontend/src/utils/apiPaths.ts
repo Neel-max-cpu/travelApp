@@ -42,21 +42,33 @@ export const API_PATHS = {
       return `https://test.api.amadeus.com/v1/reference-data/locations/hotels/by-city?${queryParams.toString()}`;
     },
     GETHOTELOFFERS:(params: {
-      cityCode?: string;
-      radius?: string;
-      amenities?: string[];
-      ratings?: string[];
+      hotelIds: string[];
+      adults: number;
+      checkInDate: string;
+      checkOutDate?: string | null;
     }) => {
       const queryParams = new URLSearchParams();
 
-      if (params.cityCode) queryParams.append("cityCode", params.cityCode);
-      if (params.radius) queryParams.append("radius", params.radius);
-      if (params.amenities?.length)
-        queryParams.append("amenities", params.amenities.join(","));
-      if (params.ratings?.length)
-        queryParams.append("ratings", params.ratings.join(","));
+      if (params.hotelIds) queryParams.append("hotelIds", params.hotelIds.join(","));
+      if (params.adults) queryParams.append("adults", params.adults.toString());
+      if (params.checkInDate)
+        queryParams.append("checkInDate", params.checkInDate);
+      if (params.checkOutDate)
+        queryParams.append("ratings", params.checkOutDate);
 
       return `https://test.api.amadeus.com/v3/shopping/hotel-offers?${queryParams.toString()}`;
+    },
+    GETHOTELIMAGE:(params:{
+      query:string;
+      per_page:number;
+      client_id:string;
+    })=>{
+      const queryParams = new URLSearchParams();
+      if(params.client_id) queryParams.append("client_id", params.client_id);
+      if(params.query) queryParams.append("query", params.query);
+      if(params.per_page) queryParams.append("per_page", params.per_page.toString());
+
+      return `https://api.unsplash.com/search/photos?${queryParams.toString()}`;
     },
   },
 };

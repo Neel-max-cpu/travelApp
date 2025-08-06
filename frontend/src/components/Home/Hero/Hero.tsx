@@ -45,6 +45,8 @@ const Hero = () => {
     const [cityCenterDistance, setCityCenterDistance] = useState("5");
     const [aminities, setAminities] = useState<string[]>([]);
     const [hotelStars, setHotelStars] = useState("");
+    const [guestNumber, setGuestNumber] = useState(1);
+    
 
     //search 
     const [loading, setLoading] = useState(false);
@@ -58,6 +60,14 @@ const Hero = () => {
         if (currentSelected === 'hotel') {
             let response;
             try {
+
+                //validations
+                if(!hotelLocation || !checkInDate || !guestNumber){
+                    toast.error("please fill the req * field! Location, Check In Date and Number of Guests");
+                    setLoading(false);
+                    return;
+                }
+
                 // save the check in/out date for further api calls
                 const params = {
                     cityCode: hotelLocation?.value,
@@ -82,6 +92,8 @@ const Hero = () => {
                 if (checkOutDate) {
                     useHotelStore.getState().setCheckOutDate(checkOutDate);
                 }
+                useHotelStore.getState().setGuestNumber(guestNumber);
+
                 setLoading(false);
                 router.push("/hotel-results");
 
@@ -213,6 +225,8 @@ const Hero = () => {
                             setAminities={setAminities}
                             hotelStars={hotelStars}
                             setHotelStars={setHotelStars}
+                            guestNumber={guestNumber}
+                            setGuestNumber={setGuestNumber}
                         />
                         :
                         <SearchBoxFlight

@@ -122,37 +122,69 @@ export function HotelMapCard({ data }: HotelDataProps) {
 
     const [loading, setLoading] = useState(false);
 
-
-    // call the image api with each name and get 3 full image    
+    /*
     const results = hotelImage[0]?.results || [];
     const image1 = results[0]?.urls?.full || "/HotelDefaulImages/1.jpg";
     const image2 = results[1]?.urls?.full || "/HotelDefaulImages/2.jpg";
     const image3 = results[2]?.urls?.full || "/HotelDefaulImages/3.jpg";
+    */
+    // call the image api with each name and get 3 full image  
+    let image1 = "/HotelDefaulImages/1.jpg";
+    let image2 = "/HotelDefaulImages/2.jpg";
+    let image3 = "/HotelDefaulImages/3.jpg";
+
+    useEffect(() => {
+        const fetchHotelImages = async () => {
+            let response;
+            try {
+                const params = {
+                    query: data.name || "hotel",
+                    per_page: 3,
+                    client_id: process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY || "notfound"
+                }
+                response = await axiosInstance.get(API_PATHS.HOTELS.GETHOTELIMAGE(params));
+                const results = response.data.results || [];
+                image1 = results[0]?.urls?.full || image1;
+                image2 = results[1]?.urls?.full || image2;
+                image3 = results[2]?.urls?.full || image3;
+            } catch (error: any) {
+                console.log("error fetching the hotel images: ", error.message || error);
+            }
+            localStorage.setItem('hotelImages', JSON.stringify({ image1, image2, image3 }));
+        };
+        fetchHotelImages();
+    }, [data.name])
+
 
     //data from zustand
     const checkInDate = useHotelStore((state) => state.checkInDate);
     const checkOutDate = useHotelStore((state) => state.checkOutDate);
+    const guestNumber = useHotelStore((state) => state.guestNumber);
 
+    //api for hotel offers
     const showHotelOffer = async (e: any) => {
         if (loading) return;
         e.preventDefault();
         e.stopPropagation();
         setLoading(true);
+        let response;
         try {
-            const params ={
+            const params = {
                 hotelIds: [data.hotelId],
-                checkInDate,
-                checkOutDate,
-                
+                adults: guestNumber ?? 1,
+                checkInDate: checkInDate ? checkInDate.toISOString().split("T")[0] : "",
+                checkOutDate: checkOutDate ? checkOutDate.toISOString().split("T")[0] : undefined
             }
-            const respone = await axiosInstance.get(API_PATHS.HOTELS.GETHOTELOFFERS())
+            response = await axiosInstance.get(API_PATHS.HOTELS.GETHOTELOFFERS(params),{
+                headers:{
+                    Authorization: `Bearer ${localStorage.getItem("accesstokenAuthorization")}`,
+                }
+            })
         } catch (error: any) {
             setLoading(false);
             toast.error("Something went wrong please try again sometime later!")
             console.log("error while searching hotel: ", error.message || error);
         }
-        localStorage.setItem('hotelImages', JSON.stringify({ image1, image2, image3 }));
-        //api for hotel offers
         router.push('/hotel-results/hotel-offers')
     }
 
@@ -189,10 +221,11 @@ export function HotelMapCard({ data }: HotelDataProps) {
                     <div className="w-full flex flex-col space-y-2">
                         {/* <h1 className="font-bold text-lg text-center">hehe</h1> */}
                         <Button
+                            disabled={loading}
                             onClick={showHotelOffer}
                             className="group relative overflow-hidden bg-green-600 hover:bg-gradient-to-r hover:from-green-600 hover:via-red-600 hover:to-yellow-400 hover:ring-2 hover:ring-blue-300 hover:ring-offset-2 hover:cursor-pointer transition-all ease-in-out duration-300 ">
                             <span className="absolute opacity-20 right-0 w-6 h-32 -mt-12 bg-white transition-all duration-1000 transform translate-x-12 rotate-12 group-hover:-translate-x-30 ease"></span>
-                            <span>Show Details</span>
+                            <span>{loading? "Showing Details..." : "Show Details"}</span>
                         </Button>
                     </div>
                 </div>

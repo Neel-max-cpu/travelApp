@@ -18,7 +18,7 @@ import moment from 'moment';
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogOverlay, DialogTitle, DialogTrigger } from '../ui/dialog';
 import { Input } from '../ui/input';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '../ui/select';
-import { amenitiesData, distanceFromCityCenter, hotelStartData } from '@/data/hotelData';
+import { amenitiesData, distanceFromCityCenter, guestData, hotelStartData } from '@/data/hotelData';
 import { MultiSelect } from '../ui/multiSelect';
 
 type HotelProps = {
@@ -34,7 +34,8 @@ type HotelProps = {
   setAminities: React.Dispatch<React.SetStateAction<string[]>>;
   hotelStars: string;
   setHotelStars: React.Dispatch<React.SetStateAction<string>>;
-
+  guestNumber: number;
+  setGuestNumber: React.Dispatch<React.SetStateAction<number>>
 }
 
 const SearchBoxHotel = ({
@@ -50,6 +51,8 @@ const SearchBoxHotel = ({
   setAminities,
   hotelStars,
   setHotelStars,
+  guestNumber,
+  setGuestNumber,
 }: HotelProps) => {
 
 
@@ -162,6 +165,16 @@ const SearchBoxHotel = ({
                       data={hotelStartData}
                     />
                   </div>
+                  <div className="grid gap-3">
+                    <Label htmlFor="name-1">Number Of Guests</Label>
+                    {/* hotel stars */}
+                    <SelectOptionDialog
+                      placeHolder="Guests"
+                      value={guestNumber}
+                      onChange={setGuestNumber}
+                      data={guestData}
+                    />
+                  </div>
                 </div>
                 <DialogFooter>
                   <DialogClose asChild>
@@ -192,11 +205,11 @@ export default SearchBoxHotel;
 
 type PropsSelectOption = {
   placeHolder: string;
-  value: string;
-  onChange: (val: string) => void;
+  value: any;
+  onChange: (val: any) => void;
   data: {
     id: number;
-    value: string;
+    value: any;
     name: string;
   }[];
 }
