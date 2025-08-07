@@ -9,11 +9,14 @@ import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, Di
 import { Label } from '../ui/label';
 import { useBookingStore } from '@/store/useBookingStore';
 import { changeToInr, changeToInrNumber } from '@/utils/helper';
+import { useHotelStore } from '@/store/useHotelStore';
 
 const HotelOfferComponent = () => {
     const router = useRouter();
     const hotelImages = JSON.parse(localStorage.getItem('hotelImages') || '{}');
-    const hotelData = hotelOffer[0].data[0];
+    // const hotelData = hotelOffer[0].data[0];
+    // const offers = hotelData.offers || [];
+    const hotelData = useHotelStore((state)=>state.hotelOffer);
     const offers = hotelData.offers || [];
 
     const [isDialogOpen, setIsDialogOpen] = useState(false);

@@ -129,11 +129,30 @@ export function HotelMapCard({ data }: HotelDataProps) {
     const image3 = results[2]?.urls?.full || "/HotelDefaulImages/3.jpg";
     */
     // call the image api with each name and get 3 full image  
-    let image1 = "/HotelDefaulImages/1.jpg";
-    let image2 = "/HotelDefaulImages/2.jpg";
-    let image3 = "/HotelDefaulImages/3.jpg";
+    const [images, setImages] = useState<{
+        image1: string;
+        image2: string;
+        image3: string;
+    }>({
+        image1: "",
+        image2: "",
+        image3: "",
+    });
+
+    const [imageLoading, setImageLoading] = useState(false);
+    const [imageError, setImageError] = useState(false);
+
+
+    const defaultImages = {
+        image1: "/HotelDefaulImages/1.jpg",
+        image2: "/HotelDefaulImages/2.jpeg",
+        image3: "/HotelDefaulImages/3.jpg",
+    }
+
 
     useEffect(() => {
+        if (imageLoading) return;
+        setImageLoading(true);
         const fetchHotelImages = async () => {
             let response;
             try {
@@ -144,13 +163,17 @@ export function HotelMapCard({ data }: HotelDataProps) {
                 }
                 response = await axiosInstance.get(API_PATHS.HOTELS.GETHOTELIMAGE(params));
                 const results = response.data.results || [];
-                image1 = results[0]?.urls?.full || image1;
-                image2 = results[1]?.urls?.full || image2;
-                image3 = results[2]?.urls?.full || image3;
+                const image1 = results[0]?.urls?.full;
+                const image2 = results[1]?.urls?.full;
+                const image3 = results[2]?.urls?.full;
+                const newImages = { image1, image2, image3 };
+                setImages(newImages);
             } catch (error: any) {
+                setImageError(true);
                 console.log("error fetching the hotel images: ", error.message || error);
+            } finally {
+                setImageLoading(true);
             }
-            localStorage.setItem('hotelImages', JSON.stringify({ image1, image2, image3 }));
         };
         fetchHotelImages();
     }, [data.name])
@@ -175,17 +198,30 @@ export function HotelMapCard({ data }: HotelDataProps) {
                 checkInDate: checkInDate ? checkInDate.toISOString().split("T")[0] : "",
                 checkOutDate: checkOutDate ? checkOutDate.toISOString().split("T")[0] : undefined
             }
-            response = await axiosInstance.get(API_PATHS.HOTELS.GETHOTELOFFERS(params),{
-                headers:{
+            response = await axiosInstance.get(API_PATHS.HOTELS.GETHOTELOFFERS(params), {
+                headers: {
                     Authorization: `Bearer ${localStorage.getItem("accesstokenAuthorization")}`,
                 }
             })
+
+            //save in zustand
+            useHotelStore.getState().setHotelOffer([{ data: response.data.data }]);            
+
+            // Decide what to save based on error or loading state
+            const finalImages = {
+                image1: !imageError && images.image1 ? images.image1 : defaultImages.image1,
+                image2: !imageError && images.image2 ? images.image2 : defaultImages.image2,
+                image3: !imageError && images.image3 ? images.image3 : defaultImages.image3,
+            };
+            localStorage.setItem('hotelImages', JSON.stringify(finalImages));
+
+            router.push('/hotel-results/hotel-offers')
+            setLoading(false);
         } catch (error: any) {
             setLoading(false);
             toast.error("Something went wrong please try again sometime later!")
             console.log("error while searching hotel: ", error.message || error);
         }
-        router.push('/hotel-results/hotel-offers')
     }
 
     return (
@@ -194,15 +230,42 @@ export function HotelMapCard({ data }: HotelDataProps) {
                 <div className="grid grid-cols-1 space-y-3 justify-start items-start lg:grid-cols-3 space-x-2 ">
                     {/* part 1 images */}
                     <div className="w-full space-y-3 overflow-hidden">
-                        <div className="bg-gray-300 w-[160px] h-[90px] rounded-lg">
-                            <img src={image1} className="w-full h-full object-cover rounded-lg" alt="" />
+                        <div className={`bg-gray-400 w-[160px] h-[90px] rounded-lg ${imageLoading ? 'animate-pulse' : ''}`}>
+                            <img
+                                src={!imageLoading && imageError ? defaultImages.image1 : images.image1}
+                                onLoad={() => setImageLoading(false)}
+                                onError={() => {
+                                    setImageLoading(false);
+                                    setImageError(true);
+                                }}
+                                className="w-full h-full object-cover rounded-lg"
+                                alt=""
+                            />
                         </div>
                         <div className="flex space-x-2">
-                            <div className="bg-gray-300 rounded-lg w-[80px] h-[45px]">
-                                <img src={image2} className="w-full h-full object-cover rounded-lg" alt="" />
+                            <div className={`bg-gray-400 rounded-lg w-[80px] h-[45px] ${imageLoading ? 'animate-pulse' : ''}`}>
+                                <img
+                                    src={!imageLoading && imageError ? defaultImages.image2 : images.image2}
+                                    onLoad={() => setImageLoading(false)}
+                                    onError={() => {
+                                        setImageLoading(false);
+                                        setImageError(true);
+                                    }}
+                                    className="w-full h-full object-cover rounded-lg"
+                                    alt=""
+                                />
                             </div>
-                            <div className="bg-gray-300 rounded-lg w-[80px] h-[45px]">
-                                <img src={image3} className="w-full h-full object-cover rounded-lg" alt="" />
+                            <div className={`bg-gray-400 rounded-lg w-[80px] h-[45px] ${imageLoading ? 'animate-pulse' : ''}`}>
+                                <img
+                                    src={!imageLoading && imageError ? defaultImages.image3 : images.image3}
+                                    onLoad={() => setImageLoading(false)}
+                                    onError={() => {
+                                        setImageLoading(false);
+                                        setImageError(true);
+                                    }}
+                                    className="w-full h-full object-cover rounded-lg"
+                                    alt=""
+                                />
                             </div>
                         </div>
                     </div>
@@ -225,7 +288,7 @@ export function HotelMapCard({ data }: HotelDataProps) {
                             onClick={showHotelOffer}
                             className="group relative overflow-hidden bg-green-600 hover:bg-gradient-to-r hover:from-green-600 hover:via-red-600 hover:to-yellow-400 hover:ring-2 hover:ring-blue-300 hover:ring-offset-2 hover:cursor-pointer transition-all ease-in-out duration-300 ">
                             <span className="absolute opacity-20 right-0 w-6 h-32 -mt-12 bg-white transition-all duration-1000 transform translate-x-12 rotate-12 group-hover:-translate-x-30 ease"></span>
-                            <span>{loading? "Showing Details..." : "Show Details"}</span>
+                            <span>{loading ? "Showing Details..." : "Show Details"}</span>
                         </Button>
                     </div>
                 </div>

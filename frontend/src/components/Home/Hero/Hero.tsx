@@ -61,9 +61,19 @@ const Hero = () => {
             let response;
             try {
 
-                //validations
-                if(!hotelLocation || !checkInDate || !guestNumber){
-                    toast.error("please fill the req * field! Location, Check In Date and Number of Guests");
+                //validations                
+                if(!hotelLocation){
+                    toast.error("please fill the req * field! Location of your stay");
+                    setLoading(false);
+                    return;
+                }
+                if(!checkInDate){
+                    toast.error("Please fill the check In Date!");
+                    setLoading(false);
+                    return;
+                }
+                if(!guestNumber){
+                    toast.error("Please fill in number of guests!");
                     setLoading(false);
                     return;
                 }
@@ -94,8 +104,8 @@ const Hero = () => {
                 }
                 useHotelStore.getState().setGuestNumber(guestNumber);
 
-                setLoading(false);
                 router.push("/hotel-results");
+                setLoading(false);
 
             } catch (error: any) {
                 setLoading(false);
