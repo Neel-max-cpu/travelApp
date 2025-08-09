@@ -4,27 +4,27 @@ import { persist } from "zustand/middleware";
 
 type HotelBooking = {
   type: "hotel";
-  name: string;
-  cityCode: string;
-  checkInDate: string;
-  checkOutDate: string;
-  price: number;
-  currency: string;
+  name?: string;
+  cityCode?: string;
+  checkInDate?: string;
+  checkOutDate?: string;
+  price?: number;
+  currency?: string;
 };
 
 type FlightBooking = {
   type: "flight";
-  fromCity: string;
-  toCity: string;
-  departureDate: string;
-  arrivalDate: string;
-  price: number;
-  currency: string;
-  carrier: string;
-  carrierCode:string;
-  duration:string;
-  deptTerminal:string;
-  arrivalTerminal:string;
+  fromCity?: string;
+  toCity?: string;
+  departureDate?: string;
+  arrivalDate?: string;
+  price?: number;
+  currency?: string;
+  carrier?: string;
+  carrierCode?:string;
+  duration?:string;
+  deptTerminal?:string;
+  arrivalTerminal?:string;
 };
 
 

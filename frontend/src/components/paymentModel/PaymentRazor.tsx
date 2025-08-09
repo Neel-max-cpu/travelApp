@@ -28,47 +28,68 @@ const paymentRazor = () => {
         });
     };
 
+    const saveBooking =async () => {
+        try{
+            const response = null;
+            //do the api
+        } catch(error:any){
+            console.log(error);
+            toast.error("error in saving the data!");
+        }
+    }
 
-    const handlePayment = async () => {
-        // if (!localStorage.getItem("token")) {
-        //     toast.error("Login in first to make the payment!");
-        //     return;
-        // }
-        const res = await loadRazorpayScript();
-        if (!res) {
-            alert('Razorpay SDK failed to load.');
+
+    const handlePayment = async (val: string) => {
+        if (!localStorage.getItem("token")) {
+            toast.error("Login in first to make the payment!");
             return;
         }
+        
+        if(val==="payment") {
 
-        const amountInPaisa = Math.round(amount * 100);
 
-        const options = {
-            key: process.env.NEXT_PUBLIC_RAZOR_KEY_ID!,
-            amount: amountInPaisa,
-            currency: "INR",
-            name: "Your Booking App",
-            description: "Hotel/Flight Booking",
-            handler: function (response: any) {
-                console.log("Payment successful", response);
-            },
-            prefill: {
-                name: "Neel",
-                email: "neel@example.com",
-                contact: "9999999999",
-            },
-            theme: {
-                color: "#3399cc",
-            },
-            method: {
-                netbanking: true,
-                card: true,
-                upi: true,
-                wallet: true,
-            },
-        };
+            const res = await loadRazorpayScript();
+            if (!res) {
+                alert('Razorpay SDK failed to load.');
+                return;
+            }
 
-        const rzp = new (window as any).Razorpay(options);
-        rzp.open();
+            const amountInPaisa = Math.round(amount * 100);
+
+            const options = {
+                key: process.env.NEXT_PUBLIC_RAZOR_KEY_ID!,
+                amount: amountInPaisa,
+                currency: "INR",
+                name: "Your Booking App",
+                description: "Hotel/Flight Booking",
+                handler: function (response: any) {
+                    console.log("Payment successful", response);
+                    //save it in db
+                    saveBooking();
+                },
+                prefill: {
+                    name: "Neel",
+                    email: "neel@example.com",
+                    contact: "9999999999",
+                },
+                theme: {
+                    color: "#3399cc",
+                },
+                method: {
+                    netbanking: true,
+                    card: true,
+                    upi: true,
+                    wallet: true,
+                },
+            };
+
+            const rzp = new (window as any).Razorpay(options);
+            rzp.open();
+        }
+
+        if(val==="skip"){
+            saveBooking();
+        }
     };
 
     return (
@@ -109,7 +130,7 @@ const paymentRazor = () => {
                                         value={amount}
                                         className="w-50 ml-2 border px-1 mr-2 py-1 rounded"
                                         onChange={(e) => setAmount(Number(e.target.value))}
-                                    />                                    
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -170,13 +191,14 @@ const paymentRazor = () => {
                 )}
                 <div className="flex flex-col space-y-2">
                     <Button
-                        onClick={handlePayment}
+                        onClick={() => handlePayment("payment")}
                         className="group mt-6 w-full relative overflow-hidden  bg-blue-500 hover:bg-gradient-to-r hover:from-blue-500 hover:via-blue-900 hover:to-white hover:ring-2 hover:ring-blue-300 hover:ring-offset-2 hover:cursor-pointer transition-all ease-in-out duration-300 "
                     >
                         <span className="absolute opacity-30 right-0 w-5 h-32 -mt-12 bg-white transition-all duration-1000 transform translate-x-12 rotate-12 group-hover:-translate-x-45 ease"></span>
                         <span>Pay Now</span>
                     </Button>
                     <Button
+                        onClick={() => handlePayment("skip")}
                         className="group relative overflow-hidden  bg-green-600 hover:bg-gradient-to-r hover:from-green-600 hover:via-red-600 hover:to-yellow-400 hover:ring-2 hover:ring-blue-300 hover:ring-offset-2 hover:cursor-pointer transition-all ease-in-out duration-300 ">
                         <span className="absolute opacity-30 right-0 w-5 h-32 -mt-12 bg-white transition-all duration-1000 transform translate-x-12 rotate-12 group-hover:-translate-x-40 ease"></span>
                         <span>Skip payment 😉</span>

@@ -203,9 +203,14 @@ export function HotelMapCard({ data }: HotelDataProps) {
                     Authorization: `Bearer ${localStorage.getItem("accesstokenAuthorization")}`,
                 }
             })
+            console.log("offers Hotel" , response);
 
             //save in zustand
-            useHotelStore.getState().setHotelOffer([{ data: response.data.data }]);            
+             useHotelStore.getState().setHotelOffer([
+                {
+                    data: response?.data?.data ?? []
+                }
+             ]);
 
             // Decide what to save based on error or loading state
             const finalImages = {

@@ -108,13 +108,13 @@ interface HotelOffers{
   ],
 }
 
-interface HotelOffer{
+interface HotelOfferWrapper {
   data: HotelOffers[];
 }
 
 interface HotelStore {
   hotelResponse: HotelApiResponse | null;
-  hotelOffer: HotelOffer[] | null;
+  hotelOffer: HotelOfferWrapper [] | null;
 
 
   checkInDate: Date | null;
@@ -123,14 +123,15 @@ interface HotelStore {
   guestNumber: number | null;
   
   setHotelResponse: (res: HotelApiResponse) => void;
-  setHotelOffer: (res:HotelOffer[])=>void;
+  setHotelOffer: (res:HotelOfferWrapper[])=>void;
 
   setCheckInDate: (checkInDate: Date) => void;
   setCheckOutDate: (checkOutDate: Date) => void;
 
   setGuestNumber:(guestNumber:number)=>void;
   
-  clearHotelResponse: () => void;
+  // clearHotelResponse: () => void;
+  
 }
 
 export const useHotelStore = create<HotelStore>()(
@@ -153,6 +154,7 @@ export const useHotelStore = create<HotelStore>()(
       setGuestNumber: (guestNumber) => set({ guestNumber }),
 
       clearHotelResponse: () => set({ hotelResponse: null }),
+      clearHotelOffer: () => set({ hotelOffer: null }),
     }),
     {
       name: "hotel-store", // localStorage key

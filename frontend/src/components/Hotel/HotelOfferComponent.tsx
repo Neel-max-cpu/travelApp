@@ -16,13 +16,19 @@ const HotelOfferComponent = () => {
     const hotelImages = JSON.parse(localStorage.getItem('hotelImages') || '{}');
     // const hotelData = hotelOffer[0].data[0];
     // const offers = hotelData.offers || [];
-    const hotelData = useHotelStore((state)=>state.hotelOffer);
-    const offers = hotelData.offers || [];
+    const hotelOfferArray  = useHotelStore((state)=>state.hotelOffer);
+    const hotelData = hotelOfferArray?.[0]?.data?.[0];
+    const offers = hotelData?.offers || [];
 
     const [isDialogOpen, setIsDialogOpen] = useState(false);
+    const [loading, setLoading] = useState(false);
+    
 
     const handleOfferData = (offer: any) => {
+        if(loading) return;
+        setLoading(true);
         const dataToSend = {
+            /*
             type: "hotel",
             name: hotelData.hotel.name,
             cityCode: hotelData.hotel.cityCode,
@@ -30,10 +36,20 @@ const HotelOfferComponent = () => {
             checkOutDate: hotelData.offers[0].checkOutDate,
             price: changeToInrNumber(hotelData.offers[0].price.total),
             currency: hotelData.offers[0].price.currency,
+            */
+            type: "hotel",
+            name: hotelData?.hotel.name,
+            cityCode: hotelData?.hotel.cityCode,
+            checkInDate: offer.checkInDate,
+            checkOutDate: offer.checkOutDate,
+            price: changeToInrNumber(offer.price.total),
+            currency: offer.price.currency,
         } as const;
 
+        //save in zustand
         useBookingStore.getState().setBookingData(dataToSend); // set in store
         router.push("/payment");
+        setLoading(false);
     };
 
     // 1 $ = Rs 87.77
@@ -60,10 +76,10 @@ const HotelOfferComponent = () => {
                 <div className="">
                     <div className="flex my-2 p-2 space-x-3">
                         <span className="text-blue-500 text-lg font-semibold ">Hotel:</span>
-                        <h2 className="text-lg font-semibold underline"> {hotelData.hotel.name}</h2>
+                        <h2 className="text-lg font-semibold underline"> {hotelData?.hotel.name}</h2>
                     </div>
                     <h1 className="text-xl font-semibold my-2 p-3">Available Offers:</h1>
-                    {!hotelData.available ? (
+                    {!hotelData?.available ? (
                         <h1 className="text-red-500">No offers available right now. Sorry 😔</h1>
                     ) : (
                         offers.map((offer) => (
@@ -185,7 +201,7 @@ const HotelOfferComponent = () => {
                                             onClick={() => handleOfferData(offer)}
                                             className="group relative overflow-hidden  bg-green-600 hover:bg-gradient-to-r hover:from-green-600 hover:via-red-600 hover:to-yellow-400 hover:ring-2 hover:ring-blue-300 hover:ring-offset-2 hover:cursor-pointer transition-all ease-in-out duration-300 ">
                                             <span className="absolute opacity-30 right-0 w-5 h-32 -mt-12 bg-white transition-all duration-1000 transform translate-x-12 rotate-12 group-hover:-translate-x-15 ease"></span>
-                                            <span>Book Now</span>
+                                            <span>{loading? "Redirecting..." :"Book Now"}</span>
                                         </Button>
                                     </div>
                                 </div>

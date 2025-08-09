@@ -13,6 +13,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import SearchBoxHotel from '@/components/Helper/SearchBoxHotel';
 import { useHotelStore } from '@/store/useHotelStore';
 import toast from 'react-hot-toast';
+import { useFlightStore } from '@/store/useFlightStore';
 
 const videoSources = [
     "/videos/hero2.mp4",
@@ -114,8 +115,27 @@ const Hero = () => {
             }
         }
         else {
-            //todo
+            let response;
             try {
+                //validation
+                if(!fromAirport){
+                    toast.error("Please select Departure Airport!");
+                    setLoading(false);
+                    return;
+                }
+
+                if(!toAirport){
+                    toast.error("Please select arrival Airport!");
+                    setLoading(false);
+                    return;
+                }             
+                
+                if(!formdate){
+                    toast.error("Please select Departure Date!");
+                    setLoading(false);
+                    return;                    
+                }
+
                 const travellerLenght = parseInt(defaultTraveller, 10);
                 const travellers = Array.from({ length: travellerLenght }, (_, i) => ({
                     id: (i + 1).toString(),
@@ -152,9 +172,33 @@ const Hero = () => {
                             ]
                         }
                     }
+                }                
+                response = await axiosInstance.post(API_PATHS.FLIGHT.FLIGHTSEARCH,payLoad,{
+                    headers:{
+                        Authorization: `Bearer ${localStorage.getItem("accesstokenAuthorization")}`,
+                    }
+                });
+                console.log("response ", response);
+
+                //save it in zustand
+                useFlightStore.getState().setFlightResponse({
+                    meta: { count: response.data.meta.count },
+                    data: response.data.data,
+                    dictionaries: response.data.dictionaries
+                });
+
+                const res ={
+                    fromAirport,
+                    toAirport,
+                    formdate,
+                    defaultClass,
+                    defaultTraveller
                 }
-                // console.log(payLoad);
+                useFlightStore.getState().setFlightSearchData(res);
+                
+
                 // Redirect to results page
+                /*
                 localStorage.setItem("flight_search_data", JSON.stringify({
                     fromAirport,
                     toAirport,
@@ -162,6 +206,7 @@ const Hero = () => {
                     defaultClass,
                     defaultTraveller
                 }));
+                */
                 router.push("/flight-results");
 
                 // const response = await axiosInstance.post(API_PATHS.FLIGHT.FLIGHTSEARCH, payLoad);
