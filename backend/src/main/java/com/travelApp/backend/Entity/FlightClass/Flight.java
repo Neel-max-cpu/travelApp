@@ -29,34 +29,46 @@ public class Flight {
     private  String destination;
 
     @Column(name = "departure_date")
-    private LocalDate departureDate;
+    private String departureDate;
 
     @Column(name = "departure_time")
-    private LocalTime departureTime;
+    private String departureTime;
 
     @Column(name = "arrival_date")
-    private LocalDate  arrivalDate;
+    private String arrivalDate;
 
-    @Column(name = "flight_number")
-    private  String flightNumber;
-
-    @Column(name = "airline_id")
-    private  Integer airlineId;
-
-    @Column(name = "travel_class_id")
-    private  Integer travelClassId;
-
-    @Column(name = "number_of_passengers")
-    private  Integer numberOfPassengers;
+    @Column(name = "arrival_time")
+    private String arrivalTime;
 
     @Column(name = "total_price")
     private  Double totalPrice;
 
-    @Column(name = "currency")
-    private  String currency;
+    @Column(name = "aricraft_company")
+    private  String aricraftCompany;
+
+    @Column(name = "aircraft_name")
+    private  String aircraftName;
+
+    @Column(name = "carrier_code_for_image")
+    private  String carrierCodeForImage;
+
+    @Column(name = "flight_duration")
+    private  String flightDuration;
+
+    @Column(name = "dept_terminal")
+    private  String deptTerminal;
+
+    @Column(name = "arrival_terminal")
+    private  String arrivalTerminal;
+
+    @Column(name = "traveller_class")
+    private  String travellerClass;
+
+    @Column(name = "number_of_passangers")
+    private Integer numberOfPassangers;
 
     @Column(name = "send_mail_confirmation")
-    private  Character sendMailConfirmation;
+    private Character sendMailConfirmation;
 
     @Column(name = "created_on")
     private LocalDateTime createdOn;

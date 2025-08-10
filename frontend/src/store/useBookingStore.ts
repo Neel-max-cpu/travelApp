@@ -30,6 +30,7 @@ type FlightBooking = {
   aircraftCompany?:string;
   aircraftName?:string;
   travellerClass?:string;
+  numberofTravellers?:string;
 };
 
 

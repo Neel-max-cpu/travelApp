@@ -23,6 +23,7 @@ export const API_PATHS = {
     FLIGHTSEARCH: "https://test.api.amadeus.com/v2/shopping/flight-offers",
     IATACODETOCITY: (iataCode: string) =>
       `https://aerokey-api.vercel.app/v1/airports/code/${iataCode}`,
+    FLIGHTBOOKING:"/api/flight/saveBooking",
   },
   HOTELS: {
     GETHOTELSINCITY: (params: {

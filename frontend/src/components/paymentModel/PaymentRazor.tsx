@@ -4,6 +4,8 @@ import { Button } from '../ui/button';
 import { useBookingStore } from '@/store/useBookingStore';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
+import axiosInstance from '@/utils/axiosInstance';
+import { API_PATHS } from '@/utils/apiPaths';
 
 const paymentRazor = () => {
     const router = useRouter();
@@ -33,13 +35,38 @@ const paymentRazor = () => {
 
     const saveBooking = async () => {
         try {
-            const response = null;
+            let response;
             //do the api
+            if (bookingData.type === "flight") {
+                const payLoad = {
+                    origin: bookingData?.fromCity ?? null,
+                    destination: bookingData?.toCity ?? null,
+                    departureDate: bookingData?.departureDate ?? null,
+                    departureTime: bookingData?.departureTime ?? null,
+                    arrivalDate: bookingData?.arrivalDate ?? null,
+                    arrivalTime: bookingData?.arrivalTime ?? null,
+                    totalPrice: bookingData?.price ?? null,
+                    aricraftCompany: bookingData?.aircraftCompany ?? null,
+                    aircraftName: bookingData?.aircraftName ?? null,
+                    carrierCodeForImage: bookingData?.carrierCode ?? null,
+                    flightDuration: bookingData?.duration ?? null,
+                    deptTerminal: bookingData?.deptTerminal ?? null,
+                    arrivalTerminal: bookingData?.arrivalTerminal ?? null,
+                    travellerClass: bookingData?.travellerClass ?? null,
+                    numberOfPassangers: bookingData?.numberofTravellers ?? null,
+                };
+
+                response = await axiosInstance.post(API_PATHS.FLIGHT.FLIGHTBOOKING,payLoad);
+                toast.success("Confirmation mail sent!");
+            }
+            else {
+                //hotels
+            }
             toast.success("Redirecting please wait!");
             router.push("/bookings")
         } catch (error: any) {
             console.log(error);
-            toast.error("error in saving the data!");
+            toast.error("Error in saving the data!");
         }
     }
 
@@ -198,7 +225,7 @@ const paymentRazor = () => {
                                             value={amount}
                                             className="w-20 ml-2 border px-1 mr-2 py-1 rounded"
                                             onChange={(e) => setAmount(Number(e.target.value))}
-                                        />                                        
+                                        />
                                     </div>
                                 </div>
                             </div>

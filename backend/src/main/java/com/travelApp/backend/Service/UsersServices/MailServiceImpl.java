@@ -56,4 +56,30 @@ public class MailServiceImpl implements MailService{
             return false;
         }
     }
+
+    @Override
+    public boolean sendFlightConfirmationMail(String email, String body){
+        if(!mailEnabled){
+            System.out.println("✉️ Mail is disabled. Skipping send.");
+            return false;
+        }
+        try{
+            //logger
+            logger.info("send flight confirmation mail:{}", email);
+            String heading="Flight confirmation";
+
+            SimpleMailMessage message = new SimpleMailMessage();
+            message.setFrom(fromEmail);
+            message.setTo(email);
+            message.setSubject("Hurray! Flight Confirmation Done 🥳");
+            message.setText(body);
+            mailSender.send(message);
+            logger.info("flight mail send to email:{}", email);
+            return true;
+        } catch (Exception e) {
+            //logger
+            logger.error("flight send mail failed in service");
+            return false;
+        }
+    }
 }

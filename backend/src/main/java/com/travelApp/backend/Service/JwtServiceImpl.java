@@ -41,4 +41,22 @@ public class JwtServiceImpl implements JwtService {
                 .getBody();
         return Integer.parseInt(claims.getSubject());
     }
+
+    @Override
+    public boolean isTokenValid(String jwt, Users userDetails) {
+        try {
+            Claims claims = Jwts.parser()
+                    .setSigningKey(Keys.hmacShaKeyFor(jwtSecret.getBytes()))
+                    .build()
+                    .parseClaimsJws(jwt)
+                    .getBody();
+
+            String email = claims.get("email", String.class);
+            Date expiration = claims.getExpiration();
+
+            return (email.equals(userDetails.getEmail()) && expiration.after(new Date()));
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }

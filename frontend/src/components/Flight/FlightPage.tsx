@@ -228,6 +228,7 @@ export function FlightCard({ data, dictionaries, searchData }: FlightCardProps) 
 
   const price = `${moneyCode} ${fommattedTotal}`;
   const travellerClass = searchData?.defaultClass;
+  const travellers = searchData?.defaultTraveller;
 
   //image
   const src = `/Airline_Logos/Square/${carrierCode}.png`;
@@ -252,6 +253,7 @@ export function FlightCard({ data, dictionaries, searchData }: FlightCardProps) 
       aircraftCompany: aircraftCompany,
       aircraftName: aircraftName,
       travellerClass: travellerClass.name,
+      numberofTravellers:travellers,
     } as const;
 
     //store in zustand
