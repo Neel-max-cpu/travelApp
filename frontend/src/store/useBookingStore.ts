@@ -17,7 +17,9 @@ type FlightBooking = {
   fromCity?: string;
   toCity?: string;
   departureDate?: string;
+  departureTime?: string;
   arrivalDate?: string;
+  arrivalTime?: string;
   price?: number;
   currency?: string;
   carrier?: string;
@@ -25,6 +27,9 @@ type FlightBooking = {
   duration?:string;
   deptTerminal?:string;
   arrivalTerminal?:string;
+  aircraftCompany?:string;
+  aircraftName?:string;
+  travellerClass?:string;
 };
 
 

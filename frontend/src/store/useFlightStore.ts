@@ -17,8 +17,8 @@ interface FlightResponse {
 }
 
 interface FlightStoreState {
-  flightSearchData: FlightSearchData | null; 
-  flightResponse: FlightResponse | null;
+  flightSearchData: FlightSearchData | null;
+  flightResponse: FlightResponse[] | null;
 
   setFlightSearchData: (res: FlightSearchData) => void;
   setFlightResponse: (response: FlightResponse) => void;
@@ -35,16 +35,19 @@ export const useFlightStore = create<FlightStoreState>()(
 
       setFlightResponse: (response) =>
         set({
-          flightResponse: {
-            meta: { count: response.meta.count },
-            data: response.data,
-            dictionaries: response.dictionaries || {},
-          },
+          flightResponse: [
+            {
+              meta: { count: response.meta.count },
+              data: response.data,
+              dictionaries: response.dictionaries || {},
+            },
+          ],
         }),
+
       clearFlightResponse: () => set({ flightResponse: null }),
     }),
     {
-      name: "flight-response-store", 
+      name: "flight-response-store",
       partialize: (state) => ({
         flightSearchData: state.flightSearchData,
         flightResponse: state.flightResponse,

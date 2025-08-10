@@ -16,9 +16,11 @@ import com.travelApp.backend.Repo.UsersRepo.UsersRepo;
 import com.travelApp.backend.Service.JwtService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -36,6 +38,12 @@ public class AuthServiceImpl implements AuthService {
     private final PasswordMappingRepo passwordMappingRepo;
     private final JwtService jwtService;
     private final ForgetPasswordLoggerRepo forgetPasswordLoggerRepo;
+
+    @Value("${AMADEUS_CLIENT_ID}")
+    private String clientId;
+
+    @Value("${AMADEUS_CLIENT_SECRET}")
+    private String clientSecret;
 
     public AuthServiceImpl(UsersRepo usersRepo, RegisterUserOtpRepo registerUserOtpRepo,
                            MailService mailService, PasswordEncoder passwordEncoder,
@@ -349,6 +357,18 @@ public class AuthServiceImpl implements AuthService {
             logger.error("Error disabling OTP", e);
             throw new BadRequestsException("Error disableOtp authService");
         }
+    }
+
+    @Override
+    public Map<String, Object>getAccessToken(){
+        String url = "https://test.api.amadeus.com/v1/security/oauth2/token";
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+        String body = "grant_type=client_credentials&client_id=" + clientId + "&client_secret=" + clientSecret;
+        HttpEntity<String> requestEntity = new HttpEntity<>(body, headers);
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<Map> response = restTemplate.exchange(url, HttpMethod.POST, requestEntity, Map.class);
+        return response.getBody();
     }
 
 

@@ -169,4 +169,19 @@ public class Auth {
         }
     }
 
+    @PostMapping("/amadeus/token")
+    public ResponseEntity<?>getAmadeusToken(){
+        try {
+            Map<String, Object> tokenData = authService.getAccessToken();
+            return ResponseEntity.ok(tokenData);
+        } catch (Exception e) {
+            logger.error("Error fetching Amadeus token", e);
+            Map<String, String> error = new HashMap<>();
+            error.put("error", "Failed to fetch Amadeus token");
+            return ResponseEntity.status(500).body(error);
+        }
+    }
+
+
+
 }

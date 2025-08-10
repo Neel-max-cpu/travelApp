@@ -14,6 +14,7 @@ import SearchBoxHotel from '@/components/Helper/SearchBoxHotel';
 import { useHotelStore } from '@/store/useHotelStore';
 import toast from 'react-hot-toast';
 import { useFlightStore } from '@/store/useFlightStore';
+import useAmadeusToken from '@/hooks/useAmadeusToken';
 
 const videoSources = [
     "/videos/hero2.mp4",
@@ -26,6 +27,8 @@ const hotelImg = "/hotel.png";
 const flightImg = "/airplane.png";
 
 const Hero = () => {
+    //verificaiton token
+    const amadeusToken = useAmadeusToken();
 
     const router = useRouter();
 
@@ -89,7 +92,7 @@ const Hero = () => {
                 response = await axiosInstance.get(
                     API_PATHS.HOTELS.GETHOTELSINCITY(params), {
                     headers: {
-                        Authorization: `Bearer ${localStorage.getItem("accesstokenAuthorization")}`,
+                        Authorization: `Bearer ${amadeusToken}`,
                     },
 
                 });
@@ -105,6 +108,7 @@ const Hero = () => {
                 }
                 useHotelStore.getState().setGuestNumber(guestNumber);
 
+                toast.success("Redirecting please wait!");
                 router.push("/hotel-results");
                 setLoading(false);
 
@@ -175,7 +179,7 @@ const Hero = () => {
                 }                
                 response = await axiosInstance.post(API_PATHS.FLIGHT.FLIGHTSEARCH,payLoad,{
                     headers:{
-                        Authorization: `Bearer ${localStorage.getItem("accesstokenAuthorization")}`,
+                        Authorization: `Bearer ${amadeusToken}`,
                     }
                 });
                 console.log("response ", response);
@@ -207,15 +211,9 @@ const Hero = () => {
                     defaultTraveller
                 }));
                 */
-                router.push("/flight-results");
-
-                // const response = await axiosInstance.post(API_PATHS.FLIGHT.FLIGHTSEARCH, payLoad);
-                // if(response.data){
-                //     console.log(response.data);
-                // }
-                // else{
-                //     //error
-                // }
+                toast.success("Redirecting please wait!");
+                router.push("/flight-results");   
+                setLoading(false);          
 
             } catch (error) {
                 console.error("Flight search error:", error);

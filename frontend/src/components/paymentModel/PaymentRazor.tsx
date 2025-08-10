@@ -3,12 +3,15 @@ import React, { useEffect, useState } from 'react'
 import { Button } from '../ui/button';
 import { useBookingStore } from '@/store/useBookingStore';
 import toast from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
 
 const paymentRazor = () => {
+    const router = useRouter();
     const razerPayLogo = "/Razorpay-Logo.jpg"
 
     const hotelImages = JSON.parse(localStorage.getItem('hotelImages') || '{}');
     const bookingData = useBookingStore((state) => state.bookingData);
+    console.log("BookingData: ", bookingData);
     if (!bookingData) return null;
 
     let flightImage;
@@ -28,11 +31,13 @@ const paymentRazor = () => {
         });
     };
 
-    const saveBooking =async () => {
-        try{
+    const saveBooking = async () => {
+        try {
             const response = null;
             //do the api
-        } catch(error:any){
+            toast.success("Redirecting please wait!");
+            router.push("/bookings")
+        } catch (error: any) {
             console.log(error);
             toast.error("error in saving the data!");
         }
@@ -44,8 +49,8 @@ const paymentRazor = () => {
             toast.error("Login in first to make the payment!");
             return;
         }
-        
-        if(val==="payment") {
+
+        if (val === "payment") {
 
 
             const res = await loadRazorpayScript();
@@ -65,6 +70,7 @@ const paymentRazor = () => {
                 handler: function (response: any) {
                     console.log("Payment successful", response);
                     //save it in db
+                    toast.success("Payment success!");
                     saveBooking();
                 },
                 prefill: {
@@ -87,7 +93,8 @@ const paymentRazor = () => {
             rzp.open();
         }
 
-        if(val==="skip"){
+        if (val === "skip") {
+            toast.success("Skipped payment but we will let it slide 😉");
             saveBooking();
         }
     };
@@ -141,16 +148,20 @@ const paymentRazor = () => {
                         <div>
                             <div className="flex space-x-3 items-end mb-3">
                                 <img src={flightImage} alt="" className="w-20" />
-                                <p>
-                                    <strong>Carrier:</strong> {bookingData.carrier}
-                                </p>
+                                <div className="flex flex-col space-y-2">
+                                    <p>
+                                        <strong>Carrier:</strong> {bookingData.carrier}
+                                    </p>
+                                    <p className="font-semibold text-sm text-gray-500">{bookingData.aircraftName}</p>
+                                </div>
                             </div>
                             <div className="grid grid-cols-3 w-full gap-2 items-center text-center mb-3">
-                                <div className="flex flex-col">
+                                <div className="flex flex-col space-y-2">
                                     <p className="justify-self-start">
                                         <strong>From:</strong> {bookingData.fromCity}
                                     </p>
                                     <p className="text-xs text-gray-500 font-medium">Terminal: {bookingData.deptTerminal}</p>
+                                    <p className="text-xs text-blue-500 font-bold underline">Time: {bookingData.departureTime}</p>
                                 </div>
 
                                 <div className="flex flex-col items-center justify-center">
@@ -158,32 +169,37 @@ const paymentRazor = () => {
                                     <div className="relative bg-gradient-to-r from-yellow-400 via-white to-red-500 w-full h-1 rounded-lg mt-1"></div>
                                 </div>
 
-                                <div className="flex flex-col">
+                                <div className="flex flex-col space-y-2">
                                     <p className="justify-self-end">
                                         <strong>To:</strong> {bookingData.toCity}
                                     </p>
                                     <p className="text-xs text-gray-500 font-medium">Terminal: {bookingData.arrivalTerminal}</p>
+                                    <p className="text-xs text-blue-500 font-bold underline">Time: {bookingData.arrivalTime}</p>
                                 </div>
                             </div>
-                            <p>
-                                <strong>Departure:</strong> {bookingData.departureDate}
-                            </p>
-                            <p>
-                                <strong>Arrival:</strong> {bookingData.arrivalDate}
-                            </p>
-                            <div className="flex items-center">
-                                <p className="mr-2">
-                                    <strong>Amount:</strong>
+                            <div className="space-y-2">
+                                <p>
+                                    <strong>Departure:</strong> {bookingData.departureDate}
+                                </p>
+                                <p>
+                                    <strong>Arrival:</strong> {bookingData.arrivalDate}
+                                </p>
+                                <p>
+                                    <strong>Seat Type:</strong> {bookingData.travellerClass}
                                 </p>
                                 <div className="flex items-center">
-                                    <span className="">$</span>
-                                    <input
-                                        type="number"
-                                        value={amount}
-                                        className="w-20 ml-2 border px-1 mr-2 py-1 rounded"
-                                        onChange={(e) => setAmount(Number(e.target.value))}
-                                    />
-                                    {bookingData.currency}
+                                    <p className="mr-2">
+                                        <strong>Amount:</strong>
+                                    </p>
+                                    <div className="flex items-center">
+                                        <span className="">Rs</span>
+                                        <input
+                                            type="number"
+                                            value={amount}
+                                            className="w-20 ml-2 border px-1 mr-2 py-1 rounded"
+                                            onChange={(e) => setAmount(Number(e.target.value))}
+                                        />                                        
+                                    </div>
                                 </div>
                             </div>
                         </div>

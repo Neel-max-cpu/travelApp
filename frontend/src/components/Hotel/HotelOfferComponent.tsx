@@ -10,6 +10,7 @@ import { Label } from '../ui/label';
 import { useBookingStore } from '@/store/useBookingStore';
 import { changeToInr, changeToInrNumber } from '@/utils/helper';
 import { useHotelStore } from '@/store/useHotelStore';
+import toast from 'react-hot-toast';
 
 const HotelOfferComponent = () => {
     const router = useRouter();
@@ -48,6 +49,7 @@ const HotelOfferComponent = () => {
 
         //save in zustand
         useBookingStore.getState().setBookingData(dataToSend); // set in store
+        toast.success("Redirecting please wait!");
         router.push("/payment");
         setLoading(false);
     };

@@ -153,7 +153,7 @@ const SearchBoxFlight = (
               </div>
               <DialogFooter>
                 <DialogClose asChild>
-                  <Button variant="outline" onClick={() => setIsDialogOpen(false)}>Cancel</Button>
+                  <Button type="button" variant="outline" onClick={() => setIsDialogOpen(false)}>Cancel</Button>
                 </DialogClose>
                 <Button onClick={handleTravellerAndClass} type="submit">Select</Button>
               </DialogFooter>
@@ -181,6 +181,7 @@ export function CalendarOption({onChange}:PropsDate) {
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button
+            type="button"
             variant="outline"
             id="date"
             className="w-[100%] justify-between font-normal"
@@ -281,7 +282,7 @@ type Props = {
 
 export function Combobox({ placeholderName, value, onChange }: Props) {
   //verificaiton token
-  const amadeusToken = useAmadeusToken();
+  const amadeusToken = useAmadeusToken(); 
 
   const [open, setOpen] = React.useState(false)
   const [options, setOptions] = useState<{ label: string; value: string }[]>([])
@@ -289,18 +290,20 @@ export function Combobox({ placeholderName, value, onChange }: Props) {
 
   const latestSearchRef = useRef("");
   useEffect(() => {
-
+    if (!amadeusToken) return; 
     if (!search || search.length < 2) return;
 
     const controller = new AbortController();
     latestSearchRef.current = search;
     const fetchLocations = setTimeout(async () => {
       try {
+        // /*
         const response = await axiosInstance.get(
           API_PATHS.COMMON.CITYWITHNAME,
           {
             headers: {
               Authorization: `Bearer ${amadeusToken}`,
+              // Authorization: `Bearer JgYmip7IGpLNGZDhbmMD882XQWAO`,
             },
             params: {
               subType: "AIRPORT",
@@ -309,6 +312,19 @@ export function Combobox({ placeholderName, value, onChange }: Props) {
             },
           }
         );
+        // */
+        
+        /*
+        const response = await axiosInstance.get(API_PATHS.COMMON.CITYWITHNAMEBACKEND,{
+          headers: { Authorization: `Bearer ${amadeusToken}` },
+          params: {
+            subType: "AIRPORT",
+            keyword: search,
+            "page[limit]": 5,
+          },
+        });
+        */
+        console.log("API Response:", response);
 
         const toTitleCase = (str: string) => {
           return str.toLowerCase().replace(/\b\w/g, char => char.toUpperCase())
@@ -330,7 +346,7 @@ export function Combobox({ placeholderName, value, onChange }: Props) {
           setOptions(mapped);
         }
       } catch (error) {
-        console.log("error in searching the destionat!");
+        console.log("error in searching the destionation!");
       }
     }, 1000);
 
@@ -350,6 +366,7 @@ export function Combobox({ placeholderName, value, onChange }: Props) {
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button
+          type="button"
           variant="outline"
           role="combobox"
           aria-expanded={open}

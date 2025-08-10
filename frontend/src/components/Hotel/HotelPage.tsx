@@ -11,6 +11,7 @@ import toast from 'react-hot-toast';
 import { Axis3D } from 'lucide-react';
 import axiosInstance from '@/utils/axiosInstance';
 import { API_PATHS } from '@/utils/apiPaths';
+import useAmadeusToken from '@/hooks/useAmadeusToken';
 
 const HotelPage = () => {
     // data from zustand
@@ -118,6 +119,10 @@ type HotelDataProps = {
 };
 
 export function HotelMapCard({ data }: HotelDataProps) {
+
+    //verificaiton token
+    const amadeusToken = useAmadeusToken();
+
     const router = useRouter();
 
     const [loading, setLoading] = useState(false);
@@ -161,6 +166,7 @@ export function HotelMapCard({ data }: HotelDataProps) {
                     per_page: 3,
                     client_id: process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY || "notfound"
                 }
+                //unsplash no need of token
                 response = await axiosInstance.get(API_PATHS.HOTELS.GETHOTELIMAGE(params));
                 const results = response.data.results || [];
                 const image1 = results[0]?.urls?.full;
@@ -199,8 +205,8 @@ export function HotelMapCard({ data }: HotelDataProps) {
                 checkOutDate: checkOutDate ? checkOutDate.toISOString().split("T")[0] : undefined
             }
             response = await axiosInstance.get(API_PATHS.HOTELS.GETHOTELOFFERS(params), {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem("accesstokenAuthorization")}`,
+                headers:{
+                    Authorization: `Bearer ${amadeusToken}`,
                 }
             })
             console.log("offers Hotel" , response);
@@ -219,7 +225,7 @@ export function HotelMapCard({ data }: HotelDataProps) {
                 image3: !imageError && images.image3 ? images.image3 : defaultImages.image3,
             };
             localStorage.setItem('hotelImages', JSON.stringify(finalImages));
-
+            toast.success("Redirecting please wait!");
             router.push('/hotel-results/hotel-offers')
             setLoading(false);
         } catch (error: any) {

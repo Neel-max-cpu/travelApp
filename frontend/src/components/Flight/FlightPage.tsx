@@ -14,45 +14,73 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import { ImSpinner2 } from "react-icons/im";
 import { useBookingStore } from '@/store/useBookingStore';
 import { useRouter } from 'next/navigation';
+import { useFlightStore } from '@/store/useFlightStore';
+import toast from 'react-hot-toast';
 
 const FlightPage = () => {
   const [searchData, setSearchData] = useState<any>(null);
   const [visibleFlights, setVisibleFlights] = useState<any[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const itemsPerPage = 5;
+
+  const searchDataFromStore = useFlightStore((state) => state.flightSearchData);
+  const getFlights = useFlightStore((state) => state.flightResponse ?? []);
+  const totalFlightsCount = getFlights.flatMap((item) => item.data).length;
+
   useEffect(() => {
+    /*
     const data = localStorage.getItem('flight_search_data');
     if (data) setSearchData(JSON.parse(data));
+    */
+    if (searchDataFromStore) setSearchData(searchDataFromStore);
+
 
     // Preprocess and store all flights
-    const allFlights = flightResponse20data.flatMap((item) =>
+    /* const allFlights = flightResponse20data.flatMap((item) =>
+      const allFlights = flightResponse20data.flatMap((item) =>
       item.data.map((flight) => ({
         flight,
         dictionaries: item.dictionaries,
       }))
-    );
+    )
+    */    
+    
+    const allFlights = getFlights?.flatMap((item) =>
+      item.data.map((flight) => ({
+        flight,
+        dictionaries: item.dictionaries,
+      }))
+    ) ?? [];
 
     setVisibleFlights(allFlights.slice(0, itemsPerPage));
     setCurrentIndex(itemsPerPage);
   }, []);
 
   const fetchMoreData = () => {
+    /*
     const allFlights = flightResponse20data.flatMap((item) =>
       item.data.map((flight) => ({
         flight,
         dictionaries: item.dictionaries,
       }))
     );
+    */    
+    const allFlights = getFlights?.flatMap((item) =>
+      item.data.map((flight) => ({
+        flight,
+        dictionaries: item.dictionaries,
+      }))
+    )??[];
 
     setTimeout(() => {
-      const nextFlights = allFlights.slice(currentIndex, currentIndex + 2);
+      const nextFlights = allFlights?.slice(currentIndex, currentIndex + 2);
       setVisibleFlights((prev) => [...prev, ...nextFlights]);
       setCurrentIndex((prev) => prev + nextFlights.length);
     }, 700);
   };
 
-  const hasMore = currentIndex < flightResponse20data.flatMap((item) => item.data).length;
-
+  // const hasMore = currentIndex < flightResponse20data.flatMap((item) => item.data).length;
+  const hasMore = currentIndex < totalFlightsCount;
 
   return (
     <div className='bg-[#1B1212] min-h-screen pt-30'>
@@ -199,29 +227,38 @@ export function FlightCard({ data, dictionaries, searchData }: FlightCardProps) 
   const arrivalTerminal = data.itineraries?.[0]?.segments?.[0].arrival.terminal || "N/A";
 
   const price = `${moneyCode} ${fommattedTotal}`;
+  const travellerClass = searchData?.defaultClass;
 
   //image
   const src = `/Airline_Logos/Square/${carrierCode}.png`;
 
   const router = useRouter();
-  const handleOfferData = ()=>{
-    const dataToSend={
+  const handleOfferData = () => {
+    const dataToSend = {
       type: "flight",
       fromCity: departureCity,
       toCity: arrivalCity,
       departureDate: departureDay,
+      departureTime: departureTime,
       arrivalDate: arrivalDay,
+      arrivalTime: arrivalTime,
       price: parseFloat(moneyTotal),
       currency: moneyCode,
       carrier: aircraftCompany,
       carrierCode: carrierCode,
       duration: formattedDuration,
-      deptTerminal:departureTerminal,
-      arrivalTerminal:arrivalTerminal,
+      deptTerminal: departureTerminal,
+      arrivalTerminal: arrivalTerminal,
+      aircraftCompany: aircraftCompany,
+      aircraftName: aircraftName,
+      travellerClass: travellerClass.name,
     } as const;
+
+    //store in zustand
     useBookingStore.getState().setBookingData(dataToSend);
+    toast.success("Redirecting please wait!");
     router.push("/payment");
-  }   
+  }
 
   return (
     <Card className="w-full">
@@ -233,6 +270,7 @@ export function FlightCard({ data, dictionaries, searchData }: FlightCardProps) 
             <div className="">
               <h1 className="text-black font-semibold">{aircraftCompany}</h1>
               <h1 className="text-xs text-gray-500">{aircraftName}</h1>
+              <h1 className="text-xs font-bold text-gray-700">({travellerClass.name})</h1>
             </div>
           </div>
           {/* part2- departure time and place */}
@@ -287,7 +325,7 @@ export function FlightCard({ data, dictionaries, searchData }: FlightCardProps) 
           {/* part5 - price and booknow */}
           <div className="flex flex-col space-y-2">
             <h1 className="font-bold text-lg text-center">{price}</h1>
-            <Button 
+            <Button
               onClick={() => handleOfferData()}
               className="group relative overflow-hidden bg-green-600 hover:bg-gradient-to-r hover:from-green-600 hover:via-red-600 hover:to-yellow-400 hover:ring-2 hover:ring-blue-300 hover:ring-offset-2 hover:cursor-pointer transition-all ease-in-out duration-300 ">
               <span className="absolute opacity-20 right-0 w-6 h-32 -mt-12 bg-white transition-all duration-1000 transform translate-x-12 rotate-12 group-hover:-translate-x-30 ease"></span>

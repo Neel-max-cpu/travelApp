@@ -14,9 +14,10 @@ export const API_PATHS = {
     RESETPASS: "/api/auth/resetPass",
     DISABLEOTP: "/api/auth/disableOtp",
     AUTHORIZATION: "https://test.api.amadeus.com/v1/security/oauth2/token",
+    AUTHORIZATIONFORDEV:"/api/auth/amadeus/token"
   },
   COMMON: {
-    CITYWITHNAME: "https://test.api.amadeus.com/v1/reference-data/locations",
+    CITYWITHNAME: "https://test.api.amadeus.com/v1/reference-data/locations",    
   },
   FLIGHT: {
     FLIGHTSEARCH: "https://test.api.amadeus.com/v2/shopping/flight-offers",
@@ -74,6 +75,22 @@ export const API_PATHS = {
 };
 
 export const fetchSearchAccessToken = async () => {
+  try {
+    const response = await axiosInstance.post(API_PATHS.AUTH.AUTHORIZATIONFORDEV);
+    localStorage.setItem(
+      "accesstokenAuthorization",
+      response.data.access_token
+    );
+    localStorage.setItem("TokenstartedIn", moment().toISOString());
+  } catch (error:any) {
+    toast.error("Error getting the access token!");
+    console.log("error in searching: ", error);
+  }
+
+}
+
+/*
+export const fetchSearchAccessToken = async () => {
   const data = new URLSearchParams();
   const client_id: string = process.env.NEXT_PUBLIC_CLIENT_ID!;
   const client_secret: string = process.env.NEXT_PUBLIC_CLIENT_SECRET!;
@@ -102,3 +119,4 @@ export const fetchSearchAccessToken = async () => {
     console.log("error in searching: ", error);
   }
 };
+*/
