@@ -53,8 +53,8 @@ public class FlightServiceImpl implements FlightService{
                 "✈️ Airline: " + booking.getAricraftCompany() + " - " + booking.getAircraftName() + "\n" +
                 "🪪 Carrier Code: " + booking.getCarrierCodeForImage() + "\n" +
                 "⏱ Duration: " + booking.getFlightDuration() + "\n" +
-                "🎟 Class: " + booking.getTravellerClass() + "Class" + "\n" +
-                "👥 Passengers: " + booking.getNumberOfPassangers() +"Passengers" + "\n" +
+                "🎟 Class: " + booking.getTravellerClass() + " Class" + "\n" +
+                "👥 Passengers: " + booking.getNumberOfPassangers() +" Passengers" + "\n" +
                 "💰 Total Price: Rs " + booking.getTotalPrice() + "\n\n" +
                 "We wish you a pleasant journey!\n\n" +
                 "- TravelApp Team";

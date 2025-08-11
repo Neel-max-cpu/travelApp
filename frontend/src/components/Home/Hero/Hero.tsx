@@ -89,6 +89,7 @@ const Hero = () => {
                     amenities: aminities,
                     ratings: hotelStars ? [hotelStars] : [],
                 };
+                console.log("params: ", params);
                 response = await axiosInstance.get(
                     API_PATHS.HOTELS.GETHOTELSINCITY(params), {
                     headers: {

@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import React, { useEffect, useState } from 'react'
 import { Button } from '../ui/button';
 import { useBookingStore } from '@/store/useBookingStore';
@@ -14,6 +14,18 @@ const paymentRazor = () => {
     const hotelImages = JSON.parse(localStorage.getItem('hotelImages') || '{}');
     const bookingData = useBookingStore((state) => state.bookingData);
     console.log("BookingData: ", bookingData);
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+        //   const storedImages = JSON.parse(localStorage.getItem('hotelImages') || '{}');
+        //   setHotelImages(storedImages);
+      
+          console.log("hotelState:", localStorage.getItem("hotel-store"));
+          console.log("hotelImage:", localStorage.getItem("hotelImages"));
+          console.log("BookingData:", bookingData);
+        }
+      }, [bookingData]);
+       
     if (!bookingData) return null;
 
     let flightImage;
@@ -60,7 +72,21 @@ const paymentRazor = () => {
                 toast.success("Confirmation mail sent!");
             }
             else {
-                //hotels
+                //hotels                
+                const hotelStore = JSON.parse(localStorage.getItem("hotel-store") || '{}');
+                const payLoad ={
+                    image1: hotelImages?.image1,
+                    image2: hotelImages?.image2,
+                    image3: hotelImages?.image3,
+                    checkInDate: bookingData.checkInDate,
+                    checkOutDate: bookingData.checkOutDate,
+                    guestNumber: hotelStore?.state?.guestNumber,
+                    hotelName: bookingData.name,
+                    cityCode: bookingData.cityCode,
+                    price: bookingData.price,
+                }
+                response = await axiosInstance.post(API_PATHS.HOTELS.HOTELBOOKING, payLoad);
+                toast.success("Confirmation mail sent!");
             }
             toast.success("Redirecting please wait!");
             router.push("/bookings")

@@ -72,6 +72,7 @@ export const API_PATHS = {
 
       return `https://api.unsplash.com/search/photos?${queryParams.toString()}`;
     },
+    HOTELBOOKING:"/api/hotel/saveBooking",
   },
 };
 
