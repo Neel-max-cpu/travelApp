@@ -17,7 +17,8 @@ export const API_PATHS = {
     AUTHORIZATIONFORDEV:"/api/auth/amadeus/token"
   },
   COMMON: {
-    CITYWITHNAME: "https://test.api.amadeus.com/v1/reference-data/locations",    
+    CITYWITHNAME: "https://test.api.amadeus.com/v1/reference-data/locations",   
+    BOOKEDDATA:"/api/common/commonData",
   },
   FLIGHT: {
     FLIGHTSEARCH: "https://test.api.amadeus.com/v2/shopping/flight-offers",
