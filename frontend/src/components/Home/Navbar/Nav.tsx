@@ -27,10 +27,7 @@ const Nav = ({ openNav }: Props) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-
-
+  const [isLoggedIn, setIsLoggedIn] = useState(false);  
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -387,7 +384,7 @@ const Nav = ({ openNav }: Props) => {
 
   const handleLogOut = () => {
     localStorage.clear();
-    setIsLoggedIn(false);
+    setIsLoggedIn(false);    
     toast.success("Logged out!");
   }
 

@@ -35,7 +35,7 @@ const DestinationSlider = () => {
                         {/* overlay */}
                         <div className="absolute inset-0 bg-black opacity-25 rounded-lg "></div>
                         {/* image */}
-                        <Image src={data.image} alt={data.country} width={500} height={500} className="h-full w-full object-cover rounded-lg" />
+                        <Image src={data.image} alt={data.country} width={500} height={500} className="h-full w-full object-cover rounded-lg outline-4 outline-offset-4 outline-white" />
                         {/* text-content */}
                     </div>
                     <h1 className="text-lg font-semibold mt-4">{data.country}</h1>

@@ -10,28 +10,28 @@ const News = () => {
         <div className="" data-aos="fade-left" data-aos-anchor-placement="top-center">
           {/* use map save in data.json */}
           <NewsCard
-            image="/images/n1.jpg"
+            image="/images/n1.jpeg"
             title = "Top 10 places to visit in Australia"
             date="15 November 2025"
           />
         </div>
         <div className="" data-aos="fade-left" data-aos-anchor-placement="top-center" data-aos-delay="100">
           <NewsCard
-            image="/images/n2.jpg"
+            image="/images/n2.jpeg"
             title = "Top 10 places to visit in Tokyo"
             date="15 November 2025"
             />
         </div>
         <div className="" data-aos="fade-left" data-aos-anchor-placement="top-center" data-aos-delay="200">
           <NewsCard
-            image="/images/n3.jpg"
+            image="/images/n3.jpeg"
             title = "Top 10 places to visit in USA"
             date="15 November 2025"
           />
         </div>
         <div className="" data-aos="fade-left" data-aos-anchor-placement="top-center" data-aos-delay="300">
           <NewsCard
-            image="/images/n4.jpg"
+            image="/images/n4.jpeg"
             title = "Top 10 places to visit in Europe"
             date="15 November 2025"
           />     

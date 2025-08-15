@@ -153,7 +153,8 @@ const paymentRazor = () => {
     };
 
     return (
-        <div className="bg-[#1B1212] min-h-screen flex flex-col items-center justify-center p-30">
+        // <div className="bg-[#1B1212] min-h-screen flex flex-col items-center justify-center p-30">
+        <div className="goldenHorizon min-h-screen flex flex-col items-center justify-center p-30">
             <h1 className="text-2xl mb-2 font-semibold text-white">Confirm Payment</h1>
             <div className="flex items-center justify-center space-x-2 text-white mb-6">
                 <p className="font-semibold italic">Powered By:</p>

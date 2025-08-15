@@ -10,7 +10,7 @@ const Destination = () => {
         {/* section heading */}
         <SectionHeading 
             heading="Exploring Popular Destination" 
-            subheading="Just for testing i would be changing the description"
+            subheading="Discover the places travelers love most—your next adventure awaits."
         />
         {/* section content */}
         <div className="mt-14 w-[80%] mx-auto">

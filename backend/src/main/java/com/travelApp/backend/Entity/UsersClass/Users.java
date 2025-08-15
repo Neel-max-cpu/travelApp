@@ -30,6 +30,7 @@ public class Users {
     @Column(name = "role_id")
     private Integer roleId;
 
+
     @Column(name = "created_on", columnDefinition = "DATETIME")
     private LocalDateTime createdOn;
 }

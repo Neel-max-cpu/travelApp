@@ -28,7 +28,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div className='overflow-hidden'>
+    <div className='overflow-hidden auroraDreamVividBloom'>
       <Hero/>
       <Destination/>
       <Hotel/>

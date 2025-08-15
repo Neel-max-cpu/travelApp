@@ -1,5 +1,6 @@
 import axios from "axios";
 import { API_PATHS, BASE_URL } from "./apiPaths";
+import toast from "react-hot-toast";
 
 
 const axiosInstance = axios.create({
@@ -34,8 +35,12 @@ axiosInstance.interceptors.response.use(
     // common error - handle globally
     if (error.response) {
       if (error.response.status === 401) {
-        // unauthorized redirect to main page
-        window.location.href = "";
+        // unauthorized/token expired redirect to main page
+        localStorage.removeItem("token");
+        toast.error("Your session has expired. Please log in again.");
+        setTimeout(() => {
+          window.location.href = "";          
+        }, 1000);
       } else if (error.response.status === 500) {
         console.log("Server error! Please try again!");
       } else if (error.code === "ECONNABORTED") {

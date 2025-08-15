@@ -108,4 +108,30 @@ public class MailServiceImpl implements MailService{
             return false;
         }
     }
+
+    @Override
+    public boolean sendNewsLetterConfirmationMail(String email, String body){
+        if(!mailEnabled){
+            System.out.println("✉️ Mail is disabled. Skipping send.");
+            return false;
+        }
+        try{
+            //logger
+            logger.info("News letter confirmation mail:{}", email);
+            String heading="News Letter confirmation";
+
+            SimpleMailMessage message = new SimpleMailMessage();
+            message.setFrom(fromEmail);
+            message.setTo(email);
+            message.setSubject("Hurray! News Letter Confirmation Done 🥳");
+            message.setText(body);
+            mailSender.send(message);
+            logger.info("News Letter send to email:{}", email);
+            return true;
+        } catch (Exception e) {
+            //logger
+            logger.error("News letter mail failed in service");
+            return false;
+        }
+    }
 }

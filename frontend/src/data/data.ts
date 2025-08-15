@@ -2,25 +2,25 @@
 export const destinationData = [
   {
     id: 1,
-    image: "/images/d1.jpg",
+    image: "/images/d1.jpeg",
     country: "France",
     travelers: "150,000",
   },
   {
     id: 2,
-    image: "/images/d2.jpg",
+    image: "/images/d2.jpeg",
     country: "USA",
     travelers: "250,000",
   },
   {
     id: 3,
-    image: "/images/d3.jpg",
+    image: "/images/d3.jpeg",
     country: "Italy",
     travelers: "180,000",
   },
   {
     id: 4,
-    image: "/images/d4.jpg",
+    image: "/images/d4.jpeg",
     country: "Japan",
     travelers: "200,000",
   },
@@ -32,19 +32,19 @@ export const destinationData = [
   },
   {
     id: 6,
-    image: "/images/d6.jpg",
+    image: "/images/d6.jpeg",
     country: "Canada",
     travelers: "175,000",
   },
   {
     id: 7,
-    image: "/images/d7.jpg",
+    image: "/images/d7.jpeg",
     country: "Germany",
     travelers: "160,000",
   },
   {
     id: 8,
-    image: "/images/d8.jpg",
+    image: "/images/d8.jpeg",
     country: "Brazil",
     travelers: "140,000",
   },

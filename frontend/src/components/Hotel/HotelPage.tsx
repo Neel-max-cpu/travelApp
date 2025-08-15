@@ -63,7 +63,8 @@ const HotelPage = () => {
 
 
     return (
-        <div className="bg-[#1B1212] min-h-screen pt-30">
+        // <div className="bg-[#1B1212] min-h-screen pt-30">
+        <div className="goldenHorizon min-h-screen pt-30">
             <InfiniteScroll
                 dataLength={visibleHotels.length}
                 next={fetchMoreData}
@@ -249,7 +250,7 @@ export function HotelMapCard({ data }: HotelDataProps) {
                                     setImageLoading(false);
                                     setImageError(true);
                                 }}
-                                className="w-full h-full object-cover rounded-lg"
+                                className="w-full h-full object-cover rounded-lg shadow-lg border-2"
                                 alt=""
                             />
                         </div>
@@ -262,7 +263,7 @@ export function HotelMapCard({ data }: HotelDataProps) {
                                         setImageLoading(false);
                                         setImageError(true);
                                     }}
-                                    className="w-full h-full object-cover rounded-lg"
+                                    className="w-full h-full object-cover rounded-lg shadow-lg border-2"
                                     alt=""
                                 />
                             </div>
@@ -274,7 +275,7 @@ export function HotelMapCard({ data }: HotelDataProps) {
                                         setImageLoading(false);
                                         setImageError(true);
                                     }}
-                                    className="w-full h-full object-cover rounded-lg"
+                                    className="w-full h-full object-cover rounded-lg shadow-lg border-2"
                                     alt=""
                                 />
                             </div>

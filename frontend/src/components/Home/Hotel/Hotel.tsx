@@ -9,7 +9,7 @@ const Hotel = () => {
         {/* section heading */}
         <SectionHeading 
             heading="Recomended Hotels"
-            subheading="Just for testing i would be changing the description"
+            subheading="Curated comfort, Top-rated hotels chosen just for you. Handpicked stays for your next unforgettable journey."
         />
         <div className="w-[80%] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-col-3 xl:grid-cols-4 gap-8 items-center mt-16">
             {/* hotelcard */}
