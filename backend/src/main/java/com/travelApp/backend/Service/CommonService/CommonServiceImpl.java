@@ -12,6 +12,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.text.DateFormatSymbols;
+import java.time.LocalDate;
 import java.util.*;
 
 @Service
@@ -62,6 +64,81 @@ public class CommonServiceImpl implements CommonService{
             return ResponseEntity.ok(response);
         } catch (RuntimeException e) {
             throw new RuntimeException("error in fetching commonData",e);
+        }
+    }
+
+    @Override
+    public ResponseEntity<?> getChartData(String token) {
+        //get user
+        try{
+            Integer userId = jwtService.extractUserId(token);
+            Optional<Users> optional = usersRepo.findById(userId);
+            Users user = optional.get();
+
+            Integer role = user.getRoleId();
+
+            int currentYear = LocalDate.now().getYear();
+            logger.info("currentYear: {}", currentYear);
+            Map<Integer, Map<String, Integer>> monthlyCounts = new LinkedHashMap<>();
+            for (int month = 1; month <= 12; month++) {
+                Map<String, Integer> counts = new HashMap<>();
+                counts.put("flights", 0);
+                counts.put("hotels", 0);
+                monthlyCounts.put(month, counts);
+            }
+
+            //data
+            List<Hotel> hotelData;
+            List<Flight> flightData;
+            if (role != 1) {
+                hotelData = hotelRepo.findByUserId(user.getId());
+                flightData = flightRepo.findByUserId(user.getId());
+            } else {
+                hotelData = hotelRepo.findAll();
+                flightData = flightRepo.findAll();
+            }
+
+            // Count hotels by month
+            for (Hotel hotel : hotelData) {
+                if (hotel.getCreatedOn() != null) {
+                    LocalDate date = hotel.getCreatedOn().toLocalDate();
+                    if (date.getYear() == currentYear) {
+                        int month = date.getMonthValue();
+                        monthlyCounts.get(month).put("hotels", monthlyCounts.get(month).get("hotels") + 1);
+                    }
+                }
+            }
+            // Count flights by month
+            for (Flight flight : flightData) {
+                if (flight.getCreatedOn() != null) {
+                    LocalDate date = flight.getCreatedOn().toLocalDate();
+                    if (date.getYear() == currentYear) {
+                        int month = date.getMonthValue();
+                        monthlyCounts.get(month).put("flights", monthlyCounts.get(month).get("flights") + 1);
+                    }
+                }
+            }
+
+            // chartData for frontend
+            List<Map<String, Object>> chartData = new ArrayList<>();
+            DateFormatSymbols dfs = new DateFormatSymbols();
+            for (int month = 1; month <= 12; month++) {
+                Map<String, Object> monthEntry = new HashMap<>();
+                monthEntry.put("month", dfs.getMonths()[month - 1]); // "January", "February"...
+                monthEntry.put("flights", monthlyCounts.get(month).get("flights"));
+                monthEntry.put("hotels", monthlyCounts.get(month).get("hotels"));
+                chartData.add(monthEntry);
+            }
+
+            Map<String, Object> response = new HashMap<>();
+            response.put("year", currentYear);
+            response.put("chartData", chartData);
+
+            //logger
+            logger.info("data fetched from chartData!");
+            return ResponseEntity.ok(response);
+        } catch (RuntimeException e) {
+            throw new RuntimeException("error in fetching chartData",e);
         }
     }
 }

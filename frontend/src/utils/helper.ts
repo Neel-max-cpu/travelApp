@@ -50,3 +50,25 @@ export const changeToInrNumber = (data:any)=>{
   let inr = 87.77 * dollars;
   return parseFloat(inr.toFixed(2));    
 }
+
+export const commaSeparator = (data:any)=>{
+  const [integerPart, decimalPart] = data.toString().split(".");
+  const lastThree = integerPart.slice(-3);
+  const otherNumbers = integerPart.slice(0, -3);
+  const formattedInteger = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + (otherNumbers ? "," : "") + lastThree;
+  return decimalPart ? `${formattedInteger}.${decimalPart}` : formattedInteger;
+}
+
+export const formatDateTime = (isoString: string): string => {
+  const date = new Date(isoString);
+  const options: Intl.DateTimeFormatOptions = {
+    day: "2-digit",
+    month: "long",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true,
+    timeZone: "Asia/Kolkata"
+  };
+  return date.toLocaleString("en-IN", options);
+};

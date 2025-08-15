@@ -28,4 +28,11 @@ public class CommonController {
         String token = authHeader.replace("Bearer ", "");
         return commonService.getData(token);
     }
+
+    @GetMapping("/chartData")
+    ResponseEntity<?> chartData(@RequestHeader("Authorization") String authHeader) {
+        logger.info("chartData in controller");
+        String token = authHeader.replace("Bearer ", "");
+        return commonService.getChartData(token);
+    }
 }
