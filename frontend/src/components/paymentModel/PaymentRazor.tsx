@@ -11,8 +11,14 @@ import Image from 'next/image';
 const paymentRazor = () => {
     const router = useRouter();
     const razerPayLogo = "/Razorpay-Logo.jpg"
+    const [hotelImages, setHotelImages] = useState<{image1?: string, image2?: string, image3?: string}>({});
 
-    const hotelImages = JSON.parse(localStorage.getItem('hotelImages') || '{}');
+    useEffect(() => {
+        const storedImages = localStorage.getItem('hotelImages');
+        if (storedImages) setHotelImages(JSON.parse(storedImages));
+    }, []);
+
+    // const hotelImages = JSON.parse(localStorage.getItem('hotelImages') || '{}');
     const bookingData = useBookingStore((state) => state.bookingData);
     console.log("BookingData: ", bookingData);
 
@@ -167,14 +173,14 @@ const paymentRazor = () => {
                         {/* images */}
                         <div className="space-y-3 flex flex-col justify-center mb-3">
                             <div className="bg-gray-300 w-[398px] h-[224px] rounded-lg shadow-md">
-                                <Image src={hotelImages.image1} alt="" className="w-full h-full object-cover rounded-lg shadow-md" />
+                                <img src={hotelImages.image1} alt="" className="w-full h-full object-cover rounded-lg shadow-md" />
                             </div>
                             <div className="flex space-x-3">
                                 <div className="bg-gray-300 w-[235px] h-[132px] rounded-lg shadow-md">
-                                    <Image src={hotelImages.image2} alt="" className="w-full h-full object-cover rounded-lg shadow-md" />
+                                    <img src={hotelImages.image2} alt="" className="w-full h-full object-cover rounded-lg shadow-md" />
                                 </div>
                                 <div className="bg-gray-300 w-[235px] h-[132px] rounded-lg shadow-md">
-                                    <Image src={hotelImages.image3} alt="" className="w-full h-full object-cover rounded-lg shadow-md" />
+                                    <img src={hotelImages.image3} alt="" className="w-full h-full object-cover rounded-lg shadow-md" />
                                 </div>
                             </div>
                         </div>
