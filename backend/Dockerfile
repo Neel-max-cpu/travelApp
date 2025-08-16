@@ -1,14 +1,27 @@
-# Step 1: Use OpenJDK 17 as base
-FROM openjdk:17-jdk-slim
+# Stage 1: Build the jar using Maven
+FROM maven:3.9.2-eclipse-temurin-17 AS build
 
-# Step 2: Set working directory
 WORKDIR /app
 
-# Step 3: Copy the built jar file
-COPY target/*.jar app.jar
+# Copy pom.xml and download dependencies (cached)
+COPY pom.xml .
+RUN mvn dependency:go-offline
 
-# Step 4: Expose the port (Render will override with PORT)
+# Copy source code
+COPY src ./src
+
+# Build jar (skip tests to speed up)
+RUN mvn clean package -DskipTests
+
+# Stage 2: Run the jar using a smaller JDK
+FROM openjdk:17-jdk-slim
+WORKDIR /app
+
+# Copy jar from build stage
+COPY --from=build /app/target/*.jar app.jar
+
+# Expose port (Render will override with $PORT)
 EXPOSE 5001
 
-# Step 5: Run the Spring Boot app
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# Run app with Render's dynamic port
+ENTRYPOINT ["sh", "-c", "java -jar app.jar --server.port=${PORT}"]
