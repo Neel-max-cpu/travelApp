@@ -8,6 +8,7 @@ import InfiniteScroll from 'react-infinite-scroll-component'
 import { ImSpinner2 } from 'react-icons/im'
 import { Card, CardContent } from '../ui/card'
 import { commaSeparator, formatDateTime } from '@/utils/helper'
+import Image from 'next/image'
 
 const BookingDetails = () => {
 
@@ -181,11 +182,11 @@ export function FlightCard({ data }: FlightProps) {
         <div className="bg-white">
           {/* top image */}
           <div className="flex justify-center items-center mb-5">
-            <img src={coverImgRectangle} className="w-[400px]" alt="" />
+            <Image src={coverImgRectangle} className="w-[400px]" alt="" />
           </div>
           {/* name carrier */}
           <div className="flex space-x-5 mb-5">
-            <img src={coverImgTail} className="w-[100px]" alt="" />
+            <Image src={coverImgTail} className="w-[100px]" alt="" />
             <div className="flex flex-col space-y-2 justify-center ">
               <h1 className="font-bold">Carrier: <span className="font-normal">{data.aricraftCompany}</span></h1>
               <h1 className="text-gray-500 font-semibold">{data.aircraftName}</h1>
@@ -239,7 +240,7 @@ export function FlightCard({ data }: FlightProps) {
           {/* final image */}
           <div className="flex items-center justify-center">
             <div className="relative">
-              <img src={coverImgSquare} className="w-[100px]" alt="" />
+              <Image src={coverImgSquare} className="w-[100px]" alt="" />
             </div>
             <div className="absolute">
               <h1 className="tracking-widest font-bold">{data.aricraftCompany} Wishes you a safe journey and happy journey Ahead 🙏</h1>
@@ -288,7 +289,7 @@ export function HotelCard({ data }: HotelProps) {
                 key={index}
                 className={`relative bg-gray-300 w-[500px] h-[281px] rounded-lg shadow-md ${loading ? "animate-pulse" : ""}`}
               >
-                <img
+                <Image
                   src={src ?? ""}
                   alt={`Property image ${index + 1}`}
                   className="w-full h-full object-cover rounded-lg shadow-md"

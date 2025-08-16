@@ -10,6 +10,7 @@ import { useBookingStore } from '@/store/useBookingStore';
 import { useRouter } from 'next/navigation';
 import { useFlightStore } from '@/store/useFlightStore';
 import toast from 'react-hot-toast';
+import Image from 'next/image';
 
 const FlightPage = () => {
   const [searchData, setSearchData] = useState<any>(null);
@@ -262,7 +263,7 @@ export function FlightCard({ data, dictionaries, searchData }: FlightCardProps) 
         <div className="grid grid-cols-1 space-y-3 justify-start items-start lg:grid-cols-5 space-x-6 ">
           {/* part1 - plane */}
           <div className="flex space-x-2">
-            <img src={src} alt="" className="w-10 h-10" />
+            <Image src={src} alt="" className="w-10 h-10" />
             <div className="">
               <h1 className="text-black font-semibold">{aircraftCompany}</h1>
               <h1 className="text-xs text-gray-500">{aircraftName}</h1>

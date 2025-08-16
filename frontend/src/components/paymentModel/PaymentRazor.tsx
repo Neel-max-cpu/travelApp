@@ -6,6 +6,7 @@ import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 import axiosInstance from '@/utils/axiosInstance';
 import { API_PATHS } from '@/utils/apiPaths';
+import Image from 'next/image';
 
 const paymentRazor = () => {
     const router = useRouter();
@@ -158,7 +159,7 @@ const paymentRazor = () => {
             <h1 className="text-2xl mb-2 font-semibold text-white">Confirm Payment</h1>
             <div className="flex items-center justify-center space-x-2 text-white mb-6">
                 <p className="font-semibold italic">Powered By:</p>
-                <img src={razerPayLogo} alt="" className="h-10 rounded-lg shadow-lg" />
+                <Image src={razerPayLogo} alt="" className="h-10 rounded-lg shadow-lg" />
             </div>
             <div className="bg-white p-6 rounded-xl shadow-md text-left w-[90%] max-w-md">
                 {bookingData.type === 'hotel' ? (
@@ -166,14 +167,14 @@ const paymentRazor = () => {
                         {/* images */}
                         <div className="space-y-3 flex flex-col justify-center mb-3">
                             <div className="bg-gray-300 w-[398px] h-[224px] rounded-lg shadow-md">
-                                <img src={hotelImages.image1} alt="" className="w-full h-full object-cover rounded-lg shadow-md" />
+                                <Image src={hotelImages.image1} alt="" className="w-full h-full object-cover rounded-lg shadow-md" />
                             </div>
                             <div className="flex space-x-3">
                                 <div className="bg-gray-300 w-[235px] h-[132px] rounded-lg shadow-md">
-                                    <img src={hotelImages.image2} alt="" className="w-full h-full object-cover rounded-lg shadow-md" />
+                                    <Image src={hotelImages.image2} alt="" className="w-full h-full object-cover rounded-lg shadow-md" />
                                 </div>
                                 <div className="bg-gray-300 w-[235px] h-[132px] rounded-lg shadow-md">
-                                    <img src={hotelImages.image3} alt="" className="w-full h-full object-cover rounded-lg shadow-md" />
+                                    <Image src={hotelImages.image3} alt="" className="w-full h-full object-cover rounded-lg shadow-md" />
                                 </div>
                             </div>
                         </div>

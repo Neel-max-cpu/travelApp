@@ -9,6 +9,7 @@ import { useBookingStore } from '@/store/useBookingStore';
 import { changeToInr, changeToInrNumber } from '@/utils/helper';
 import { useHotelStore } from '@/store/useHotelStore';
 import toast from 'react-hot-toast';
+import Image from 'next/image';
 
 const HotelOfferComponent = () => {
     const router = useRouter();
@@ -61,15 +62,15 @@ const HotelOfferComponent = () => {
                 {/* images */}
                 <div className="flex space-x-3">
                     <div className="relative bg-gray-300 w-[500px] h-[281px] rounded-lg shadow-lg">
-                        <img src={hotelImages.image1} alt="" className="w-full h-full object-cover rounded-lg shadow-md" />
+                        <Image src={hotelImages.image1} alt="" className="w-full h-full object-cover rounded-lg shadow-md" />
                         <span className="absolute bottom-2 left-5 text-white font-bold text-xl tracking-widest">Property Photos</span>
                     </div>
                     <div className="flex flex-col space-y-3">
                         <div className="bg-gray-300 w-[235px] h-[132px] rounded-lg shadow-lg">
-                            <img src={hotelImages.image2} alt="" className="w-full h-full object-cover rounded-lg shadow-md" />
+                            <Image src={hotelImages.image2} alt="" className="w-full h-full object-cover rounded-lg shadow-md" />
                         </div>
                         <div className="bg-gray-300 w-[235px] h-[132px] rounded-lg shadow-lg">
-                            <img src={hotelImages.image3} alt="" className="w-full h-full object-cover rounded-lg shadow-md" />
+                            <Image src={hotelImages.image3} alt="" className="w-full h-full object-cover rounded-lg shadow-md" />
                         </div>
                     </div>
                 </div>

@@ -12,6 +12,7 @@ import { useHotelStore } from '@/store/useHotelStore';
 import toast from 'react-hot-toast';
 import { useFlightStore } from '@/store/useFlightStore';
 import useAmadeusToken from '@/hooks/useAmadeusToken';
+import Image from 'next/image';
 
 const videoSources = [
     "/videos/hero2.mp4",
@@ -249,14 +250,14 @@ const Hero = () => {
                         {/* left side hotels */}
                         <div className="toggleOption" onClick={() => setCurrentSelected('hotel')}>
                             <div className={`flex space-x-3 space-y-2 ${currentSelected === 'hotel' ? 'border-b-4 border-blue-500' : ''}`}>
-                                <img src={hotelImg} alt="hotel" className="w-6 h-6" />
+                                <Image src={hotelImg} alt="hotel" className="w-6 h-6" />
                                 <h1>hotels</h1>
                             </div>
                         </div>
                         {/* right side flights */}
                         <div className="toggleOption" onClick={() => setCurrentSelected('flight')}>
                             <div className={`flex space-x-3 space-y-2 ${currentSelected === 'flight' ? 'border-b-4 border-blue-500' : ''}`}>
-                                <img src={flightImg} alt="flight" className="w-6 h-6" />
+                                <Image src={flightImg} alt="flight" className="w-6 h-6" />
                                 <h1>flights</h1>
                             </div>
                         </div>
