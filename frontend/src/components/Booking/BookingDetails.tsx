@@ -1,14 +1,13 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import { ChartAreaGradient } from '../Chart/Chart'
-import { Button } from '../ui/button'
 import toast from 'react-hot-toast'
 import axiosInstance from '@/utils/axiosInstance'
 import { API_PATHS } from '@/utils/apiPaths'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { ImSpinner2 } from 'react-icons/im'
 import { Card, CardContent } from '../ui/card'
-import { changeToInr, changeToInrNumber, commaSeparator, formatDateTime } from '@/utils/helper'
+import { commaSeparator, formatDateTime } from '@/utils/helper'
 
 const BookingDetails = () => {
 

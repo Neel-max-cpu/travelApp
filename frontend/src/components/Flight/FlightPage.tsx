@@ -2,14 +2,8 @@
 import React, { useEffect, useState } from 'react'
 import { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../ui/card';
 import { Button } from '../ui/button';
-import { Label } from '../ui/label';
-import { Input } from '../ui/input';
-import { flightResponse20data, flightResponse5data } from '@/data/flightData';
 import moment from 'moment';
 import { formateMoney } from '@/utils/helper';
-import { IATACodes } from '@/utils/iataCodes';
-import axiosInstance from '@/utils/axiosInstance';
-import { API_PATHS } from '@/utils/apiPaths';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { ImSpinner2 } from "react-icons/im";
 import { useBookingStore } from '@/store/useBookingStore';

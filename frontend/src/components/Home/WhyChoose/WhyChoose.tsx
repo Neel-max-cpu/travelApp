@@ -6,7 +6,7 @@ const WhyChoose = () => {
   return (
     <div className="pt-16 pb-24 ">
         {/* section */}
-        <SectionHeading heading="Why Choose Us" subheading="hehe"/>
+        <SectionHeading heading="Why Choose Us" subheading="Crafting seamless journeys with care, clarity, and comfort—because you deserve the best."/>
         <div className="grid w-[80%] mx-auto grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 items-center mt-20">
             {/* why choose card */}
             <div className="" data-aos="fade-up" data-aos-anchor-placement="top-center">

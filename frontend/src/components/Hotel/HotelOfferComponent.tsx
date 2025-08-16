@@ -1,12 +1,10 @@
 'use client'
 import React, { useState } from 'react'
-import { Card, CardContent } from '../ui/card';
 import { Button } from '../ui/button';
-import { hotelOffer, hotelOfferDetail } from '@/data/hotelData';
+import { hotelOfferDetail } from '@/data/hotelData';
 import moment from 'moment';
 import { useRouter } from 'next/navigation';
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogOverlay, DialogTitle, DialogTrigger } from '../ui/dialog';
-import { Label } from '../ui/label';
 import { useBookingStore } from '@/store/useBookingStore';
 import { changeToInr, changeToInrNumber } from '@/utils/helper';
 import { useHotelStore } from '@/store/useHotelStore';

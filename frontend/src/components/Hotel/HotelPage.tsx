@@ -2,13 +2,11 @@
 import React, { useEffect, useState } from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { ImSpinner2 } from "react-icons/im";
-import { hotelFromCity, hotelImage } from '@/data/hotelData';
 import { Card, CardContent } from '../ui/card';
 import { Button } from '../ui/button';
 import { useRouter } from 'next/navigation';
 import { useHotelStore } from '@/store/useHotelStore';
 import toast from 'react-hot-toast';
-import { Axis3D } from 'lucide-react';
 import axiosInstance from '@/utils/axiosInstance';
 import { API_PATHS } from '@/utils/apiPaths';
 import useAmadeusToken from '@/hooks/useAmadeusToken';

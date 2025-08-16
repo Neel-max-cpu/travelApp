@@ -5,7 +5,6 @@ import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 import { HiBars3BottomRight } from 'react-icons/hi2';
 import { LiaCloudSolid } from 'react-icons/lia';
-import { TbAirBalloon } from "react-icons/tb";
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { validateCpass, validateEmail, validateName, validateOtp, validatePass } from '@/utils/helper';

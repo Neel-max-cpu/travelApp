@@ -1,13 +1,10 @@
 'use client';
 import SearchBoxFlight from '@/components/Helper/SearchBoxFlight';
 import { Button } from '@/components/ui/button';
-import { Label } from '@/components/ui/label';
-import { Switch } from '@/components/ui/switch';
 import { classData } from '@/data/flightData';
 import { API_PATHS } from '@/utils/apiPaths';
 import axiosInstance from '@/utils/axiosInstance';
 import moment from 'moment';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useRef, useState } from 'react'
 import SearchBoxHotel from '@/components/Helper/SearchBoxHotel';

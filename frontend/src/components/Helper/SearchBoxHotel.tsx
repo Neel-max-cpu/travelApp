@@ -2,7 +2,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { FaCalendar, FaMap } from 'react-icons/fa'
 import { FaUserGroup } from 'react-icons/fa6'
-import { Switch } from '../ui/switch'
 import { Label } from '../ui/label'
 import useAmadeusToken from '@/hooks/useAmadeusToken';
 import { Popover, PopoverTrigger } from '../ui/popover';
@@ -16,7 +15,6 @@ import { cn } from '@/lib/utils';
 import { Calendar } from '../ui/calendar';
 import moment from 'moment';
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogOverlay, DialogTitle, DialogTrigger } from '../ui/dialog';
-import { Input } from '../ui/input';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '../ui/select';
 import { amenitiesData, distanceFromCityCenter, guestData, hotelStartData } from '@/data/hotelData';
 import { MultiSelect } from '../ui/multiSelect';
