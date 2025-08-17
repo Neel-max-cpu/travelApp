@@ -26,7 +26,7 @@ const Nav = ({ openNav }: Props) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);  
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -377,13 +377,14 @@ const Nav = ({ openNav }: Props) => {
     }
   };
 
-  const handleHome = ()=>{
+  const handleHome = () => {
+    toast.success("Redirecting...");
     router.push("/");
   }
 
   const handleLogOut = () => {
     localStorage.clear();
-    setIsLoggedIn(false);    
+    setIsLoggedIn(false);
     toast.success("Logged out!");
   }
 
@@ -418,11 +419,30 @@ const Nav = ({ openNav }: Props) => {
             .filter(item => isLoggedIn || item.id !== 7)
             .map((item) => {
               return (
-                <Link href={item.url} key={item.id}>
-                  <p className="navButtonStyleMap">
-                    {item.lable}
-                  </p>
-                </Link>
+                <p
+                  key={item.id}
+                  className="navButtonStyleMap cursor-pointer"
+                  onClick={() => {
+                    if (item.url === "#") {
+                      toast(
+                        "No link present!",
+                        {
+                          icon: '⚠️',
+                          style: {
+                            border: "1px solid #facc15", 
+                            padding: "8px",
+                            color: "#713f12",            
+                          },
+                        }
+                      );
+                    } else {
+                      toast.success("Redirecting...");
+                      router.push(item.url);
+                    }
+                  }}
+                >
+                  {item.lable}
+                </p>
               )
             })}
         </div>
@@ -476,21 +496,21 @@ const Nav = ({ openNav }: Props) => {
                     login: loading ? (
                       <>
                         <AiOutlineLoading3Quarters className="animate-spin inline-block mr-2" />
-                        Logging in... 
+                        Logging in...
                       </>
-                      ): ("Login"),
+                    ) : ("Login"),
                     register: loading ? (
                       <>
                         <AiOutlineLoading3Quarters className="animate-spin inline-block mr-2" />
                         Signing up...
                       </>
-                      ) : "Sign Up",
+                    ) : "Sign Up",
                     forgetpass: loading ? (
                       <>
                         <AiOutlineLoading3Quarters className="animate-spin inline-block mr-2" />
                         Changing...
                       </>
-                      ) : "Change Password"
+                    ) : "Change Password"
                   }[formType]}
                 </Button>
               </DialogFooter>

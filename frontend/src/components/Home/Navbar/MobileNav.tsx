@@ -1,16 +1,19 @@
+import { useRouter } from 'next/navigation'
 import { navlinks } from '../../../constants/constants'
 import Link from 'next/link'
 import React from 'react'
+import toast from 'react-hot-toast'
 import { CgClose } from 'react-icons/cg'
 
-type Props={
-  showNav:boolean;
-  closeNav:()=>void;
+type Props = {
+  showNav: boolean;
+  closeNav: () => void;
 }
 
-const MobileNav = ({showNav, closeNav}:Props) => {
+const MobileNav = ({ showNav, closeNav }: Props) => {
+  const router = useRouter();
 
-  const navOpen = showNav?"translate-x-0":"translate-x-[-100%]";
+  const navOpen = showNav ? "translate-x-0" : "translate-x-[-100%]";
   return (
     <div>
       {/* overlay */}
@@ -20,11 +23,32 @@ const MobileNav = ({showNav, closeNav}:Props) => {
         {/* close button */}
         <CgClose onClick={closeNav} className='absolute top-[1.7rem] right-[1.4rem] sw:w-8 sm:h-8 w-6 h-6' />
 
-        {navlinks.map((item)=>{
-          return(
-            <Link href={item.url} key={item.id}>
-              <p className='text-white w-fit text-[20px] ml-12 border-b-[1.5px] pb-1 border-yellow-300 sm:text-[30px]'>{item.lable}</p>
-            </Link>
+        {navlinks.map((item) => {
+          return (
+            <p
+              key={item.id}
+              className="navButtonStyleMap cursor-pointer"
+              onClick={() => {
+                if (item.url === "#") {
+                  toast(
+                    "No link present!",
+                    {
+                      icon: '⚠️',
+                      style: {
+                        border: "1px solid #facc15",
+                        padding: "8px",
+                        color: "#713f12",
+                      },
+                    }
+                  );
+                } else {
+                  toast.success("Redirecting...");
+                  router.push(item.url);
+                }
+              }}
+            >
+              {item.lable}
+            </p>
           )
         })}
       </div>

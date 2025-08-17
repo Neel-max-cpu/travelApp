@@ -1,80 +1,81 @@
-  "use client"
+"use client"
 
-  import { TrendingUp, TrendingUpDown } from "lucide-react"
-  import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
+import { TrendingUp, TrendingUpDown } from "lucide-react"
+import { Area, AreaChart, CartesianGrid, ResponsiveContainer, XAxis } from "recharts";
 
-  import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-  } from "@/components/ui/card"
-  import {
-    ChartConfig,
-    ChartContainer,
-    ChartTooltip,
-    ChartTooltipContent,
-  } from "@/components/ui/chart"
-  import toast from "react-hot-toast";
-  import { useEffect, useState } from "react";
-  import axiosInstance from "@/utils/axiosInstance";
-  import { API_PATHS } from "@/utils/apiPaths";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import {
+  ChartConfig,
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "@/components/ui/chart"
+import toast from "react-hot-toast";
+import { useEffect, useState } from "react";
+import axiosInstance from "@/utils/axiosInstance";
+import { API_PATHS } from "@/utils/apiPaths";
 
-  export const description = "An area chart with gradient fill"
-  
+export const description = "An area chart with gradient fill"
 
-  const chartConfig = {
-    desktop: {
-      label: "Hotels",
-      color: "var(--chart-5)",
-    },
-    mobile: {
-      label: "Flights",
-      color: "var(--chart-3)",
-    },
-  } satisfies ChartConfig
 
-  export function ChartAreaGradient() {
-    const [loading, setLoading] = useState(false);
-    const [chartData, setChartData] = useState<any[]>([]);
-    const [year, setYear] = useState<number | null>();
-    
-    
+const chartConfig = {
+  desktop: {
+    label: "Hotels",
+    color: "var(--chart-5)",
+  },
+  mobile: {
+    label: "Flights",
+    color: "var(--chart-3)",
+  },
+} satisfies ChartConfig
 
-    useEffect(() => {    
-      const fechtChartData = async()=>{
-        if(loading) return;
-        try {
-          setLoading(true);
-          const response = await axiosInstance.get(API_PATHS.COMMON.CHARTDATA);
-          setChartData(response.data.chartData);
-          setYear(response.data.year);
-          console.log("responese:",response);
-          
-          
-        } catch (error:any) {
-          setLoading(false);
-          toast.error("Error occured while fetching chart data, please try again!");
-          console.log("error: ", error);
-        } finally{
-          setLoading(false);
-        }
-      };
-      fechtChartData();
-    }, []);   
+export function ChartAreaGradient() {
+  const [loading, setLoading] = useState(false);
+  const [chartData, setChartData] = useState<any[]>([]);
+  const [year, setYear] = useState<number | null>();
 
-    return (
-      <Card className="bg-transparent text-white">
-        <CardHeader>
-          <CardTitle>Hotel Booking vs Flight Book Data</CardTitle>
-          <CardDescription>
-            Showing total booking for the last 1 year
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <ChartContainer config={chartConfig}>
+
+
+  useEffect(() => {
+    const fechtChartData = async () => {
+      if (loading) return;
+      try {
+        setLoading(true);
+        const response = await axiosInstance.get(API_PATHS.COMMON.CHARTDATA);
+        setChartData(response.data.chartData);
+        setYear(response.data.year);
+        console.log("responese:", response);
+
+
+      } catch (error: any) {
+        setLoading(false);
+        toast.error("Error occured while fetching chart data, please try again!");
+        console.log("error: ", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fechtChartData();
+  }, []);
+
+  return (
+    <Card className="bg-transparent text-white">
+      <CardHeader>
+        <CardTitle>Hotel Booking vs Flight Book Data</CardTitle>
+        <CardDescription>
+          Showing total booking for the last 1 year
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <ChartContainer config={chartConfig}>
+          <ResponsiveContainer width="100%" height={150}>
             <AreaChart
               accessibilityLayer
               data={chartData}
@@ -135,20 +136,21 @@
                 stackId="a"
               />
             </AreaChart>
-          </ChartContainer>
-        </CardContent>
-        <CardFooter>
-          <div className="flex w-full items-start gap-2 text-sm">
-            <div className="grid gap-2">
-              <div className="flex items-center gap-2 leading-none font-medium">
-                Graph <TrendingUpDown className="h-4 w-4" />
-              </div>
-              <div className="text-muted-foreground flex items-center gap-2 leading-none">
-                January - December {year}
-              </div>
+          </ResponsiveContainer>
+        </ChartContainer>
+      </CardContent>
+      <CardFooter>
+        <div className="flex w-full items-start gap-2 text-sm">
+          <div className="grid gap-2">
+            <div className="flex items-center gap-2 leading-none font-medium">
+              Graph <TrendingUpDown className="h-4 w-4" />
+            </div>
+            <div className="text-muted-foreground flex items-center gap-2 leading-none">
+              January - December {year}
             </div>
           </div>
-        </CardFooter>
-      </Card>
-    )
-  }
+        </div>
+      </CardFooter>
+    </Card>
+  )
+}
