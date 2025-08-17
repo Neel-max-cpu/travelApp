@@ -19,6 +19,7 @@ export const API_PATHS = {
   COMMON: {
     CITYWITHNAME: "https://test.api.amadeus.com/v1/reference-data/locations",   
     BOOKEDDATA:"/api/common/commonData",
+    COUNTDATA:"/api/common/totalData",
     CHARTDATA:"/api/common/chartData",  
     NEWSLETTER:"/api/common/newsLetter",
   },

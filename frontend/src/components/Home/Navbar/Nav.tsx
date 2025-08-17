@@ -403,7 +403,7 @@ const Nav = ({ openNav }: Props) => {
 
 
   return (
-    <div className={`${navBg ? "bg-blue-950 shadow-md" : "bg-transparent"} transition-all duration-200 h-[12vh] z-[1000] fixed w-full`}>
+    <div className={`${navBg ? "bg-blue-950 shadow-md" : "bg-transparent"} transition-all duration-200 h-[12vh] z-[1001] fixed w-full`}>
       <div className="flex items-center h-full justify-between w-[90%] xl:w-[80%] mx-auto">
         {/* logo */}
         <div className="flex items-center space-x-2">
@@ -416,7 +416,7 @@ const Nav = ({ openNav }: Props) => {
         {/* navlinks */}
         <div className="hidden lg:flex items-center space-x-10">
           {navlinks
-            .filter(item => isLoggedIn || item.id !== 7)
+            .filter(item => isLoggedIn ||(item.id !== 7 && item.id !== 5))
             .map((item) => {
               return (
                 <p
@@ -435,7 +435,8 @@ const Nav = ({ openNav }: Props) => {
                           },
                         }
                       );
-                    } else {
+                    } 
+                    else {
                       toast.success("Redirecting...");
                       router.push(item.url);
                     }

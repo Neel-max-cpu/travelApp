@@ -100,6 +100,41 @@ public class CommonServiceImpl implements CommonService{
     }
 
     @Override
+    public ResponseEntity<?>getTotalData(String token) {
+        //get user
+        try{
+            Integer userId = jwtService.extractUserId(token);
+            Optional<Users> optional = usersRepo.findById(userId);
+            Users user = optional.get();
+
+            Integer role = user.getRoleId();
+
+            Map<String, Object>response = new HashMap<>();
+            if (role != 1) {
+                // for normal user → count only their bookings
+                long hotelCount = hotelRepo.countByUserId(user.getId());
+                long flightCount = flightRepo.countByUserId(user.getId());
+
+                response.put("HotelCount", hotelCount);
+                response.put("FlightCount", flightCount);
+
+            } else {
+                // for admin → count all
+                long hotelCount = hotelRepo.count();
+                long flightCount = flightRepo.count();
+
+                response.put("HotelCount", hotelCount);
+                response.put("FlightCount", flightCount);
+            }
+            //logger
+            logger.info("getdata fetched from commonData!");
+            return ResponseEntity.ok(response);
+        } catch (RuntimeException e) {
+            throw new RuntimeException("error in fetching commonData",e);
+        }
+    }
+
+    @Override
     public ResponseEntity<?> getChartData(String token) {
         //get user
         try{

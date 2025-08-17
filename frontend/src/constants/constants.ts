@@ -21,7 +21,7 @@ export const navlinks = [
     },
     {
         id:5, 
-        url:'#',
+        url:'/dashboard',
         lable:'Dashboard',
     },
     {

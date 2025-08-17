@@ -205,18 +205,18 @@ export function HotelMapCard({ data }: HotelDataProps) {
                 checkOutDate: checkOutDate ? checkOutDate.toISOString().split("T")[0] : undefined
             }
             response = await axiosInstance.get(API_PATHS.HOTELS.GETHOTELOFFERS(params), {
-                headers:{
+                headers: {
                     Authorization: `Bearer ${amadeusToken}`,
                 }
             })
-            console.log("offers Hotel" , response);
+            console.log("offers Hotel", response);
 
             //save in zustand
-             useHotelStore.getState().setHotelOffer([
+            useHotelStore.getState().setHotelOffer([
                 {
                     data: response?.data?.data ?? []
                 }
-             ]);
+            ]);
 
             // Decide what to save based on error or loading state
             const finalImages = {
@@ -230,6 +230,21 @@ export function HotelMapCard({ data }: HotelDataProps) {
             setLoading(false);
         } catch (error: any) {
             setLoading(false);
+            if (error.response?.data?.errors?.length) {
+                const err = error.response.data.errors[0];
+                if (err.code === 3664) {
+                    toast("No rooms available at this property, please try a different one!", {
+                        icon: "⚠️",
+                        style: {
+                            border: "1px solid #facc15",
+                            padding: "8px",
+                            color: "#713f12",
+                        },
+                    });
+                    console.log("Amadeus error:", err);
+                    return;
+                }
+            }
             toast.error("Something went wrong please try again sometime later!")
             console.log("error while searching hotel: ", error.message || error);
         }

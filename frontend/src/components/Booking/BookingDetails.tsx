@@ -91,7 +91,8 @@ const BookingDetails = () => {
   }
 
   return (
-    <div className="bg-[#1B1212] min-h-screen flex flex-col p-30">
+    // <div className="bg-[#1B1212] min-h-screen flex flex-col p-30">
+    <div className="darkSphereGrid min-h-screen flex flex-col p-30">
       <div className="">
         {/* heading */}
         <h1 className="text-white text-2xl font-bold p-3">My Bookings:</h1>
@@ -110,9 +111,9 @@ const BookingDetails = () => {
       </div>
 
       {/* chart */}
-      <div className="mt-10">
+      {/* <div className="mt-10">
         <ChartAreaGradient />
-      </div>
+      </div> */}
 
       {/* map */}
       <div className="">

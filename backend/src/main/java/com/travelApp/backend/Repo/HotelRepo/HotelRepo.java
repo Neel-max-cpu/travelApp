@@ -8,6 +8,9 @@ import java.util.List;
 
 @Repository
 public interface HotelRepo extends JpaRepository<Hotel, Integer> {
+    long countByUserId(Integer userId);
+    long count();
+
     List<Hotel> findByUserId(Integer userId);
     List<Hotel> findByUserIdOrderByIdDesc(Integer userId);
     List<Hotel> findAllByOrderByIdDesc();

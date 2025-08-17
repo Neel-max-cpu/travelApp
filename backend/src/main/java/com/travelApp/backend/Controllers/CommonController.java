@@ -27,6 +27,13 @@ public class CommonController {
         return commonService.getData(token);
     }
 
+    @GetMapping("/totalData")
+    ResponseEntity<?> totalData(@RequestHeader("Authorization") String authHeader) {
+        logger.info("totalData in controller");
+        String token = authHeader.replace("Bearer ", "");
+        return commonService.getTotalData(token);
+    }
+
     @GetMapping("/chartData")
     ResponseEntity<?> chartData(@RequestHeader("Authorization") String authHeader) {
         logger.info("chartData in controller");
