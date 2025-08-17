@@ -79,14 +79,15 @@ public class CommonServiceImpl implements CommonService{
             //if admin
             if (role != 1) {
                 //if particular user
-                List<Hotel>hotelData = hotelRepo.findByUserId(user.getId());
-                List<Flight>flightData = flightRepo.findByUserId(user.getId());
+                List<Hotel>hotelData = hotelRepo.findByUserIdOrderByIdDesc(user.getId());
+                List<Flight>flightData = flightRepo.findByUserIdOrderByIdDesc(user.getId());
+
                 response.put("HotelData", hotelData);
                 response.put("FlightData", flightData);
 
             } else {
-                List<Hotel>hotelData = hotelRepo.findAll();
-                List<Flight>flightData = flightRepo.findAll();
+                List<Hotel>hotelData = hotelRepo.findAllByOrderByIdDesc();
+                List<Flight>flightData = flightRepo.findAllByOrderByIdDesc();
                 response.put("HotelData", hotelData);
                 response.put("FlightData", flightData);
             }

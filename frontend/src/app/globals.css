@@ -33,6 +33,9 @@
   @apply w-full p-5 flex items-center hover:cursor-pointer hover:bg-blue-50 rounded-xl transition-all ease-in-out duration-200;
 }
 
+
+/* https://patterncraft.fun/ */
+
 .auroraDreamVividBloom {    
     background: radial-gradient(ellipse 80% 60% at 70% 20%, rgba(175, 109, 255, 0.85), transparent 68%),
                 radial-gradient(ellipse 70% 60% at 20% 80%, rgba(255, 100, 180, 0.75), transparent 68%),
@@ -82,6 +85,10 @@
   
   .emeraldDepts{
     background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(16, 185, 129, 0.25), transparent 70%), #000000;
+  }  
+
+  .deepOceanGlow{
+    background: radial-gradient(70% 55% at 50% 50%, #2a5d77 0%, #184058 18%, #0f2a43 34%, #0a1b30 50%, #071226 66%, #040d1c 80%, #020814 92%, #01040d 97%, #000309 100%), radial-gradient(160% 130% at 10% 10%, rgba(0,0,0,0) 38%, #000309 76%, #000208 100%), radial-gradient(160% 130% at 90% 90%, rgba(0,0,0,0) 38%, #000309 76%, #000208 100%);
   }  
 
 

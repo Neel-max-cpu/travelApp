@@ -78,7 +78,8 @@ const FlightPage = () => {
   const hasMore = currentIndex < totalFlightsCount;
 
   return (
-    <div className='bg-[#1B1212] min-h-screen pt-30'>
+    // <div className='bg-[#1B1212] min-h-screen pt-30'>
+    <div className='deepOceanGlow min-h-screen pt-30'>
       <InfiniteScroll
         dataLength={visibleFlights.length}
         next={fetchMoreData}

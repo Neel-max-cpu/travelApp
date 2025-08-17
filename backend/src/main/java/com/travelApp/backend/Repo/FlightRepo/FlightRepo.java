@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface FlightRepo extends JpaRepository<Flight, Integer> {
     List<Flight> findByUserId(Integer userId);
+    List<Flight> findByUserIdOrderByIdDesc(Integer userId);
+    List<Flight> findAllByOrderByIdDesc();
 }

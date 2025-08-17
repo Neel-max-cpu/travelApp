@@ -1,6 +1,6 @@
 # ✨ Full Stack Travel Booking App ✨
 
-## Check the video for the brief of the project without running here  -> [Link]() ⭐
+## Check the video for the brief of the project without running here  -> [Link](https://youtu.be/yVr2FEpY6gU) ⭐
 ## Deployed Link  -> [Link](https://travel-app-one-peach.vercel.app) ⭐
 
 ![Demo App Image 1](/frontend/public/readMeImg/1.png)
@@ -44,6 +44,7 @@
 - **Styling**: Shadcn, Swiper React, React Hot Toast, and custom Tailwind CSS for responsive design
 - **Version Control**: Git & GitHub
 - **Hosting**: Vecel & Render
+- **Apis**: For Hotes & Flights - amadeus and for images - unsplash
 
 
 
