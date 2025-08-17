@@ -242,7 +242,7 @@ export function HotelMapCard({ data }: HotelDataProps) {
                     {/* part 1 images */}
                     <div className="w-full space-y-3 overflow-hidden">
                         <div className={`bg-gray-400 w-[160px] h-[90px] rounded-lg ${imageLoading ? 'animate-pulse' : ''}`}>
-                            <Image
+                            <img
                                 src={!imageLoading && imageError ? defaultImages.image1 : images.image1}
                                 onLoad={() => setImageLoading(false)}
                                 onError={() => {
@@ -255,7 +255,7 @@ export function HotelMapCard({ data }: HotelDataProps) {
                         </div>
                         <div className="flex space-x-2">
                             <div className={`bg-gray-400 rounded-lg w-[80px] h-[45px] ${imageLoading ? 'animate-pulse' : ''}`}>
-                                <Image
+                                <img
                                     src={!imageLoading && imageError ? defaultImages.image2 : images.image2}
                                     onLoad={() => setImageLoading(false)}
                                     onError={() => {
@@ -267,7 +267,7 @@ export function HotelMapCard({ data }: HotelDataProps) {
                                 />
                             </div>
                             <div className={`bg-gray-400 rounded-lg w-[80px] h-[45px] ${imageLoading ? 'animate-pulse' : ''}`}>
-                                <Image
+                                <img
                                     src={!imageLoading && imageError ? defaultImages.image3 : images.image3}
                                     onLoad={() => setImageLoading(false)}
                                     onError={() => {
